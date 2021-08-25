@@ -18,6 +18,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+os.execute("xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > ~/.config/awesome/archmenu.lua") -- using os.execute because it's sync, which is important here
 xdg_menu = require("archmenu")
 
 -- {{{ Error handling
@@ -47,11 +48,11 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "gtk")
+local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "artytheme") -- modification of default theme
 beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "xterm" -- todo: use gnome-terminal somehow
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -70,21 +71,51 @@ awful.layout.layouts = {
 }
 -- }}}
 
+-- fade out wibox
+fadeout = wibox {
+   visible = false,
+   bg = '#000000',
+   ontop = true,
+   width = 1920, -- todo: actually calculate size
+   height = 1080,
+}
+
+-- log out with a fade out so it looks nice. fade out is handled by picom
+function fade_out_log_out()
+   fadeout.visible = true
+   gears.timer {
+      timeout = 0.5, -- adjust the timer if the fade out happens too fast or too slow
+      autostart = true,
+      single_shot = true,
+      callback = function()
+        os.execute("light-locker-command -a") -- turns off the screen. fixed a brief flash of a wallpaper
+        awesome.quit()
+      end
+   }
+end
+
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
+   { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+   { "Manual", terminal .. " -e man awesome" },
+   { "Local Awesome Config", "xdg-open " .. gears.filesystem.get_configuration_dir() }, -- ~ doesn't work
+   { "Restart", awesome.restart },
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Applications", xdgmenu },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+myfavorites = {
+    { "Firefox", "firefox" },
+    { "Discord", "discord" },
+    { "GNOME Files", "nautilus" },
+    { "Terminal", terminal },
+}
+
+mymainmenuitems = xdgmenu
+table.insert(mymainmenuitems, 1, { "Favorites", myfavorites })
+table.insert(mymainmenuitems, { "Awesome", myawesomemenu, beautiful.awesome_icon })
+table.insert(mymainmenuitems, { "Log Out", fade_out_log_out })
+
+mymainmenu = awful.menu({ items = mymainmenuitems })
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
@@ -98,7 +129,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock(" %d %b %Y, %H:%M ", 60)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -106,6 +137,7 @@ local taglist_buttons = gears.table.join(
                     awful.button({ modkey }, 1, function(t)
                                               if client.focus then
                                                   client.focus:move_to_tag(t)
+                                                  t:view_only() -- more logical this way
                                               end
                                           end),
                     awful.button({ }, 3, awful.tag.viewtoggle),
@@ -131,7 +163,7 @@ local tasklist_buttons = gears.table.join(
                                               end
                                           end),
                      awful.button({ }, 3, function()
-                                              awful.menu.client_list({ theme = { width = 250 } })
+                                              awful.menu.client_list()
                                           end),
                      awful.button({ }, 4, function ()
                                               awful.client.focus.byidx(1)
@@ -187,7 +219,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s }) -- todo: make it on top but still make it below fullscreen windows
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -212,13 +244,13 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, 3, function () mymainmenu:toggle() end)
+    -- awful.button({ }, 4, awful.tag.viewnext),
+    -- awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
 
--- {{{ Key bindings
+-- {{{ Key bindings, todo work on them
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -483,6 +515,9 @@ awful.rules.rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = true }
     },
+    
+    -- remove titlebars from windows that don't want them
+    { rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false, border_width = 0 }},
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
@@ -490,12 +525,28 @@ awful.rules.rules = {
 }
 -- }}}
 
+function make_pseudo_fullscreen_real(c)
+    -- some games like witcher 2 (through proton) are very weird with their fullscreen. it's more like borderless fullscreen? so this code tries to detect pseudo-fullscreen windows and actually make them fullscreen
+    if c.requests_no_titlebar and c.height >= c.screen.geometry.height and c.width >= c.screen.geometry.width then
+        gears.timer {
+          timeout = 0.5, -- for some reason if i do this immediately it doesn't work. this value seems good on my pc
+          autostart = true,
+          single_shot = true,
+          callback = function()
+            c.fullscreen = true
+          end
+       }
+    end
+end
+
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
+    
+    make_pseudo_fullscreen_real(c)
 
     if awesome.startup
       and not c.size_hints.user_position
@@ -521,8 +572,8 @@ client.connect_signal("request::titlebars", function(c)
 
     awful.titlebar(c) : setup {
         { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
+            wibox.container.margin(awful.titlebar.widget.iconwidget    (c), 3, 3, 4, 6),
+            wibox.container.margin(awful.titlebar.widget.floatingbutton(c), 3, 3, 4, 6),
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
@@ -534,20 +585,13 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            -- awful.titlebar.widget.stickybutton   (c),
-            -- awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
+            wibox.container.margin(awful.titlebar.widget.minimizebutton (c), 3, 3, 4, 6),
+            wibox.container.margin(awful.titlebar.widget.maximizedbutton(c), 3, 3, 4, 6),
+            wibox.container.margin(awful.titlebar.widget.closebutton    (c), 3, 3, 4, 6),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
     }
-end)
-
--- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
@@ -555,3 +599,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 awful.spawn.with_shell("picom")
+awful.spawn.with_shell("setxkbmap -layout \"us,ru\"") -- english and russian layouts

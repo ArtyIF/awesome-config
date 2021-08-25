@@ -15,6 +15,8 @@
      {"Text Editor", "gedit "},
      {"Visual Studio Code", "/opt/visual-studio-code/code --no-sandbox --unity-launch ", "/usr/share/icons/visual-studio-code.png" },
      {"Weather", "gapplication launch org.gnome.Weather"},
+     {"compton", "compton", "/usr/share/icons/hicolor/48x48/apps/compton.png" },
+     {"picom", "picom"},
  }
 
  local menude7a22a0c94aa64ba2449e520aa20c99 = {
