@@ -19,7 +19,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 os.execute("xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > ~/.config/awesome/archmenu.lua") -- using os.execute because it's sync, which is important here
-xdg_menu = require("archmenu")
+local xdg_menu = require("archmenu")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -110,7 +110,7 @@ myfavorites = {
     { "Terminal", terminal },
 }
 
-mymainmenuitems = xdgmenu
+mymainmenuitems = xdg_menu.xdgmenu
 table.insert(mymainmenuitems, 1, { "Favorites", myfavorites })
 table.insert(mymainmenuitems, { "Awesome", myawesomemenu, beautiful.awesome_icon })
 table.insert(mymainmenuitems, { "Log Out", fade_out_log_out })

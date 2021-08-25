@@ -4,5 +4,16 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"Lua.workspace.library": [
+			"/usr/share/awesome/lib"
+		],
+		"Lua.diagnostics.globals": [
+			// libraries
+			"awesome", "dbus", "mouse", "mousegrabber", "root", "selection",
+			// classes
+			"button", "client", "drawable", "key", "screen", "signals", "wibox", "xproperties"
+		],
+		"Lua.runtime.version": "Lua 5.3" // the arch linux version at the date is compiled against lua 5.3.5,
+	}
 }
