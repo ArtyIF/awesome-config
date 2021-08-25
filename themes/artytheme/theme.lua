@@ -42,11 +42,9 @@ theme.border_marked = theme.bg_urgent
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.bg_focus
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+local taglist_square_size = dpi(2)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(0, theme.bg_focus)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
 )
 
