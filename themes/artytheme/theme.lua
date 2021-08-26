@@ -14,9 +14,9 @@ local theme = {}
 theme.font          = "Inter 10"
 
 theme.bg_normal     = "#0f0f0f"
-theme.bg_focus      = "#0f4f0f"
-theme.bg_urgent     = "#0fff0f"
-theme.bg_minimize   = "#0f170f"
+theme.bg_focus      = "#005f2f"
+theme.bg_urgent     = "#00ff7f"
+theme.bg_minimize   = "#032317" -- lerp(#0f0f0f, #005f2f, 0.25)
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#afafaf"
@@ -25,7 +25,7 @@ theme.fg_urgent     = "#000000"
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(2)
+theme.border_width  = dpi(0) -- todo make it 0 only for maximized
 theme.border_normal = theme.bg_normal
 theme.border_focus  = theme.bg_focus
 theme.border_marked = theme.bg_urgent
@@ -94,7 +94,7 @@ theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized_
 theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized_focus_active.png"
 
 theme.wallpaper = function(s)
-    return theme_assets.wallpaper(theme.bg_normal, theme.fg_normal, theme.bg_focus, s)
+    return theme_assets.wallpaper(theme.bg_normal, theme.fg_focus, theme.bg_urgent, s)
 end
 
 -- You can use your own layout icons like this:
