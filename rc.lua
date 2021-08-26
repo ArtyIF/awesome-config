@@ -570,10 +570,10 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+    awful.titlebar(c, { size = 23 }) : setup { -- todo adjust for maximized to be 25, and also paddings below
         { -- Left
-            wibox.container.margin(awful.titlebar.widget.iconwidget    (c), 3, 3, 4, 6),
-            wibox.container.margin(awful.titlebar.widget.floatingbutton(c), 3, 3, 4, 6),
+            wibox.container.margin(awful.titlebar.widget.iconwidget    (c), 4, 3, 2, 4),
+            wibox.container.margin(awful.titlebar.widget.floatingbutton(c), 3, 6, 4, 4),
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
@@ -585,9 +585,9 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            wibox.container.margin(awful.titlebar.widget.minimizebutton (c), 3, 3, 4, 6),
-            wibox.container.margin(awful.titlebar.widget.maximizedbutton(c), 3, 3, 4, 6),
-            wibox.container.margin(awful.titlebar.widget.closebutton    (c), 3, 3, 4, 6),
+            wibox.container.margin(awful.titlebar.widget.minimizebutton (c), 6, 3, 4, 4),
+            wibox.container.margin(awful.titlebar.widget.maximizedbutton(c), 3, 3, 4, 4),
+            wibox.container.margin(awful.titlebar.widget.closebutton    (c), 3, 4, 4, 4),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
