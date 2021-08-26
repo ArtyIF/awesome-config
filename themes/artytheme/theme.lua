@@ -16,16 +16,16 @@ theme.font          = "Inter 10"
 theme.bg_normal     = "#0f0f0f"
 theme.bg_focus      = "#005f2f"
 theme.bg_urgent     = "#00ff7f"
-theme.bg_minimize   = "#032317" -- lerp(#0f0f0f, #005f2f, 0.25)
+theme.bg_minimize   = "#005f2f3f"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#afafaf"
 theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#000000"
+theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(2) -- todo make it 0 for maximized windows. oh and adjust titlebar for that too
+theme.border_width  = dpi(0)
 theme.border_normal = theme.bg_normal
 theme.border_focus  = theme.bg_focus
 theme.border_marked = theme.bg_urgent
@@ -40,13 +40,6 @@ theme.border_marked = theme.bg_urgent
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
-
--- Generate taglist squares:
-local taglist_square_size = dpi(3)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(0, theme.bg_focus)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
-)
 
 -- Variables set for theming notifications:
 -- notification_font
@@ -117,7 +110,7 @@ theme.layout_cornerse = theme_path.."layouts/cornersew.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
+    theme.menu_height, theme.bg_urgent, theme.fg_urgent
 )
 
 -- Define the icon theme for application icons. If not set then the icons
