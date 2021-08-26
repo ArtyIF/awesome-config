@@ -51,7 +51,7 @@ theme.border_marked = theme.bg_urgent
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = theme_path.."submenu.png"
-theme.menu_height = dpi(24)
+theme.menu_height = dpi(32)
 theme.menu_width  = dpi(256)
 
 -- You can add as many variables as

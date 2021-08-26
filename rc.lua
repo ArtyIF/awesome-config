@@ -53,8 +53,9 @@ beautiful.init(theme_path)
 
 terminal = "gnome-terminal"
 
-function run_in_terminal(command)
-    awful.spawn(terminal .. " -e " .. command)
+local function run_in_terminal(command)
+    naughty.notify({text = command})
+    awful.spawn(terminal .. " -e \"" .. command .. "\"")
 end
 
 -- Default modkey.
@@ -98,7 +99,6 @@ end
 -- Create a launcher widget and a main menu
 myawesomemenu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "Manual", run_in_terminal("man awesome") },
    { "Local Awesome Config", "code " .. gears.filesystem.get_configuration_dir() .. "/awesome-config.code-workspace" },
    { "Restart", awesome.restart },
 }
