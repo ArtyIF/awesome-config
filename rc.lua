@@ -51,10 +51,11 @@ end
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "artytheme") -- modification of default theme
 beautiful.init(theme_path)
 
--- This is used later as the default terminal and editor to run.
-terminal = "xterm" -- todo: use gnome-terminal somehow
-editor = os.getenv("EDITOR") or "nano"
-editor_cmd = terminal .. " -e " .. editor
+terminal = "gnome-terminal"
+
+function run_in_terminal(command)
+    awful.spawn(terminal .. " -e " .. command)
+end
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -97,7 +98,7 @@ end
 -- Create a launcher widget and a main menu
 myawesomemenu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "Manual", terminal .. " -e man awesome" },
+   { "Manual", run_in_terminal("man awesome") },
    { "Local Awesome Config", "code " .. gears.filesystem.get_configuration_dir() .. "/awesome-config.code-workspace" },
    { "Restart", awesome.restart },
 }
@@ -120,7 +121,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+menubar.utils.terminal = 'xterm' -- setting xterm here because gnome-terminal ignores arguments without quotes, which is how awesome passes them https://github.com/awesomeWM/awesome/blob/13cd20780e95f85f59906f6b57b8779abe2dfcd6/lib/menubar/utils.lua#L346. todo: fix when this is fixed
 -- }}}
 
 -- Keyboard map indicator and switcher
