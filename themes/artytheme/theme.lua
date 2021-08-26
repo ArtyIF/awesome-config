@@ -25,7 +25,7 @@ theme.fg_urgent     = "#000000"
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(0) -- todo make it 0 only for maximized
+theme.border_width  = dpi(2) -- todo make it 0 for maximized windows. oh and adjust titlebar for that too
 theme.border_normal = theme.bg_normal
 theme.border_focus  = theme.bg_focus
 theme.border_marked = theme.bg_urgent
@@ -42,7 +42,7 @@ theme.border_marked = theme.bg_urgent
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(2)
+local taglist_square_size = dpi(3)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(0, theme.bg_focus)
 theme.taglist_squares_unsel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
