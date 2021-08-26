@@ -51,8 +51,8 @@ theme.border_marked = theme.bg_urgent
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = theme_path.."submenu.png"
-theme.menu_height = dpi(25)
-theme.menu_width  = dpi(250)
+theme.menu_height = dpi(24)
+theme.menu_width  = dpi(256)
 
 -- You can add as many variables as
 -- you wish and access them by using
@@ -110,7 +110,7 @@ theme.layout_cornerse = theme_path.."layouts/cornersew.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_urgent, theme.fg_urgent
+    64, theme.bg_urgent, theme.fg_urgent
 )
 
 -- Define the icon theme for application icons. If not set then the icons
