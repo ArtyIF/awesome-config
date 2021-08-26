@@ -110,7 +110,7 @@ myfavorites = {
     { "Terminal", terminal },
 }
 
-mymainmenuitems = xdg_menu.xdgmenu
+mymainmenuitems = xdgmenu
 table.insert(mymainmenuitems, 1, { "Favorites", myfavorites })
 table.insert(mymainmenuitems, { "Awesome", myawesomemenu, beautiful.awesome_icon })
 table.insert(mymainmenuitems, { "Log Out", fade_out_log_out })
