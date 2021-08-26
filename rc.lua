@@ -99,7 +99,7 @@ end
 myawesomemenu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "Manual", terminal .. " -e man awesome" },
-   { "Local Awesome Config", "xdg-open " .. gears.filesystem.get_configuration_dir() }, -- ~ doesn't work
+   { "Local Awesome Config", "code " .. gears.filesystem.get_configuration_dir() .. "/awesome-config.code-workspace" },
    { "Restart", awesome.restart },
 }
 
