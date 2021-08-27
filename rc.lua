@@ -599,4 +599,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 awful.spawn.with_shell("picom")
-awful.spawn.with_shell("setxkbmap -layout \"us,ru\"") -- english and russian layouts
+awful.spawn.with_shell("xset s 300")
+awful.spawn.with_shell("light-locker --lock-after-screensaver=300")
