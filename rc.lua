@@ -110,7 +110,18 @@ local myfavorites = {
     { "Terminal", terminal },
 }
 
-local mymainmenuitems = xdgmenu
+-- taken from roblox docs
+local function shallow_copy(original)
+    local copy = {}
+    for key, value in pairs(original) do
+        copy[key] = value
+    end
+    return copy
+end
+
+
+
+local mymainmenuitems = shallow_copy(xdgmenu)
 table.insert(mymainmenuitems, 1, { "Favorites", myfavorites })
 table.insert(mymainmenuitems, { "Awesome", myawesomemenu, beautiful.awesome_icon })
 table.insert(mymainmenuitems, { "Log Out", fade_out_log_out })
@@ -191,8 +202,13 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
+    local available_categories = {"1", "2", "3"}
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    --[[ for menu_category, menu_entry in ipairs(xdgmenu) do
+        table.insert(available_categories, menu_entry[1])
+    end ]]
+
+    awful.tag(available_categories, s, awful.layout.layouts[1]) -- todo more tags, dynamic maybe?
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
