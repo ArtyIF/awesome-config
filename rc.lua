@@ -51,7 +51,7 @@ end
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "artytheme") -- modification of default theme
 beautiful.init(theme_path)
 
-terminal = "gnome-terminal"
+local terminal = "gnome-terminal"
 
 local function run_in_terminal(command)
     naughty.notify({text = command})
@@ -63,7 +63,7 @@ end
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+local modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -73,7 +73,7 @@ awful.layout.layouts = {
 -- }}}
 
 -- fade out wibox
-fadeout = wibox {
+local fadeout = wibox {
    visible = false,
    bg = '#000000',
    ontop = true,
@@ -82,7 +82,7 @@ fadeout = wibox {
 }
 
 -- log out with a fade out so it looks nice. fade out is handled by picom
-function fade_out_log_out()
+local function fade_out_log_out()
    fadeout.visible = true
    gears.timer {
       timeout = 0.5, -- adjust the timer if the fade out happens too fast or too slow
@@ -97,27 +97,27 @@ end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
+local myawesomemenu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "Local Awesome Config", "code " .. gears.filesystem.get_configuration_dir() .. "/awesome-config.code-workspace" },
    { "Restart", awesome.restart },
 }
 
-myfavorites = {
+local myfavorites = {
     { "Firefox", "firefox" },
     { "Discord", "discord" },
     { "GNOME Files", "nautilus" },
     { "Terminal", terminal },
 }
 
-mymainmenuitems = xdgmenu
+local mymainmenuitems = xdgmenu
 table.insert(mymainmenuitems, 1, { "Favorites", myfavorites })
 table.insert(mymainmenuitems, { "Awesome", myawesomemenu, beautiful.awesome_icon })
 table.insert(mymainmenuitems, { "Log Out", fade_out_log_out })
 
-mymainmenu = awful.menu({ items = mymainmenuitems })
+local mymainmenu = awful.menu({ items = mymainmenuitems })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
@@ -125,11 +125,11 @@ menubar.utils.terminal = 'xterm' -- setting xterm here because gnome-terminal ig
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock(" %d %b %Y, %H:%M ", 60)
+local mytextclock = wibox.widget.textclock(" %d %b %Y, %H:%M ", 60)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -251,7 +251,7 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings, todo work on them
-globalkeys = gears.table.join(
+local globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -352,7 +352,7 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"})
 )
 
-clientkeys = gears.table.join(
+local clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -446,7 +446,7 @@ for i = 1, 9 do
     )
 end
 
-clientbuttons = gears.table.join(
+local clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
     end),
