@@ -231,7 +231,27 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+        widget_template = {
+            {
+                {
+                    {
+                        id     = 'icon_role',
+                        widget = wibox.widget.imagebox,
+                    },
+                    margins = 8,
+                    widget  = wibox.container.margin,
+                },
+                {
+                    id     = 'text_role',
+                    widget = wibox.widget.textbox,
+                },
+                nil,
+                layout = wibox.layout.align.horizontal
+            },
+            id     = 'background_role',
+            widget = wibox.container.background,
+        },
     }
 
     -- Create the wibox
