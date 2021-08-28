@@ -16,7 +16,7 @@ theme.font          = "Inter 10"
 theme.bg_normal     = "#171717"
 theme.bg_focus      = "#005f2f"
 theme.bg_urgent     = "#00ff7f"
-theme.bg_minimize   = "#005f2f3f"
+theme.bg_minimize   = theme.bg_focus .. "3f"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#bfbfbf"

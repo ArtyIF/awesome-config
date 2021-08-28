@@ -53,6 +53,7 @@ beautiful.init(theme_path)
 
 local terminal = "gnome-terminal"
 
+-- for future
 local function run_in_terminal(command)
     naughty.notify({text = command})
     awful.spawn(terminal .. " -e \"" .. command .. "\"")
@@ -118,8 +119,6 @@ local function shallow_copy(original)
     end
     return copy
 end
-
-
 
 local mymainmenuitems = shallow_copy(xdgmenu)
 table.insert(mymainmenuitems, 1, { "Favorites", myfavorites })
