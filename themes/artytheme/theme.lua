@@ -41,6 +41,12 @@ theme.border_marked = theme.bg_urgent
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 
+local taglist_square_size = dpi(32)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(0, "#00000000")
+theme.taglist_squares_unsel = theme_assets.taglist_squares_sel(
+    taglist_square_size, theme.bg_minimize
+)
+
 -- Variables set for theming notifications:
 -- notification_font
 -- notification_[bg|fg]
