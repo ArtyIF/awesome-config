@@ -1,24 +1,20 @@
--- Standard awesome library
+-- standard awesome stuff
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
--- Widget and layout library
+-- widget and layout library, might need in the future
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
-local naughty = require("naughty")
-local menubar = require("menubar")
+-- hotkeys popup, we might not need it
 local hotkeys_popup = require("awful.hotkeys_popup")
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
 local main_menu = {}
 
 -- generate the app menu (sync) and require it
 os.execute("xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > ~/.config/awesome/appmenu.lua")
-local xdg_menu = require("appmenu")
+require("appmenu")
 
 -- awesomewm menu
 local menu_awesome = {
@@ -37,7 +33,7 @@ local menu_favorites = {
 }
 
 -- taken from roblox docs, clones a table
--- todo: move to separate file
+-- todo: move to separate file for everything
 local function shallow_copy(original)
     local copy = {}
     for key, value in pairs(original) do
