@@ -73,62 +73,7 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- fade out wibox
-local fadeout = wibox {
-   visible = false,
-   bg = '#000000',
-   ontop = true,
-   width = 1920, -- todo: actually calculate size
-   height = 1080,
-}
-
--- log out with a fade out so it looks nice. fade out is handled by picom
-local function fade_out_log_out()
-   fadeout.visible = true
-   gears.timer {
-      timeout = 0.5, -- adjust the timer if the fade out happens too fast or too slow
-      autostart = true,
-      single_shot = true,
-      callback = function()
-        os.execute("light-locker-command -a") -- turns off the screen. fixed a brief flash of a wallpaper
-        awesome.quit()
-      end
-   }
-end
-
--- {{{ Menu
--- Create a launcher widget and a main menu
-local myawesomemenu = {
-   { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "Local Awesome Config", "code " .. gears.filesystem.get_configuration_dir() .. "/awesome-config.code-workspace" },
-   { "Restart", awesome.restart },
-}
-
-local myfavorites = {
-    { "Firefox", "firefox" },
-    { "Discord", "discord" },
-    { "GNOME Files", "nautilus" },
-    { "Terminal", terminal },
-}
-
--- taken from roblox docs
-local function shallow_copy(original)
-    local copy = {}
-    for key, value in pairs(original) do
-        copy[key] = value
-    end
-    return copy
-end
-
-local mymainmenuitems = shallow_copy(xdgmenu)
-table.insert(mymainmenuitems, 1, { "Favorites", myfavorites })
-table.insert(mymainmenuitems, { "Awesome", myawesomemenu, beautiful.awesome_icon })
-table.insert(mymainmenuitems, { "Log Out", fade_out_log_out })
-
-local mymainmenu = awful.menu({ items = mymainmenuitems })
-
-local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+local main_menu = require("components.top_bar.main_menu")
 
 -- Menubar configuration
 menubar.utils.terminal = 'xterm' -- setting xterm here because gnome-terminal ignores arguments without quotes, which is how awesome passes them https://github.com/awesomeWM/awesome/blob/13cd20780e95f85f59906f6b57b8779abe2dfcd6/lib/menubar/utils.lua#L346. todo: fix when this is fixed
@@ -268,7 +213,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            main_menu.launcher,
             s.mytaglist,
             s.mypromptbox,
         },
@@ -286,7 +231,7 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end)
+    awful.button({ }, 3, function () main_menu.menu:toggle() end)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -315,7 +260,7 @@ local globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+    awful.key({ modkey,           }, "w", function () main_menu.menu:show() end,
               {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
