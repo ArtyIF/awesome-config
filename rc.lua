@@ -232,6 +232,9 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
+        layout  = {
+            layout  = wibox.layout.fixed.horizontal,
+        },
         widget_template = {
             {
                 {
@@ -243,10 +246,14 @@ awful.screen.connect_for_each_screen(function(s)
                     widget  = wibox.container.margin,
                 },
                 {
-                    id     = 'text_role',
-                    widget = wibox.widget.textbox,
+                    {
+                        id     = 'text_role',
+                        widget = wibox.widget.textbox,
+                        forced_width = beautiful.menu_width
+                    },
+                    right = 8,
+                    widget = wibox.container.margin,
                 },
-                nil,
                 layout = wibox.layout.align.horizontal
             },
             id     = 'background_role',
