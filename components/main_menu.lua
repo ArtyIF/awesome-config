@@ -28,8 +28,8 @@ local menu_awesome = {
 local menu_favorites = {
     { "Firefox", "firefox" },
     { "Discord", "discord" },
-    { "GNOME Files", "nautilus" },
-    { "GNOME Terminal", "gnome-terminal" },
+    { "Files", "nautilus" },
+    { "Terminal", "konsole" },
 }
 
 -- taken from roblox docs, clones a table
