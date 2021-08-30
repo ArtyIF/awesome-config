@@ -70,7 +70,7 @@ awful.layout.layouts = {
 }
 -- }}}
 
-local main_menu = require("components.top_bar.main_menu")
+local main_menu = require("components.main_menu")
 
 -- Menubar configuration
 menubar.utils.terminal = 'xterm' -- setting xterm here because gnome-terminal ignores arguments without quotes, which is how awesome passes them https://github.com/awesomeWM/awesome/blob/13cd20780e95f85f59906f6b57b8779abe2dfcd6/lib/menubar/utils.lua#L346. todo: fix when this is fixed
@@ -101,28 +101,6 @@ local taglist_buttons = gears.table.join(
                     awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
-
-local tasklist_buttons = gears.table.join(
-                     awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  c:emit_signal(
-                                                      "request::activate",
-                                                      "tasklist",
-                                                      {raise = true}
-                                                  )
-                                              end
-                                          end),
-                     awful.button({ }, 3, function()
-                                              awful.menu.client_list()
-                                          end),
-                     awful.button({ }, 4, function ()
-                                              awful.client.focus.byidx(1)
-                                          end),
-                     awful.button({ }, 5, function ()
-                                              awful.client.focus.byidx(-1)
-                                          end))
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -169,38 +147,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create a tasklist widget, todo make the icons smaller
-    s.mytasklist = awful.widget.tasklist {
-        screen  = s,
-        filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons,
-        layout  = {
-            layout  = wibox.layout.fixed.horizontal,
-        },
-        widget_template = {
-            {
-                {
-                    {
-                        id     = 'icon_role',
-                        widget = wibox.widget.imagebox,
-                    },
-                    margins = 8,
-                    widget  = wibox.container.margin,
-                },
-                {
-                    {
-                        id     = 'text_role',
-                        widget = wibox.widget.textbox,
-                        forced_width = beautiful.menu_width
-                    },
-                    right = 8,
-                    widget = wibox.container.margin,
-                },
-                layout = wibox.layout.align.horizontal
-            },
-            id     = 'background_role',
-            widget = wibox.container.background,
-        },
-    }
+    s.task_list = require("components.task_list").new(s)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = 32 }) -- todo: make it on top but still make it below fullscreen windows
@@ -214,7 +161,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        s.task_list, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,

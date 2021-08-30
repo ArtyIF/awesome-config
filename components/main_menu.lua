@@ -4,7 +4,7 @@ local awful = require("awful")
 require("awful.autofocus")
 -- widget and layout library, might need in the future
 local wibox = require("wibox")
--- Theme handling library
+-- theme handling library
 local beautiful = require("beautiful")
 -- hotkeys popup, we might not need it
 local hotkeys_popup = require("awful.hotkeys_popup")
