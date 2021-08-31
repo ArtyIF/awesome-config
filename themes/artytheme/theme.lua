@@ -40,8 +40,8 @@ theme.border_marked = theme.bg_urgent
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
-theme.titlebar_bg_normal = theme.bg_normal .. "bf"
-theme.titlebar_bg_focus = theme.bg_focus .. "bf"
+-- theme.titlebar_bg_normal = theme.bg_normal .. "bf"
+-- theme.titlebar_bg_focus = theme.bg_focus .. "bf"
 
 local taglist_square_size = dpi(32)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(0, "#00000000")
