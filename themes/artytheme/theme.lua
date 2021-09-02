@@ -4,6 +4,7 @@
 
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
+local gtk_vars = require("beautiful.gtk").get_theme_variables()
 local dpi = xresources.apply_dpi
 
 local gfs = require("gears.filesystem")
@@ -11,7 +12,7 @@ local theme_path = string.format("%s/.config/awesome/themes/%s/", os.getenv("HOM
 
 local theme = {}
 
-theme.font          = "Inter 10"
+theme.font          = gtk_vars.font_family .. " " .. gtk_vars.font_size
 
 theme.bg_normal     = "#171717"
 theme.bg_focus      = "#005f2f"
@@ -24,8 +25,8 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(0)
+theme.useless_gap   = 0
+theme.border_width  = 0
 theme.border_normal = theme.bg_normal
 theme.border_focus  = theme.bg_focus
 theme.border_marked = theme.bg_urgent
@@ -43,7 +44,7 @@ theme.border_marked = theme.bg_urgent
 -- theme.titlebar_bg_normal = theme.bg_normal .. "bf"
 -- theme.titlebar_bg_focus = theme.bg_focus .. "bf"
 
-local taglist_square_size = dpi(32)
+local taglist_square_size = 32
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(0, "#00000000")
 theme.taglist_squares_unsel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.bg_minimize
@@ -59,8 +60,8 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_sel(
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = theme_path.."submenu.png"
-theme.menu_height = dpi(32)
-theme.menu_width  = dpi(256)
+theme.menu_height = 32
+theme.menu_width  = 256
 
 -- You can add as many variables as
 -- you wish and access them by using

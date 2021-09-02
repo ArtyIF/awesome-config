@@ -48,7 +48,7 @@ end
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "artytheme") -- modification of default theme
 beautiful.init(theme_path)
 
-local terminal = "gnome-terminal"
+local terminal = "konsole"
 
 -- for future
 local function run_in_terminal(command)
@@ -73,7 +73,7 @@ awful.layout.layouts = {
 local main_menu = require("components.main_menu")
 
 -- Menubar configuration
-menubar.utils.terminal = 'xterm' -- setting xterm here because gnome-terminal ignores arguments without quotes, which is how awesome passes them https://github.com/awesomeWM/awesome/blob/13cd20780e95f85f59906f6b57b8779abe2dfcd6/lib/menubar/utils.lua#L346. todo: fix when this is fixed
+menubar.utils.terminal = terminal
 -- }}}
 
 -- Keyboard map indicator and switcher
