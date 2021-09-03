@@ -87,7 +87,7 @@ local possible_colors =
     "#00ff7f",
     "#00ffff",
     "#007fff",
-    "#0000ff",
+    -- "#0000ff", -- too low contrast
     "#7f00ff",
     "#ff00ff",
     "#ff007f",

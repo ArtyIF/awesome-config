@@ -81,7 +81,7 @@ local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-local mytextclock = wibox.widget.textclock(" %d %b %Y, %H:%M ", 60)
+local mytextclock = wibox.widget.textclock("%a %d %b %Y, %H:%M ", 60)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -122,10 +122,6 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     local available_categories = {"1", "2", "3"}
-    -- Each screen has its own tag table.
-    --[[ for menu_category, menu_entry in ipairs(xdgmenu) do
-        table.insert(available_categories, menu_entry[1])
-    end ]]
 
     awful.tag(available_categories, s, awful.layout.layouts[1]) -- todo more tags, dynamic maybe?
 
