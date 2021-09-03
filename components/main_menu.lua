@@ -10,14 +10,14 @@ local beautiful = require("beautiful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
-local main_menu = {}
+local main_menu = {menus = {}}
 
 -- generate the app menu (sync) and require it
 os.execute("xdg_menu --fullmenu --format awesome --root-menu /etc/xdg/menus/applications.menu > ~/.config/awesome/appmenu.lua")
 require("appmenu")
 
 -- awesomewm menu
-local menu_awesome = {
+main_menu.menus.awesome = {
     { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end }, -- remove?
     { "Local Awesome Config", "code " .. gears.filesystem.get_configuration_dir() .. "/awesome-config.code-workspace" },
     { "Restart", awesome.restart },
@@ -25,7 +25,7 @@ local menu_awesome = {
 
 -- favorites menu
 -- todo: make this as part of xdgmenu somehow
-local menu_favorites = {
+main_menu.menus.favorites = {
     { "Firefox", "firefox" },
     { "Discord", "discord" },
     { "Files", "nautilus" },
@@ -43,16 +43,16 @@ local function shallow_copy(original)
 end
 
 -- the entries that are actually going to be in the menu. first favorites, then all the xdg categories, then awesomewm and then an option to log out
-local menu_items = shallow_copy(xdgmenu)
-table.insert(menu_items, 1, { "Favorites", menu_favorites })
-table.insert(menu_items, { "Awesome", menu_awesome, beautiful.awesome_icon })
-table.insert(menu_items, { "Log Out", function() awesome.quit() end }) -- todo: make it fade out again, but properly
+main_menu.items = shallow_copy(xdgmenu)
+table.insert(main_menu.items, 1, { "Favorites", main_menu.menus.favorites })
+table.insert(main_menu.items, { "Awesome", main_menu.menus.awesome, beautiful.awesome_icon })
+table.insert(main_menu.items, { "Log Out", function() awesome.quit() end }) -- todo: make it fade out again, but properly
 
 -- the menu itself
-main_menu.menu = awful.menu({ items = menu_items })
+main_menu.menu = awful.menu({ items = main_menu.items })
 
 -- the launcher for the menu
 -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
 main_menu.launcher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = main_menu.menu })
 
-return main_menu
+return { menu = main_menu.menu, launcher = main_menu.launcher }

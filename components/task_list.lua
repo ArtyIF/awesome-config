@@ -9,7 +9,11 @@ local beautiful = require("beautiful")
 
 local task_list = {}
 
-local task_list_buttons = gears.table.join(
+task_list.layout = {
+    layout = wibox.layout.fixed.horizontal,
+}
+
+task_list.buttons = gears.table.join(
     awful.button({ }, 1,
         function (c)
             if c == client.focus then
@@ -36,7 +40,7 @@ local task_list_buttons = gears.table.join(
     )
 )
 
-local task_list_template = {
+task_list.template = {
     {
         {
             {
@@ -65,12 +69,10 @@ function task_list.new(s)
     return awful.widget.tasklist {
         screen = s,
         filter = awful.widget.tasklist.filter.currenttags,
-        buttons = task_list_buttons,
-        layout = {
-            layout = wibox.layout.fixed.horizontal,
-        },
-        widget_template = task_list_template
+        buttons = task_list.buttons,
+        layout = task_list.layout,
+        widget_template = task_list.template
     }
 end
 
-return task_list
+return task_list.new
