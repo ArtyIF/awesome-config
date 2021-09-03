@@ -14,15 +14,86 @@ local theme = {}
 
 theme.font          = gtk_vars.font_family .. " " .. gtk_vars.font_size
 
+local function hex_to_srgb(color)
+    color = string.gsub(color, "#", "")
+    if string.len(color) == 6 then
+        return tonumber("0x" .. string.sub(color, 1, 2)) / 255, tonumber("0x" .. string.sub(color, 3, 4)) / 255, tonumber("0x" .. string.sub(color, 5, 6)) / 255
+    elseif string.len(color) == 3 then
+        return tonumber("0x" .. string.sub(color, 1, 1)) / 255, tonumber("0x" .. string.sub(color, 2, 2)) / 255, tonumber("0x" .. string.sub(color, 3, 3)) / 255
+    end
+end
+
+local function gamma_correct(r_srgb, g_srgb, b_srgb)
+    local r, g, b = 0, 0, 0
+
+    if r_srgb <= 0.03928 then
+        r = r_srgb / 12.92
+    else
+        r = ((r_srgb + 0.055) / 1.055) ^ 2.4
+    end
+
+    if g_srgb <= 0.03928 then
+        g = g_srgb / 12.92
+    else
+        g = ((g_srgb + 0.055) / 1.055) ^ 2.4
+    end
+
+    if b_srgb <= 0.03928 then
+        b = b_srgb / 12.92
+    else
+        b = ((b_srgb + 0.055) / 1.055) ^ 2.4
+    end
+
+    return r, g, b
+end
+
+-- source: https://www.w3.org/TR/WCAG20-TECHS/G17.html
+local function best_fg(bg)
+    local r_srgb, g_srgb, b_srgb = hex_to_srgb(bg)
+
+    local r_bg, g_bg, b_bg = gamma_correct(r_srgb, g_srgb, b_srgb)
+    local l_bg = 0.2126 * r_bg + 0.7152 * g_bg + 0.0722 * b_bg
+    
+    local contrast_ratio = (l_bg + 0.05) / 0.05
+
+    if contrast_ratio >= 7 then
+        return "#000000"
+    else
+        return "#ffffff"
+    end
+end
+
+-- possible values for colors
+-- todo: color button imageboxes too somehow
+-- todo: adjust the ugly colors to be, well, less ugly
+local possible_palettes =
+{
+    -- { focus_bg = "#7f0000", urgent_bg = "#ff0000" }, -- ugly
+    { focus_bg = "#7f3f00", urgent_bg = "#ff7f00" },
+    -- { focus_bg = "#7f7f00", urgent_bg = "#ffff00" }, -- ugly
+    { focus_bg = "#3f7f00", urgent_bg = "#7fff00" },
+    { focus_bg = "#007f00", urgent_bg = "#00ff00" },
+    { focus_bg = "#007f3f", urgent_bg = "#00ff7f" },
+    { focus_bg = "#007f7f", urgent_bg = "#00ffff" },
+    { focus_bg = "#003f7f", urgent_bg = "#007fff" },
+    -- { focus_bg = "#00007f", urgent_bg = "#0000ff" }, -- ugly
+    -- { focus_bg = "#3f007f", urgent_bg = "#7f00ff" }, -- ugly
+    -- { focus_bg = "#7f007f", urgent_bg = "#ff00ff" }, -- ugly
+    { focus_bg = "#7f003f", urgent_bg = "#ff007f" },
+}
+
+math.randomseed(os.time())
+local random_palette_chosen = possible_palettes[math.random(#possible_palettes)]
+
 theme.bg_normal     = "#171717"
-theme.bg_focus      = "#005f2f"
-theme.bg_urgent     = "#00ff7f"
+theme.bg_focus      = random_palette_chosen.focus_bg
+theme.bg_urgent     = random_palette_chosen.urgent_bg
 theme.bg_minimize   = theme.bg_focus .. "3f"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#bfbfbf"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = theme.bg_normal
+theme.fg_focus      = best_fg(theme.bg_focus)
+theme.fg_urgent      = best_fg(theme.bg_urgent)
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = 0
