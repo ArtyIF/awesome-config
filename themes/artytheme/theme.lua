@@ -7,6 +7,8 @@ local xresources = require("beautiful.xresources")
 local gtk_vars = require("beautiful.gtk").get_theme_variables()
 local dpi = xresources.apply_dpi
 
+local naughty = require("naughty") -- debugging stuff
+
 local gfs = require("gears.filesystem")
 local theme_path = string.format("%s/.config/awesome/themes/%s/", os.getenv("HOME"), "artytheme")
 
@@ -53,7 +55,7 @@ local function best_fg(bg)
 
     local r_bg, g_bg, b_bg = gamma_correct(r_srgb, g_srgb, b_srgb)
     local l_bg = 0.2126 * r_bg + 0.7152 * g_bg + 0.0722 * b_bg
-    
+
     local contrast_ratio = (l_bg + 0.05) / 0.05
 
     if contrast_ratio >= 7 then
@@ -63,37 +65,46 @@ local function best_fg(bg)
     end
 end
 
+-- very dirty but good enough. will need to move to a proper color library one day
+local function darken_color(color, amount)
+    local r, g, b = hex_to_srgb(color)
+    r = r * amount
+    g = g * amount
+    b = b * amount
+    return "#" .. string.format("%02x", math.floor(r * 255)) .. string.format("%02x", math.floor(g * 255)) .. string.format("%02x", math.floor(b * 255))
+end
+
 -- possible values for colors
 -- todo: color button imageboxes too somehow
--- todo: adjust the ugly colors to be, well, less ugly
-local possible_palettes =
+-- todo: adjust the colors
+local possible_colors =
 {
-    -- { focus_bg = "#7f0000", urgent_bg = "#ff0000" }, -- ugly
-    { focus_bg = "#7f3f00", urgent_bg = "#ff7f00" },
-    -- { focus_bg = "#7f7f00", urgent_bg = "#ffff00" }, -- ugly
-    { focus_bg = "#3f7f00", urgent_bg = "#7fff00" },
-    { focus_bg = "#007f00", urgent_bg = "#00ff00" },
-    { focus_bg = "#007f3f", urgent_bg = "#00ff7f" },
-    { focus_bg = "#007f7f", urgent_bg = "#00ffff" },
-    { focus_bg = "#003f7f", urgent_bg = "#007fff" },
-    -- { focus_bg = "#00007f", urgent_bg = "#0000ff" }, -- ugly
-    -- { focus_bg = "#3f007f", urgent_bg = "#7f00ff" }, -- ugly
-    -- { focus_bg = "#7f007f", urgent_bg = "#ff00ff" }, -- ugly
-    { focus_bg = "#7f003f", urgent_bg = "#ff007f" },
+    "#ff0000",
+    "#ff7f00",
+    "#ffff00",
+    "#7fff00",
+    "#00ff00",
+    "#00ff7f",
+    "#00ffff",
+    "#007fff",
+    "#0000ff",
+    "#7f00ff",
+    "#ff00ff",
+    "#ff007f",
 }
 
 math.randomseed(os.time())
-local random_palette_chosen = possible_palettes[math.random(#possible_palettes)]
+local random_color_chosen = possible_colors[math.random(#possible_colors)]
 
-theme.bg_normal     = "#171717"
-theme.bg_focus      = random_palette_chosen.focus_bg
-theme.bg_urgent     = random_palette_chosen.urgent_bg
+theme.bg_normal     = darken_color(random_color_chosen, 0.05)
+theme.bg_focus      = darken_color(random_color_chosen, 0.25)
+theme.bg_urgent     = random_color_chosen
 theme.bg_minimize   = theme.bg_focus .. "3f"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#bfbfbf"
 theme.fg_focus      = best_fg(theme.bg_focus)
-theme.fg_urgent      = best_fg(theme.bg_urgent)
+theme.fg_urgent     = best_fg(theme.bg_urgent)
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = 0
