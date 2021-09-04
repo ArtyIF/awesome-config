@@ -50,9 +50,9 @@ local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.ge
 beautiful.init(theme_path)
 
 -- components
-local layout_box = require("components.layout_box")
-local main_menu = require("components.main_menu")
-local task_list = require("components.task_list")
+local layout_box = require("components.widgets.layout_box")
+local main_menu = require("components.widgets.main_menu")
+local task_list = require("components.widgets.task_list")
 
 local terminal = "konsole"
 
