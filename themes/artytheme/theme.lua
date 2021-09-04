@@ -88,7 +88,7 @@ local possible_colors =
     "#00ffff",
     "#007fff",
     -- "#0000ff", -- too low contrast
-    "#7f00ff",
+    -- "#7f00ff", -- looks cool, too low contrast
     "#ff00ff",
     "#ff007f",
 }
@@ -102,10 +102,10 @@ theme.bg_urgent     = random_color_chosen
 theme.bg_minimize   = theme.bg_focus .. "3f"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#bfbfbf"
+theme.fg_normal     = best_fg(theme.bg_normal) .. "bf"
 theme.fg_focus      = best_fg(theme.bg_focus)
 theme.fg_urgent     = best_fg(theme.bg_urgent)
-theme.fg_minimize   = "#ffffff"
+theme.fg_minimize   = best_fg(theme.bg_normal) .. "bf"
 
 theme.useless_gap   = 0
 theme.border_width  = 0
