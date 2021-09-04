@@ -12,6 +12,7 @@ require("awful.hotkeys_popup.keys")
 local main_menu = {menus = {}}
 
 -- generate the app menu (sync) and require it
+-- todo: replace with a better option since these files aren't easily editable neither by alacarte or kmenuedit
 os.execute("xdg_menu --fullmenu --format awesome --root-menu /etc/xdg/menus/applications.menu > ~/.config/awesome/appmenu.lua")
 require("appmenu")
 
