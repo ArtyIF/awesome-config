@@ -99,7 +99,7 @@ local random_color_chosen = possible_colors[math.random(#possible_colors)]
 theme.bg_normal     = darken_color(random_color_chosen, 0.05)
 theme.bg_focus      = darken_color(random_color_chosen, 0.25)
 theme.bg_urgent     = random_color_chosen
-theme.bg_minimize   = theme.bg_focus .. "3f"
+theme.bg_minimize   = theme.bg_focus .. "7f"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = best_fg(theme.bg_normal) .. "bf"
