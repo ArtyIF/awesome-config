@@ -9,7 +9,7 @@ local beautiful = require("beautiful")
 local task_list = {}
 
 task_list.layout = {
-    layout = wibox.layout.fixed.horizontal,
+    layout = wibox.layout.flex.horizontal,
 }
 
 -- todo: move to keybinds
@@ -54,7 +54,6 @@ task_list.template = {
             {
                 id     = 'text_role',
                 widget = wibox.widget.textbox,
-                forced_width = beautiful.menu_width
             },
             right = 8,
             widget = wibox.container.margin,
