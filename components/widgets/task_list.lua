@@ -1,7 +1,6 @@
 -- standard awesome stuff
 local gears = require("gears")
 local awful = require("awful")
-require("awful.autofocus")
 -- widget and layout library
 local wibox = require("wibox")
 -- theme handling library
@@ -13,6 +12,7 @@ task_list.layout = {
     layout = wibox.layout.fixed.horizontal,
 }
 
+-- todo: move to keybinds
 task_list.buttons = gears.table.join(
     awful.button({ }, 1,
         function (c)

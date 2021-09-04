@@ -1,7 +1,6 @@
 -- standard awesome stuff
 local gears = require("gears")
 local awful = require("awful")
-require("awful.autofocus")
 -- widget and layout library, might need in the future
 local wibox = require("wibox")
 -- theme handling library

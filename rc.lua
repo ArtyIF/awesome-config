@@ -52,6 +52,7 @@ beautiful.init(theme_path)
 -- components
 local layout_box = require("components.widgets.layout_box")
 local main_menu = require("components.widgets.main_menu")
+local tag_list = require("components.widgets.tag_list")
 local task_list = require("components.widgets.task_list")
 
 local terminal = "konsole"
@@ -118,20 +119,8 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
-    local available_categories = {"1", "2", "3"}
-
-    awful.tag(available_categories, s, awful.layout.layouts[1]) -- todo more tags, dynamic maybe?
-
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist {
-        screen  = s,
-        filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
-    }
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = 32 }) -- todo: make it on top but still make it below fullscreen windows
@@ -142,7 +131,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             main_menu.launcher,
-            s.mytaglist,
+            tag_list(s),
             s.mypromptbox,
         },
         task_list(s), -- Middle widget
@@ -313,8 +302,7 @@ local clientkeys = gears.table.join(
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+for i = 1, 3 do
     globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
