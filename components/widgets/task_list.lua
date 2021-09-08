@@ -3,8 +3,6 @@ local gears = require("gears")
 local awful = require("awful")
 -- widget and layout library
 local wibox = require("wibox")
--- theme handling library
-local beautiful = require("beautiful")
 
 local task_list = {}
 

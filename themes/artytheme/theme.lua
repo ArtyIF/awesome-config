@@ -151,31 +151,31 @@ theme.menu_width  = 256
 --theme.bg_widget = "#cc0000"
 
 -- Define the image to load
-theme.titlebar_close_button_normal = theme_path.."titlebar/close_normal.png"
-theme.titlebar_close_button_focus  = theme_path.."titlebar/close_focus.png"
+theme.titlebar_close_button_normal = theme_path.."titlebar/close.png"
+theme.titlebar_close_button_focus  = theme_path.."titlebar/close.png"
 
-theme.titlebar_minimize_button_normal = theme_path.."titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus  = theme_path.."titlebar/minimize_focus.png"
+theme.titlebar_minimize_button_normal = theme_path.."titlebar/minimize.png"
+theme.titlebar_minimize_button_focus  = theme_path.."titlebar/minimize.png"
 
-theme.titlebar_ontop_button_normal_inactive = theme_path.."titlebar/ontop_normal_inactive.png"
-theme.titlebar_ontop_button_focus_inactive  = theme_path.."titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_active = theme_path.."titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active  = theme_path.."titlebar/ontop_focus_active.png"
+theme.titlebar_ontop_button_normal_inactive = theme_path.."titlebar/ontop.png"
+theme.titlebar_ontop_button_focus_inactive  = theme_path.."titlebar/ontop.png"
+theme.titlebar_ontop_button_normal_active = theme_path.."titlebar/ontop.png"
+theme.titlebar_ontop_button_focus_active  = theme_path.."titlebar/ontop.png"
 
-theme.titlebar_sticky_button_normal_inactive = theme_path.."titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive  = theme_path.."titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active = theme_path.."titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active  = theme_path.."titlebar/sticky_focus_active.png"
+theme.titlebar_sticky_button_normal_inactive = theme_path.."titlebar/sticky.png"
+theme.titlebar_sticky_button_focus_inactive  = theme_path.."titlebar/sticky.png"
+theme.titlebar_sticky_button_normal_active = theme_path.."titlebar/sticky.png"
+theme.titlebar_sticky_button_focus_active  = theme_path.."titlebar/sticky.png"
 
-theme.titlebar_floating_button_normal_inactive = theme_path.."titlebar/floating_normal_inactive.png"
-theme.titlebar_floating_button_focus_inactive  = theme_path.."titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_active = theme_path.."titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_active  = theme_path.."titlebar/floating_focus_active.png"
+theme.titlebar_floating_button_normal_inactive = theme_path.."titlebar/floating.png"
+theme.titlebar_floating_button_focus_inactive  = theme_path.."titlebar/floating.png"
+theme.titlebar_floating_button_normal_active = theme_path.."titlebar/floating.png"
+theme.titlebar_floating_button_focus_active  = theme_path.."titlebar/floating.png"
 
-theme.titlebar_maximized_button_normal_inactive = theme_path.."titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = theme_path.."titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized_focus_active.png"
+theme.titlebar_maximized_button_normal_inactive = theme_path.."titlebar/maximized.png"
+theme.titlebar_maximized_button_focus_inactive  = theme_path.."titlebar/maximized.png"
+theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized.png"
+theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized.png"
 
 theme.wallpaper = function(s)
     return theme_assets.wallpaper(theme.bg_normal, theme.fg_normal, theme.bg_urgent, s)
@@ -206,7 +206,13 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+theme.icon_theme = "/usr/share/icons/Adwaita++-Dark-Colorful"
+
+theme = theme_assets.recolor_titlebar(theme, theme.bg_urgent, "normal", nil, "active")
+theme = theme_assets.recolor_titlebar(theme, theme.bg_urgent, "focus", nil, "active")
+theme = theme_assets.recolor_titlebar(theme, "#bfbfbf", "normal", nil, "inactive") -- this one ignores transparency unfortunately
+theme = theme_assets.recolor_titlebar(theme, theme.fg_focus, "focus", nil, "inactive")
+theme = theme_assets.recolor_titlebar(theme, theme.fg_focus, "normal", "hover", "inactive")
 
 return theme
 
