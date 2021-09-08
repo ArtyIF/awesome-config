@@ -23,14 +23,15 @@ volume_control.icon_muted = "audio-volume-muted-symbolic.svg"
 
 function volume_control.callback(volume, muted)
     if muted or volume == 0 then
-        volume_control.widget.image = volume_control.icons_path .. volume_control.icon_muted
+        volume_control.image_widget.image = volume_control.icons_path .. volume_control.icon_muted
     elseif volume <= 33 then
-        volume_control.widget.image = volume_control.icons_path .. volume_control.icon_low
+        volume_control.image_widget.image = volume_control.icons_path .. volume_control.icon_low
     elseif volume <= 67 then
-        volume_control.widget.image = volume_control.icons_path .. volume_control.icon_medium
+        volume_control.image_widget.image = volume_control.icons_path .. volume_control.icon_medium
     else
-        volume_control.widget.image = volume_control.icons_path .. volume_control.icon_high
+        volume_control.image_widget.image = volume_control.icons_path .. volume_control.icon_high
     end
+    volume_control.text_widget.text = volume .. "% "
 end
 
 function volume_control.parse_cmd_out(cmd)
@@ -60,7 +61,10 @@ function volume_control.toggle()
 end
 
 function volume_control.new()
-    volume_control.widget = wibox.widget.imagebox(nil, true)
+    volume_control.image_widget = wibox.widget.imagebox(nil, true)
+    volume_control.text_widget = wibox.widget.textbox(nil)
+    volume_control.widget = wibox.layout.fixed.horizontal(volume_control.image_widget, volume_control.text_widget)
+
     volume_control.widget:buttons({
         awful.button({ }, 1, function ()
             awful.spawn.spawn("pavucontrol")
@@ -75,12 +79,14 @@ function volume_control.new()
             volume_control.down()
         end),
     })
+
     gears.timer({
         timeout = 1,
         autostart = true,
         call_now = true,
         callback = volume_control.get
     })
+    
     return volume_control.widget
 end
 

@@ -74,7 +74,7 @@ local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-local mytextclock = wibox.widget.textclock("%a %d %b %Y, %H:%M ", 60)
+local mytextclock = wibox.widget.textclock("%a %d %b, %H:%M ", 60)
 
 local function set_wallpaper(s)
     -- Wallpaper
