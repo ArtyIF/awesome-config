@@ -54,6 +54,7 @@ local layout_box = require("components.widgets.layout_box")
 local main_menu = require("components.widgets.main_menu")
 local tag_list = require("components.widgets.tag_list")
 local task_list = require("components.widgets.task_list")
+local volume_control = require("components.widgets.volume_control") -- https://github.com/deficient/volume-control
 local modkeys = require("components.keybinds.modkeys")
 
 local terminal = "konsole"
@@ -114,6 +115,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+            volume_control({}).widget,
             mytextclock,
             layout_box(s),
         },
