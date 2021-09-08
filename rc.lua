@@ -403,28 +403,12 @@ awful.rules.rules = {
 }
 -- }}}
 
-local function make_pseudo_fullscreen_real(c)
-    -- some games like witcher 2 (through proton) are very weird with their fullscreen. it's more like borderless fullscreen? so this code tries to detect pseudo-fullscreen windows and actually make them fullscreen
-    if c.requests_no_titlebar and c.height >= c.screen.geometry.height and c.width >= c.screen.geometry.width then
-        gears.timer {
-            timeout = 0.5, -- for some reason if i do this immediately it doesn't work. this value seems good on my pc
-            autostart = true,
-            single_shot = true,
-            callback = function()
-                c.fullscreen = true
-            end
-        }
-    end
-end
-
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
-
-    make_pseudo_fullscreen_real(c)
 
     if awesome.startup
       and not c.size_hints.user_position
@@ -450,8 +434,8 @@ client.connect_signal("request::titlebars", function(c)
 
     awful.titlebar(c, { size = 32 }) : setup {
         { -- Left
-            wibox.container.margin(awful.titlebar.widget.iconwidget    (c), 8, 4, 8, 8),
-            wibox.container.margin(awful.titlebar.widget.floatingbutton(c), 4, 8, 8, 8),
+            wibox.container.margin(awful.titlebar.widget.iconwidget    (c), 8, 4, 4, 4),
+            awful.titlebar.widget.floatingbutton(c),
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
@@ -463,9 +447,9 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            wibox.container.margin(awful.titlebar.widget.minimizebutton (c), 8, 4, 8, 8),
-            wibox.container.margin(awful.titlebar.widget.maximizedbutton(c), 4, 4, 8, 8),
-            wibox.container.margin(awful.titlebar.widget.closebutton    (c), 4, 8, 8, 8),
+            awful.titlebar.widget.minimizebutton (c),
+            awful.titlebar.widget.maximizedbutton(c),
+            wibox.container.margin(awful.titlebar.widget.closebutton    (c), 0, 4, 0, 0),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
