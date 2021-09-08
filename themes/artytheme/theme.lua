@@ -206,7 +206,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = "/usr/share/icons/Adwaita++-Dark-Colorful"
+theme.icon_theme = "/usr/share/icons/breeze-dark"
 
 theme = theme_assets.recolor_titlebar(theme, theme.bg_urgent, "normal", nil, "active")
 theme = theme_assets.recolor_titlebar(theme, theme.bg_urgent, "focus", nil, "active")

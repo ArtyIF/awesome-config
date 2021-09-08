@@ -15,7 +15,7 @@ volume_control.up_arg = "set Master 5%+"
 volume_control.down_arg = "set Master 5%-"
 volume_control.toggle_arg = "set Master toggle"
 
-volume_control.icons_path = "/usr/share/icons/Adwaita++-Dark-Colorful/status/symbolic/"
+volume_control.icons_path = "/usr/share/icons/breeze-dark/status/symbolic/"
 volume_control.icon_high = "audio-volume-high-symbolic.svg"
 volume_control.icon_medium = "audio-volume-medium-symbolic.svg"
 volume_control.icon_low = "audio-volume-low-symbolic.svg"
