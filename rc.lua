@@ -436,7 +436,8 @@ client.connect_signal("request::titlebars", function(c)
 
     awful.titlebar(c, { size = 32 }) : setup {
         { -- Left
-            wibox.container.margin(awful.titlebar.widget.iconwidget    (c), 8, 4, 8, 8),
+            wibox.container.margin(nil, 8, 0, 0, 0),
+            wibox.container.margin(awful.titlebar.widget.iconwidget    (c), 0, 4, 8, 8, nil, false),
             awful.titlebar.widget.floatingbutton(c),
             layout  = wibox.layout.fixed.horizontal
         },
