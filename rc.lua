@@ -74,7 +74,7 @@ local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-local mytextclock = wibox.widget.textclock("%a %d %b, %H:%M ", 60)
+local mytextclock = wibox.widget.textclock("%a %d %b, %H:%M", 60)
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -104,20 +104,18 @@ awful.screen.connect_for_each_screen(function(s)
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
+        expand = "none",
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             main_menu(),
-            --tag_list(s),
             --s.mypromptbox,
         },
-        --task_list(s), -- Middle widget
-        nil,
+        mytextclock,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
             volume_control(),
-            mytextclock,
             layout_box(s),
         },
     }
