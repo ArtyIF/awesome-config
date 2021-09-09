@@ -55,4 +55,8 @@ main_menu.menu = awful.menu({ items = main_menu.items })
 -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
 main_menu.launcher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = main_menu.menu })
 
-return { menu = main_menu.menu, launcher = main_menu.launcher }
+function main_menu.new()
+    return main_menu.launcher
+end
+
+return main_menu.new

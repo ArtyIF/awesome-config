@@ -106,11 +106,12 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            main_menu.launcher,
-            tag_list(s),
-            s.mypromptbox,
+            main_menu(),
+            --tag_list(s),
+            --s.mypromptbox,
         },
-        task_list(s), -- Middle widget
+        --task_list(s), -- Middle widget
+        nil,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
@@ -119,6 +120,15 @@ awful.screen.connect_for_each_screen(function(s)
             mytextclock,
             layout_box(s),
         },
+    }
+
+    s.bottom_wibox = awful.wibar({ position = "bottom", screen = s, height = 32, ontop = true })
+
+    s.bottom_wibox:setup {
+        layout = wibox.layout.align.horizontal,
+        tag_list(s),
+        task_list(s),
+        nil,
     }
 end)
 -- }}}
