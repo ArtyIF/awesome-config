@@ -120,7 +120,7 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 
-    s.bottom_wibox = awful.wibar({ position = "bottom", screen = s, height = 32, ontop = true })
+    s.bottom_wibox = awful.wibar({ position = "bottom", screen = s, height = 32 })
 
     s.bottom_wibox:setup {
         layout = wibox.layout.align.horizontal,
