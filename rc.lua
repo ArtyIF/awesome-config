@@ -439,6 +439,8 @@ client.connect_signal("request::titlebars", function(c)
             wibox.container.margin(nil, 8, 0, 0, 0),
             wibox.container.margin(awful.titlebar.widget.iconwidget    (c), 0, 4, 8, 8, nil, false),
             awful.titlebar.widget.floatingbutton(c),
+            --awful.titlebar.widget.ontopbutton(c),
+            --awful.titlebar.widget.stickybutton(c),
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
