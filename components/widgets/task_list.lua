@@ -45,7 +45,7 @@ task_list.template = {
                 id     = 'icon_role',
                 widget = wibox.widget.imagebox,
             },
-            margins = 4,
+            margins = 8,
             widget  = wibox.container.margin,
         },
         {
@@ -53,8 +53,7 @@ task_list.template = {
                 id     = 'text_role',
                 widget = wibox.widget.textbox,
             },
-            left = 4,
-            right = 4,
+            right = 8,
             widget = wibox.container.margin,
         },
         layout = wibox.layout.align.horizontal

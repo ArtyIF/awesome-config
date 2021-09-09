@@ -31,7 +31,7 @@ function volume_control.callback(volume, muted)
     else
         volume_control.image_widget.image = volume_control.icons_path .. volume_control.icon_high
     end
-    volume_control.text_widget.text = volume .. "% "
+    volume_control.text_widget.text = volume .. "%"
 end
 
 function volume_control.parse_cmd_out(cmd)
@@ -63,7 +63,7 @@ end
 function volume_control.new()
     volume_control.image_widget = wibox.widget.imagebox(nil, true)
     volume_control.text_widget = wibox.widget.textbox(nil)
-    volume_control.widget = wibox.layout.fixed.horizontal(volume_control.image_widget, volume_control.text_widget)
+    volume_control.widget = wibox.container.margin(wibox.layout.fixed.horizontal(volume_control.image_widget, volume_control.text_widget), 4, 4, 4, 4)
 
     volume_control.widget:buttons({
         awful.button({ }, 1, function ()
