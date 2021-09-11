@@ -96,9 +96,6 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
-
     -- Create the wibox
     s.top_panel = awful.wibar({ position = "top", screen = s, height = 32 }) -- todo: make it on top but still make it below fullscreen windows
 
@@ -106,11 +103,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.top_panel:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none",
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            main_menu(),
-            --s.mypromptbox,
-        },
+        main_menu(),
         mytextclock,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
