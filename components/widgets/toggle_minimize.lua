@@ -6,7 +6,7 @@ local wibox = require("wibox")
 -- theme handling library
 local beautiful = require("beautiful")
 
-local toggle_minimize = {}
+local toggle_minimize = {minimized = false, minimize_history = {}}
 
 function toggle_minimize.new(s)
     -- not sure if that's the best option for multiple screens, gotta fix it later
@@ -14,10 +14,16 @@ function toggle_minimize.new(s)
 
     toggle_minimize.button:buttons({
         awful.button({}, 1, function ()
-            -- todo: history
+            if not toggle_minimize.minimized then toggle_minimize.minimize_history = {} end
             for i, client in ipairs(s.all_clients) do
-                client.minimized = true
+                if not toggle_minimize.minimized then
+                    toggle_minimize.minimize_history[client.window] = client.minimized
+                    client.minimized = true
+                else
+                    client.minimized = toggle_minimize.minimize_history[client.window] or false
+                end
             end
+            toggle_minimize.minimized = not toggle_minimize.minimized
         end)
     })
 
