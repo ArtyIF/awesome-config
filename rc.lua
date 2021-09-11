@@ -57,6 +57,7 @@ local task_list = require("components.widgets.task_list")
 local toggle_minimize = require("components.widgets.toggle_minimize")
 local volume_control = require("components.widgets.volume_control")
 local modkeys = require("components.keybinds.modkeys")
+local wibars_ontop_when_not_fullscreen = require("components.rules.wibars_ontop_when_not_fullscreen")
 
 local terminal = "konsole"
 
@@ -97,10 +98,10 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Create the wibox
-    s.top_panel = awful.wibar({ position = "top", screen = s, height = 32 }) -- todo: make it on top but still make it below fullscreen windows
+    s.top_wibar = awful.wibar({ position = "top", screen = s, height = 32, ontop = true })
 
     -- Add widgets to the wibox
-    s.top_panel:setup {
+    s.top_wibar:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none",
         main_menu.create_widget(),
@@ -114,13 +115,15 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 
-    s.bottom_panel = awful.wibar({ position = "bottom", screen = s, height = 32 })
-    s.bottom_panel:setup {
+    s.bottom_wibar = awful.wibar({ position = "bottom", screen = s, height = 32, ontop = true })
+    s.bottom_wibar:setup {
         layout = wibox.layout.align.horizontal,
         tag_list.create_widget(s),
         task_list.create_widget(s),
         toggle_minimize.create_widget(s),
     }
+
+    wibars_ontop_when_not_fullscreen.affected_wibars = { s.top_wibar, s.bottom_wibar }
 end)
 -- }}}
 
