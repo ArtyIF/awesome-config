@@ -7,10 +7,10 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local modkeys = require("components.keybinds.modkeys")
 
-local tag_list = {}
+local this = {}
 
 -- todo: move to keybinds
-tag_list.buttons = gears.table.join(
+this.buttons = gears.table.join(
     awful.button({ }, 1, function(t) t:view_only() end),
     awful.button({ modkeys.super }, 1, function(t)
                                 if client.focus then
@@ -28,17 +28,21 @@ tag_list.buttons = gears.table.join(
     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
 
-tag_list.layout = {
+this.layout = {
     layout = wibox.layout.fixed.horizontal,
 }
 
-function tag_list.new(s)
-    awful.tag({ "1", "2", "3" }, s, awful.layout.layouts[1]) -- todo: make more dynamic. right now i can switch between them using the 1-2-3 macros on my keyboard, that behaviour is in rc.lua for now
+this.filter = awful.widget.taglist.filter.all
+
+this.tag = { "1", "2", "3" }
+
+function this.create_widget(s)
+    awful.tag(this.tag, s, awful.layout.layouts[1]) -- todo: make more dynamic. right now i can switch between them using the 1-2-3 macros on my keyboard, that behaviour is in rc.lua for now
     return awful.widget.taglist {
         screen  = s,
-        filter  = awful.widget.taglist.filter.all,
-        buttons = tag_list.buttons
+        filter  = this.filter,
+        buttons = this.buttons
     }
 end
 
-return tag_list.new
+return this

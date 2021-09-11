@@ -1,32 +1,31 @@
 -- standard awesome stuff
 local awful = require("awful")
 
-local toggle_minimize = {minimized = false, minimize_history = {}}
+local this = {minimized = false, minimize_history = {}}
 
-function toggle_minimize.new(s)
-    -- not sure if that's the best option for multiple screens, gotta fix it later
-    toggle_minimize.button = awful.widget.button({image = "/usr/share/icons/breeze-dark/places/24/desktop.svg"})
+function this.create_widget(s)
+    local toggle_minimize = awful.widget.button({image = "/usr/share/icons/breeze-dark/places/24/desktop.svg"})
 
-    toggle_minimize.button:buttons({
+    toggle_minimize:buttons({
         awful.button({}, 1, function ()
-            if not toggle_minimize.minimized then toggle_minimize.minimize_history = {} end
+            if not this.minimized then this.minimize_history = {} end
             for i, client in ipairs(s.all_clients) do
-                if not toggle_minimize.minimized then
-                    toggle_minimize.minimize_history[client.window] = client.minimized
+                if not this.minimized then
+                    this.minimize_history[client.window] = client.minimized
                     client.minimized = true
                 else
-                    client.minimized = toggle_minimize.minimize_history[client.window] or false
+                    client.minimized = this.minimize_history[client.window] or false
                 end
             end
-            toggle_minimize.minimized = not toggle_minimize.minimized
+            this.minimized = not this.minimized
         end)
     })
 
     client.connect_signal("focus", function ()
-        toggle_minimize.minimized = false
+        this.minimized = false
     end)
 
-    return toggle_minimize.button
+    return toggle_minimize
 end
 
-return toggle_minimize.new
+return this

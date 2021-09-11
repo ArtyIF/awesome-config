@@ -2,24 +2,24 @@
 local gears = require("gears")
 local awful = require("awful")
 
-local layout_box = {}
+local this = {}
 
 awful.layout.layouts = {
     awful.layout.suit.max,
     awful.layout.suit.fair,
 }
 
-layout_box.buttons = gears.table.join(
+this.buttons = gears.table.join(
     awful.button({ }, 1, function () awful.layout.inc( 1) end),
     awful.button({ }, 3, function () awful.layout.inc(-1) end),
     awful.button({ }, 4, function () awful.layout.inc( 1) end),
     awful.button({ }, 5, function () awful.layout.inc(-1) end)
 )
 
-function layout_box.new(s)
+function this.create_widget(s)
     local layoutbox = awful.widget.layoutbox(s)
-    layoutbox:buttons(layout_box.buttons)
+    layoutbox:buttons(this.buttons)
     return layoutbox
 end
 
-return layout_box.new
+return this

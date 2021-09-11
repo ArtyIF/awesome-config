@@ -4,14 +4,14 @@ local awful = require("awful")
 -- widget and layout library
 local wibox = require("wibox")
 
-local task_list = {}
+local this = {}
 
-task_list.layout = {
+this.layout = {
     layout = wibox.layout.flex.horizontal,
 }
 
 -- todo: move to keybinds
-task_list.buttons = gears.table.join(
+this.buttons = gears.table.join(
     awful.button({ }, 1,
         function (c)
             if c == client.focus then
@@ -38,7 +38,7 @@ task_list.buttons = gears.table.join(
     )
 )
 
-task_list.template = {
+this.template = {
     {
         {
             {
@@ -62,14 +62,16 @@ task_list.template = {
     widget = wibox.container.background,
 }
 
-function task_list.new(s)
+this.filter = awful.widget.tasklist.filter.currenttags
+
+function this.create_widget(s)
     return awful.widget.tasklist {
         screen = s,
-        filter = awful.widget.tasklist.filter.currenttags,
-        buttons = task_list.buttons,
-        layout = task_list.layout,
-        widget_template = task_list.template
+        filter = this.filter,
+        buttons = this.buttons,
+        layout = this.layout,
+        widget_template = this.template
     }
 end
 
-return task_list.new
+return this
