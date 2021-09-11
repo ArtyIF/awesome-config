@@ -53,7 +53,22 @@ main_menu.menu = awful.menu({ items = main_menu.items })
 
 -- the launcher for the menu
 -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
-main_menu.launcher = awful.widget.launcher({ image = "/usr/share/icons/breeze-dark/actions/32/application-menu.svg", menu = main_menu.menu })
+main_menu.launcher = awful.widget.button({ image = "/usr/share/icons/breeze-dark/actions/32/application-menu.svg" })
+
+main_menu.launcher:buttons({
+    awful.button({}, 1, function ()
+        main_menu.menu:toggle()
+    end)
+})
+
+root.buttons({
+    awful.button({}, 1, function ()
+        main_menu.menu:hide()
+    end),
+    awful.button({}, 3, function ()
+        main_menu.menu:toggle()
+    end)
+})
 
 function main_menu.new()
     return main_menu.launcher

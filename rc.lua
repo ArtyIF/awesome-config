@@ -99,10 +99,10 @@ awful.screen.connect_for_each_screen(function(s)
     s.mypromptbox = awful.widget.prompt()
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 32 }) -- todo: make it on top but still make it below fullscreen windows
+    s.top_panel = awful.wibar({ position = "top", screen = s, height = 32 }) -- todo: make it on top but still make it below fullscreen windows
 
     -- Add widgets to the wibox
-    s.mywibox:setup {
+    s.top_panel:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none",
         { -- Left widgets
@@ -120,23 +120,14 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 
-    s.bottom_wibox = awful.wibar({ position = "bottom", screen = s, height = 32 })
-
-    s.bottom_wibox:setup {
+    s.bottom_panel = awful.wibar({ position = "bottom", screen = s, height = 32 })
+    s.bottom_panel:setup {
         layout = wibox.layout.align.horizontal,
         tag_list(s),
         task_list(s),
         nil,
     }
 end)
--- }}}
-
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-    awful.button({ }, 3, function () main_menu.menu:toggle() end)
-    -- awful.button({ }, 4, awful.tag.viewnext),
-    -- awful.button({ }, 5, awful.tag.viewprev)
-))
 -- }}}
 
 -- {{{ Key bindings, todo work on them
