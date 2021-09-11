@@ -54,6 +54,7 @@ local layout_box = require("components.widgets.layout_box")
 local main_menu = require("components.widgets.main_menu")
 local tag_list = require("components.widgets.tag_list")
 local task_list = require("components.widgets.task_list")
+local toggle_minimize = require("components.widgets.toggle_minimize")
 local volume_control = require("components.widgets.volume_control")
 local modkeys = require("components.keybinds.modkeys")
 
@@ -125,7 +126,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         tag_list(s),
         task_list(s),
-        nil,
+        toggle_minimize(s),
     }
 end)
 -- }}}
