@@ -56,6 +56,7 @@ local tag_list = require("components.widgets.tag_list")
 local task_list = require("components.widgets.task_list")
 local toggle_minimize = require("components.widgets.toggle_minimize")
 local volume_control = require("components.widgets.volume_control")
+local clock = require("components.widgets.clock")
 local modkeys = require("components.keybinds.modkeys")
 local wibars_ontop_when_not_fullscreen = require("components.rules.wibars_ontop_when_not_fullscreen")
 
@@ -73,10 +74,6 @@ menubar.utils.terminal = terminal
 
 -- Keyboard map indicator and switcher
 local mykeyboardlayout = awful.widget.keyboardlayout()
-
--- {{{ Wibar
--- Create a textclock widget
-local mytextclock = wibox.widget.textclock("%a %d %b, %H:%M", 60)
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -105,7 +102,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         expand = "none",
         main_menu.create_widget(),
-        mytextclock,
+        clock.create_widget(),
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
