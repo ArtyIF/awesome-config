@@ -1,4 +1,3 @@
-
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -57,7 +56,10 @@ local task_list = require("components.widgets.task_list")
 local toggle_minimize = require("components.widgets.toggle_minimize")
 local volume_control = require("components.widgets.volume_control")
 local clock = require("components.widgets.clock")
+local keyboard_layout = require("components.widgets.keyboard_layout")
+
 local modkeys = require("components.keybinds.modkeys")
+
 local wibars_ontop_when_not_fullscreen = require("components.rules.wibars_ontop_when_not_fullscreen")
 
 local terminal = "konsole"
@@ -71,9 +73,6 @@ end
 -- Menubar configuration
 menubar.utils.terminal = terminal
 -- }}}
-
--- Keyboard map indicator and switcher
-local mykeyboardlayout = awful.widget.keyboardlayout()
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -105,7 +104,7 @@ awful.screen.connect_for_each_screen(function(s)
         clock.create_widget(),
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            keyboard_layout.create_widget(),
             wibox.widget.systray(),
             volume_control.create_widget(),
             layout_box.create_widget(s),
