@@ -28,7 +28,7 @@ this.menus.awesome = {
 this.menus.favorites = {
     { "Firefox", "firefox" },
     { "Discord", "discord" },
-    { "Files", "nautilus" },
+    { "Files", "pcmanfm" },
     { "Terminal", "konsole" },
 }
 

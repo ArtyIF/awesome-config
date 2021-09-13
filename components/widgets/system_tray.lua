@@ -7,7 +7,7 @@ this.mode = "horizontal"
 this.reverse = false
 
 this.margin_top = 4
-this.margin_right = 4
+this.margin_right = 0
 this.margin_bottom = 4
 this.margin_left = 4
 

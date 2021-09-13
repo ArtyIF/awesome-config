@@ -16,64 +16,6 @@ local theme = {}
 
 theme.font          = gtk_vars.font_family .. " " .. gtk_vars.font_size
 
-local function hex_to_srgb(color)
-    color = string.gsub(color, "#", "")
-    if string.len(color) >= 6 then
-        return tonumber("0x" .. string.sub(color, 1, 2)) / 255, tonumber("0x" .. string.sub(color, 3, 4)) / 255, tonumber("0x" .. string.sub(color, 5, 6)) / 255
-    else
-        return tonumber("0x" .. string.sub(color, 1, 1)) / 255, tonumber("0x" .. string.sub(color, 2, 2)) / 255, tonumber("0x" .. string.sub(color, 3, 3)) / 255
-    end
-end
-
-local function gamma_correct(r_srgb, g_srgb, b_srgb)
-    local r, g, b = 0, 0, 0
-
-    if r_srgb <= 0.03928 then
-        r = r_srgb / 12.92
-    else
-        r = ((r_srgb + 0.055) / 1.055) ^ 2.4
-    end
-
-    if g_srgb <= 0.03928 then
-        g = g_srgb / 12.92
-    else
-        g = ((g_srgb + 0.055) / 1.055) ^ 2.4
-    end
-
-    if b_srgb <= 0.03928 then
-        b = b_srgb / 12.92
-    else
-        b = ((b_srgb + 0.055) / 1.055) ^ 2.4
-    end
-
-    return r, g, b
-end
-
--- source: https://www.w3.org/TR/WCAG20-TECHS/G17.html
-local function best_fg(bg)
-    local r_srgb, g_srgb, b_srgb = hex_to_srgb(bg)
-
-    local r_bg, g_bg, b_bg = gamma_correct(r_srgb, g_srgb, b_srgb)
-    local l_bg = 0.2126 * r_bg + 0.7152 * g_bg + 0.0722 * b_bg
-
-    local contrast_ratio = (l_bg + 0.05) / 0.05
-
-    if contrast_ratio >= 7 then
-        return "#000000"
-    else
-        return "#ffffff"
-    end
-end
-
--- very dirty but good enough. will need to move to a proper color library one day
-local function darken_color(color, amount)
-    local r, g, b = hex_to_srgb(color)
-    r = r * amount
-    g = g * amount
-    b = b * amount
-    return "#" .. string.format("%02x", math.floor(r * 255)) .. string.format("%02x", math.floor(g * 255)) .. string.format("%02x", math.floor(b * 255))
-end
-
 -- possible palettes, taken from https://tailwindcolor.com/
 local possible_palettes =
 {
@@ -121,6 +63,7 @@ theme.fg_minimize   = chosen_palette.neutral_fg
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 theme.taglist_bg_occupied = theme.bg_minimize
+theme.systray_icon_spacing = 4
 
 -- Variables set for theming notifications:
 -- notification_font
@@ -168,7 +111,8 @@ theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized.
 theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized.png"
 
 theme.wallpaper = function(s)
-    return theme_assets.wallpaper(theme.bg_normal, theme.fg_focus, theme.bg_urgent, s)
+    return theme_assets.wallpaper(chosen_palette.neutral_bg, chosen_palette.color_100, chosen_palette.color_500, s)
+    -- todo: replace with https://source.unsplash.com/1920x1080/?wallpaper
 end
 
 -- You can use your own layout icons like this:
