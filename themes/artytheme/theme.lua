@@ -114,7 +114,7 @@ theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized.
 theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized.png"
 
 theme.wallpaper = function(s)
-    return theme_assets.wallpaper(chosen_palette.neutral_bg, chosen_palette.color_100, chosen_palette.color_500, s)
+    return theme_assets.wallpaper(chosen_palette.neutral_bg, chosen_palette.color_50, chosen_palette.color_500, s)
     -- todo: replace with https://source.unsplash.com/1920x1080/?wallpaper
 end
 
