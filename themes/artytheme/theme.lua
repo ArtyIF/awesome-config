@@ -40,6 +40,8 @@ local possible_palettes =
 
 math.randomseed(os.time())
 local chosen_palette = possible_palettes[math.random(#possible_palettes)]
+-- if you want to have a specific color at all times, replace the above line with the line below:
+-- local chosen_palette = possible_palettes[3]
 
 theme.bg_normal     = chosen_palette.neutral_bg
 theme.bg_focus      = chosen_palette.color_900
