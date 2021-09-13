@@ -49,15 +49,8 @@ local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.ge
 beautiful.init(theme_path)
 
 -- components
-local layout_box = require("components.widgets.layout_box")
-local main_menu = require("components.widgets.main_menu")
-local tag_list = require("components.widgets.tag_list")
-local task_list = require("components.widgets.task_list")
-local toggle_minimize = require("components.widgets.toggle_minimize")
-local volume_control = require("components.widgets.volume_control")
-local system_tray = require("components.widgets.system_tray")
-local clock = require("components.widgets.clock")
-local keyboard_layout = require("components.widgets.keyboard_layout")
+local top_wibar = require("components.wibars.top")
+local bottom_wibar = require("components.wibars.bottom")
 
 local modkeys = require("components.keybinds.modkeys")
 
@@ -94,31 +87,8 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
-    -- Create the wibox
-    s.top_wibar = awful.wibar({ position = "top", screen = s, height = 32, ontop = true })
-
-    -- Add widgets to the wibox
-    s.top_wibar:setup {
-        layout = wibox.layout.align.horizontal,
-        expand = "none",
-        main_menu.create_widget(),
-        clock.create_widget(),
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            keyboard_layout.create_widget(),
-            system_tray.create_widget(),
-            volume_control.create_widget(),
-            layout_box.create_widget(s),
-        },
-    }
-
-    s.bottom_wibar = awful.wibar({ position = "bottom", screen = s, height = 32, ontop = true })
-    s.bottom_wibar:setup {
-        layout = wibox.layout.align.horizontal,
-        tag_list.create_widget(s),
-        task_list.create_widget(s),
-        toggle_minimize.create_widget(s),
-    }
+    s.top_wibar = top_wibar.create_bar(s)
+    s.bottom_wibar = bottom_wibar.create_bar(s)
 
     wibars_ontop_when_not_fullscreen.affected_wibars = { s.top_wibar, s.bottom_wibar }
 end)
@@ -380,7 +350,7 @@ awful.rules.rules = {
     },
     
     -- remove titlebars from windows that don't want them
-    -- not using gtk3-nocsd anymore, instead using the gtk3 config tweak
+    -- not using gtk3-nocsd anymore, instead using the gtk3 config tweak. adds an extra titlebar for steam, but that's okay
     --{ rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false, border_width = 0 }},
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
