@@ -47,7 +47,7 @@ theme.bg_normal     = chosen_palette.neutral_bg
 theme.bg_focus      = chosen_palette.color_900
 theme.bg_urgent     = chosen_palette.color_500
 theme.bg_minimize   = theme.bg_focus .. "3f"
-theme.bg_systray    = theme.bg_normal
+theme.bg_systray    = theme.bg_focus
 
 theme.fg_normal     = chosen_palette.neutral_fg
 theme.fg_focus      = chosen_palette.color_50
