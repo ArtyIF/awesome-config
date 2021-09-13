@@ -117,7 +117,7 @@ local globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkeys.super,           }, "w", function () main_menu.menu:show() end,
+    awful.key({ modkeys.super,           }, "w", function () top_wibar.main_menu.menu:show() end,
               {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
