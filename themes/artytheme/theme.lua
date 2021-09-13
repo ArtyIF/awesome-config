@@ -76,7 +76,8 @@ theme.systray_icon_spacing = 4
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_submenu_icon = theme_path.."submenu.png"
+--theme.menu_submenu_icon = theme_path.."submenu.png"
+theme.menu_submenu = "▶ "
 theme.menu_height = 32
 theme.menu_width  = 256
 
