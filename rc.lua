@@ -380,7 +380,8 @@ awful.rules.rules = {
     },
     
     -- remove titlebars from windows that don't want them
-    { rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false, border_width = 0 }},
+    -- not using gtk3-nocsd anymore, instead using the gtk3 config tweak
+    --{ rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false, border_width = 0 }},
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
