@@ -350,8 +350,8 @@ awful.rules.rules = {
     },
     
     -- remove titlebars from windows that don't want them
-    -- not using gtk3-nocsd anymore, instead using the gtk3 config tweak. adds an extra titlebar for steam, but that's okay
-    --{ rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false, border_width = 0 }},
+    -- not using gtk3-nocsd anymore, but removing it breaks witcher 3 window and offsets it 32 pixels up off-screen
+    { rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false }},
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
