@@ -18,6 +18,11 @@ this.icon_medium = "audio-volume-medium-symbolic.svg"
 this.icon_low = "audio-volume-low-symbolic.svg"
 this.icon_muted = "audio-volume-muted-symbolic.svg"
 
+this.margin_top = 4
+this.margin_right = 0
+this.margin_bottom = 4
+this.margin_left = 4
+
 function this.callback(volume, muted)
     if muted or volume == 0 then
         this.image_widget.image = this.icons_path .. this.icon_muted
@@ -69,7 +74,7 @@ this.callback_timer = gears.timer({
 })
 
 function this.create_widget()
-    this.widget = wibox.container.margin(wibox.layout.fixed.horizontal(this.image_widget, this.text_widget), 4, 4, 4, 4)
+    this.widget = wibox.container.margin(wibox.layout.fixed.horizontal(this.image_widget, this.text_widget), this.margin_top, this.margin_right, this.margin_bottom, this.margin_left)
 
     this.widget:buttons({
         awful.button({ }, 1, function ()

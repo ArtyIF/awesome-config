@@ -1,8 +1,14 @@
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+local wibox = require("wibox")
 
 local this = {}
+
+this.margin_top = 4
+this.margin_right = 4
+this.margin_bottom = 4
+this.margin_left = 4
 
 awful.layout.layouts = {
     awful.layout.suit.max,
@@ -18,8 +24,9 @@ this.buttons = gears.table.join(
 
 function this.create_widget(s)
     local layoutbox = awful.widget.layoutbox(s)
-    layoutbox:buttons(this.buttons)
-    return layoutbox
+    local margin = wibox.container.margin(layoutbox, this.margin_top, this.margin_right, this.margin_bottom, this.margin_left)
+    margin:buttons(this.buttons)
+    return margin
 end
 
 return this

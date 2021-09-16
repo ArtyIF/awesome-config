@@ -348,7 +348,7 @@ awful.rules.rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = true }
     },
-    
+
     -- remove titlebars from windows that don't want them
     -- not using gtk3-nocsd anymore, but removing it breaks witcher 3 window and offsets it 32 pixels up off-screen
     { rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false }},
