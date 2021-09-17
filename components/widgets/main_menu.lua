@@ -26,10 +26,12 @@ this.menus.awesome = {
 -- favorites menu
 -- todo: make this as part of xdgmenu somehow
 this.menus.favorites = {
-    { "Firefox", "firefox" },
-    { "Discord", "discord" },
+    { "Web Browser", "firefox" },
+    { "Email Client", "thunderbird" },
     { "Files", "pcmanfm" },
     { "Terminal", "konsole" },
+    { "Discord", "discord" },
+    { "Steam", "steam-runtime" },
 }
 
 -- taken from roblox docs, clones a table
