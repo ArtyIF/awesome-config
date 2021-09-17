@@ -426,5 +426,5 @@ awful.spawn.with_shell("xset s 900")
 awful.spawn.with_shell("light-locker --lock-after-screensaver=900")
 awful.spawn.with_shell("picom --experimental-backends")
 if not os.execute("pgrep thunderbird") then
-    awful.spawn.with_shell("thunderbird") -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
+    awful.spawn.with_shell("kdocker thunderbird") -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
 end

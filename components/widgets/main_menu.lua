@@ -27,7 +27,6 @@ this.menus.awesome = {
 -- todo: make this as part of xdgmenu somehow
 this.menus.favorites = {
     { "Web Browser", "firefox" },
-    { "Email Client", "thunderbird" },
     { "Files", "pcmanfm" },
     { "Terminal", "konsole" },
     { "Discord", "discord" },
