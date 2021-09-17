@@ -49,7 +49,7 @@ theme.bg_urgent     = chosen_palette.color_500
 theme.bg_minimize   = theme.bg_focus .. "3f"
 theme.bg_systray    = theme.bg_focus
 
-theme.fg_normal     = "#F5F5F5"
+theme.fg_normal     = "#E5E5E5"
 theme.fg_focus      = chosen_palette.color_50
 theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = theme.fg_normal
