@@ -43,7 +43,7 @@ local chosen_palette = possible_palettes[math.random(#possible_palettes)]
 -- if you want to have a specific color at all times, replace the above line with the line below:
 -- local chosen_palette = possible_palettes[3]
 
-theme.bg_normal     = "#17171710"
+theme.bg_normal     = "#171717E5"
 theme.bg_focus      = chosen_palette.color_900
 theme.bg_urgent     = chosen_palette.color_500
 theme.bg_minimize   = theme.bg_focus .. "3f"
@@ -64,6 +64,7 @@ theme.fg_minimize   = theme.fg_normal
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
+theme.tasklist_bg_normal = "#00000000"
 theme.taglist_bg_occupied = theme.bg_minimize
 theme.titlebar_bg_focus = theme.bg_focus .. "E5"
 theme.systray_icon_spacing = 4
