@@ -419,6 +419,7 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-awful.spawn.with_shell("picom --experimental-backends")
+awful.spawn.with_shell("clipit")
 awful.spawn.with_shell("xset s 900")
 awful.spawn.with_shell("light-locker --lock-after-screensaver=900")
+awful.spawn.with_shell("picom --experimental-backends")

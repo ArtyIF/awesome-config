@@ -18,7 +18,7 @@ function this.create_widget()
     system_tray.horizontal = this.mode == "horizontal"
     system_tray.reverse = this.reverse
 
-    this.widget = wibox.container.margin(system_tray, this.margin_top, this.margin_right, this.margin_bottom, this.margin_left)
+    this.widget = wibox.container.margin(system_tray, this.margin_top, this.margin_right, this.margin_bottom, this.margin_left, nil, false)
     
     return this.widget
 end
