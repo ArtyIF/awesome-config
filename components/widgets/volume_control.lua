@@ -74,7 +74,7 @@ this.callback_timer = gears.timer({
 })
 
 function this.create_widget()
-    this.widget = wibox.container.margin(wibox.layout.fixed.horizontal(this.image_widget, this.text_widget), this.margin_top, this.margin_right, this.margin_bottom, this.margin_left)
+    this.widget = wibox.container.margin(wibox.layout.fixed.horizontal(this.image_widget, this.text_widget), this.margin_left, this.margin_right, this.margin_top, this.margin_bottom)
 
     this.widget:buttons({
         awful.button({ }, 1, function ()

@@ -21,7 +21,7 @@ this.buttons = gears.table.join(
 
 function this.create_widget(s)
     local layoutbox = awful.widget.layoutbox(s)
-    local margin = wibox.container.margin(layoutbox, this.margin_top, this.margin_right, this.margin_bottom, this.margin_left)
+    local margin = wibox.container.margin(layoutbox, this.margin_left, this.margin_right, this.margin_top, this.margin_bottom)
     margin:buttons(this.buttons)
     return margin
 end
