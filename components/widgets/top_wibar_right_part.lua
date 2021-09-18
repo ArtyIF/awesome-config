@@ -12,6 +12,7 @@ this.gpaste = require("components.widgets.gpaste")
 function this.create_widget(s)
     local margin = wibox.container.margin(nil, 4, 0, 0, 0)
     local bg = wibox.container.background(margin, beautiful.get().bg_systray)
+    bg.fg = beautiful.get().fg_systray
     margin:setup {
         layout = wibox.layout.fixed.horizontal,
         this.keyboard_layout.create_widget(),

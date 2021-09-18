@@ -53,6 +53,7 @@ theme.fg_normal     = "#E5E5E5"
 theme.fg_focus      = chosen_palette.color_50
 theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = theme.fg_normal
+theme.fg_systray    = theme.fg_focus
 
 -- There are other variable sets
 -- overriding the default one when
@@ -115,8 +116,8 @@ theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized.
 theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized.png"
 
 theme.wallpaper = function(s)
-    return "/usr/share/backgrounds/gnome/Loveles.jpg"
-    --return theme_assets.wallpaper("#171717", chosen_palette.color_50, chosen_palette.color_500, s)
+    return "/usr/share/backgrounds/gnome/Lava.jpg"
+    -- return theme_assets.wallpaper(string.sub(theme.bg_normal, 1, 7), theme.fg_normal, theme.bg_urgent, s)
     -- todo: replace with https://source.unsplash.com/1920x1080/?wallpaper
 end
 
