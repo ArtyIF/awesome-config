@@ -89,7 +89,7 @@ end
 
 function this.create_widget()
     -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
-    this.button = awful.widget.button({ image = "/usr/share/icons/breeze-dark/actions/32/application-menu.svg" })
+    this.button = wibox.widget.imagebox("/usr/share/icons/breeze-dark/actions/32/application-menu.svg")
     this.build_menu()
     return this.button
 end
