@@ -16,7 +16,7 @@ this.empty_arg = "empty"
 this.icon = "/usr/share/icons/breeze-dark/actions/24/edit-paste.svg"
 
 this.margin_top = 4
-this.margin_right = 0
+this.margin_right = 2
 this.margin_bottom = 4
 this.margin_left = 0
 

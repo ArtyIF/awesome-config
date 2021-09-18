@@ -19,9 +19,9 @@ this.icon_low = "audio-volume-low-symbolic.svg"
 this.icon_muted = "audio-volume-muted-symbolic.svg"
 
 this.margin_top = 4
-this.margin_right = 0
+this.margin_right = 2
 this.margin_bottom = 4
-this.margin_left = 4
+this.margin_left = 2
 
 function this.callback(volume, muted)
     if muted or volume == 0 then

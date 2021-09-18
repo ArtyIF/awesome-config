@@ -8,7 +8,7 @@ local this = {}
 this.margin_top = 4
 this.margin_right = 4
 this.margin_bottom = 4
-this.margin_left = 4
+this.margin_left = 2
 
 awful.layout.layouts = {
     awful.layout.suit.max,

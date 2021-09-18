@@ -7,9 +7,9 @@ this.mode = "horizontal"
 this.reverse = false
 
 this.margin_top = 4
-this.margin_right = 0
+this.margin_right = 2
 this.margin_bottom = 4
-this.margin_left = 4
+this.margin_left = 2
 
 function this.create_widget()
     local system_tray = wibox.widget.systray()
