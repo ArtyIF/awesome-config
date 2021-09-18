@@ -29,8 +29,15 @@ local this = {
             { "Restart", awesome.restart },
         },
         session = {
-            { "Log Out", function() awesome.quit() end }
-        }
+            { "Lock", function () awful.spawn.spawn("light-locker-command -l", false) end
+            },
+            { "Log Out", function() awesome.quit() end },
+        },
+        power = {
+            { "Sleep", function() awful.spawn.spawn("systemctl suspend", false) end },
+            { "Reboot", function() awful.spawn.spawn("systemctl reboot", false) end },
+            { "Shut Down", function() awful.spawn.spawn("systemctl poweroff", false) end },
+        },
     }
 }
 
@@ -67,7 +74,8 @@ function this.build_menu()
             table.insert(this.items, category)
         end
         table.insert(this.items, { "Awesome", this.menus.awesome, beautiful.awesome_icon })
-        table.insert(this.items, { "Exit", this.menus.session }) -- todo: make it fade out again, but properly
+        table.insert(this.items, { "Session", this.menus.session })
+        table.insert(this.items, { "Power", this.menus.power })
 
         this.menu = awful.menu({ items = this.items })
         root.buttons({
