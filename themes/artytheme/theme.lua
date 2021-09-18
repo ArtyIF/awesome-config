@@ -140,7 +140,7 @@ theme.layout_cornerse = theme_path.."layouts/cornersew.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-    64, theme.bg_urgent, theme.fg_urgent
+    32, theme.bg_urgent, theme.fg_urgent
 )
 
 -- Define the icon theme for application icons. If not set then the icons
