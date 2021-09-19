@@ -82,7 +82,7 @@ function this.create_widget()
         end),
         awful.button({ }, 3, function ()
             this.toggle()
-            awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
+            awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change") -- todo: https://wiki.archlinux.org/title/Libcanberra#Lua
         end),
         awful.button({ }, 4, function ()
             this.up()
