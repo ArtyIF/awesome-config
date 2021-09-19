@@ -54,7 +54,8 @@ local bottom_wibar = require("components.wibars.bottom")
 
 local modkeys = require("components.keybinds.modkeys")
 
-local wibars_ontop_when_not_fullscreen = require("components.rules.wibars_ontop_when_not_fullscreen")
+local wibars_ontop_when_not_fullscreen = require("components.signals.wibars_ontop_when_not_fullscreen")
+local titlebar = require("components.signals.titlebar")
 
 local terminal = "konsole"
 
@@ -374,46 +375,8 @@ client.connect_signal("manage", function (c)
     end
 end)
 
--- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
-    -- buttons for the titlebar
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 3, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.resize(c)
-        end)
-    )
-
-    awful.titlebar(c, { size = 32 }) : setup {
-        { -- Left
-            wibox.container.margin(nil, 8, 0, 0, 0),
-            wibox.container.margin(awful.titlebar.widget.iconwidget    (c), 0, 4, 8, 8, nil, false),
-            awful.titlebar.widget.floatingbutton(c),
-            --awful.titlebar.widget.ontopbutton(c),
-            --awful.titlebar.widget.stickybutton(c),
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            awful.titlebar.widget.minimizebutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
-end)
+wibars_ontop_when_not_fullscreen.connect_signals()
+titlebar.connect_signals()
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
