@@ -82,12 +82,15 @@ function this.create_widget()
         end),
         awful.button({ }, 3, function ()
             this.toggle()
+            awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
         end),
         awful.button({ }, 4, function ()
             this.up()
+            awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
         end),
         awful.button({ }, 5, function ()
             this.down()
+            awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
         end),
     })
     
