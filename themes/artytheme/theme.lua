@@ -119,6 +119,7 @@ theme.wallpaper = function(s)
     return "/usr/share/backgrounds/gnome/Lava.jpg"
     -- return theme_assets.wallpaper(string.sub(theme.bg_normal, 1, 7), theme.fg_normal, theme.bg_urgent, s)
     -- todo: replace with https://source.unsplash.com/1920x1080/?wallpaper
+    -- todo: use https://www.shadertoy.com/view/fdy3Wy to filter it
 end
 
 -- You can use your own layout icons like this:
