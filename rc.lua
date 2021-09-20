@@ -284,6 +284,11 @@ local clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
     end),
+    awful.button({ }, 3, function (c)
+        if c.role == "PictureInPicture" then -- firefox's PIP, not sure about others
+            awful.mouse.client.move(c)
+        end
+    end),
     awful.button({ modkeys.super }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
         awful.mouse.client.move(c)
