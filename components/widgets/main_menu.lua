@@ -8,7 +8,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- menugen from menubar
 local menu_gen = require("menubar.menu_gen")
-local ass = require("menubar.utils")
+local menu_utils = require("menubar.utils")
 -- hotkeys popup, we might not need it
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
@@ -44,7 +44,7 @@ local this = {
 function this.build_menu()
     menu_gen.generate(function (entries)
         for id, category in pairs(menu_gen.all_categories) do
-            table.insert(this.menus.apps, { id, {}, category.icon }) -- todo: fix icons
+            table.insert(this.menus.apps, { id, {}, menu_utils.lookup_icon(category.icon_name) })
         end
 
         for _, entry in pairs(entries) do

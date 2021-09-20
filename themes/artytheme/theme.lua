@@ -46,7 +46,7 @@ local chosen_palette = possible_palettes[math.random(#possible_palettes)]
 theme.bg_normal     = "#171717BF"
 theme.bg_focus      = chosen_palette.color_900
 theme.bg_urgent     = chosen_palette.color_500
-theme.bg_minimize   = theme.bg_focus .. "3f"
+theme.bg_minimize   = theme.bg_focus .. "3F"
 theme.bg_systray    = theme.bg_focus
 
 theme.fg_normal     = "#E5E5E5"
@@ -147,7 +147,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = "breeze-dark"
+theme.icon_theme = "gnome"
 
 theme = theme_assets.recolor_titlebar(theme, theme.fg_normal, "normal", nil, "inactive")
 theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_50, "focus", nil, "inactive")
