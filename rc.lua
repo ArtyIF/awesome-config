@@ -382,12 +382,11 @@ wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
 -- }}}
 
-if not os.execute("pgrep gpaste-daemon") then
-    awful.spawn.with_shell("gpaste-client start")
-end
 awful.spawn.with_shell("xset s 900")
 awful.spawn.with_shell("light-locker --lock-after-screensaver=900 --late-locking --lock-on-lid")
 awful.spawn.with_shell("picom --experimental-backends --config=$HOME/.config/awesome/picom/picom.conf") -- TODO: option to replace with picom-barebones.conf
 if not os.execute("pgrep thunderbird") then
     awful.spawn.with_shell("kdocker thunderbird") -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
 end
+
+local popup = require("components.wiboxes.volume_popup").create_popup()
