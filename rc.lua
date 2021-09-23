@@ -388,5 +388,6 @@ awful.spawn.with_shell("picom --experimental-backends --config=$HOME/.config/awe
 if not os.execute("pgrep thunderbird") then
     awful.spawn.with_shell("kdocker thunderbird") -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
 end
+awful.spawn.with_shell("copyq")
 
 local popup = require("components.wiboxes.volume_popup").create_popup()

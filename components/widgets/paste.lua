@@ -6,12 +6,8 @@ local wibox = require("wibox")
 
 local this = {}
 
-this.cmd = "gpaste-client "
-this.ui_arg = "ui"
--- below are for when i get to writing my own ui with blackjack and wiboxes
-this.history_arg = "$(" .. this.cmd .. "get-history) --oneline"
-this.select_arg = "select "
-this.empty_arg = "empty"
+this.cmd = "copyq "
+this.ui_arg = "toggle"
 
 this.icon = "/usr/share/icons/breeze-dark/actions/24/edit-paste.svg"
 
@@ -22,18 +18,6 @@ this.margin_left = 0
 
 function this.ui()
     return awful.spawn.spawn(this.cmd .. this.ui_arg)
-end
-
-function this.history_arg()
-    return awful.spawn.with_shell(this.cmd .. this.history_arg)
-end
-
-function this.select(uuid)
-    return awful.spawn.with_shell(this.cmd .. this.select_arg .. uuid)
-end
-
-function this.empty_arg()
-    return awful.spawn.with_shell(this.cmd .. this.empty_arg)
 end
 
 
