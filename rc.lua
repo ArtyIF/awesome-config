@@ -97,9 +97,9 @@ end)
 
 -- {{{ Key bindings, todo work on them
 local globalkeys = gears.table.join(
-    awful.key({                              }, "Print", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --current") end, { description="screenshot current screen", group="screenshots (spectacle)" }),
-    awful.key({ modkeys.alt                  }, "Print", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --activewindow") end, { description="screenshot focused window", group="screenshots (spectacle)" }),
-    awful.key({ modkeys.shift, modkeys.super }, "s", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --region") end, { description="(screen snip button on Microsoft keyboards) screenshot rectangular region", group="screenshots (spectacle)" }),
+    awful.key({                              }, "Print", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --current; copyq select 0") end, { description="screenshot current screen", group="screenshots (spectacle)" }),
+    awful.key({ modkeys.alt                  }, "Print", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --activewindow; copyq select 0") end, { description="screenshot focused window", group="screenshots (spectacle)" }),
+    awful.key({ modkeys.shift, modkeys.super }, "s", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --region; copyq select 0") end, { description="(screen snip button on Microsoft keyboards) screenshot rectangular region", group="screenshots (spectacle)" }),
     awful.key({                              }, "XF86AudioRaiseVolume", function() VOLUME_CONTROL.up() end, { description="increase sound volume", group="sound" }),
     awful.key({                              }, "XF86AudioLowerVolume", function() VOLUME_CONTROL.down() end, { description="decrease sound volume", group="sound" }),
     awful.key({                              }, "XF86AudioMute", function() VOLUME_CONTROL.toggle() end, { description="toggle mute sound", group="sound" }),
