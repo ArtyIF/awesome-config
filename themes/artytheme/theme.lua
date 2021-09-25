@@ -68,6 +68,9 @@ theme.fg_systray    = theme.fg_focus
 theme.tasklist_bg_normal = "#00000000"
 theme.taglist_bg_occupied = theme.bg_minimize
 theme.systray_icon_spacing = 4
+theme.hotkeys_modifiers_fg = chosen_palette.color_900
+theme.hotkeys_font = "Cascadia Code " .. gtk_vars.font_size
+theme.hotkeys_description_font = theme.font
 
 -- Variables set for theming notifications:
 -- notification_font
