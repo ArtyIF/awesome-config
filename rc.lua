@@ -97,6 +97,9 @@ end)
 
 -- {{{ Key bindings, todo work on them
 local globalkeys = gears.table.join(
+    awful.key({                              }, "Print", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --current") end, { description="screenshot current screen", group="screenshots (spectacle)" }),
+    awful.key({ modkeys.alt                  }, "Print", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --activewindow") end, { description="screenshot focused window", group="screenshots (spectacle)" }),
+    awful.key({ modkeys.shift, modkeys.super }, "s", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --region") end, { description="(screen snip button on Microsoft keyboards) screenshot rectangular region", group="screenshots (spectacle)" }),
     awful.key({ modkeys.super,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkeys.super,           }, "Left",   awful.tag.viewprev,
