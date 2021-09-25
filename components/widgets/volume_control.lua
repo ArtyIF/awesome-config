@@ -51,14 +51,17 @@ function this.get()
 end
 
 function this.up()
+    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     return this.parse_cmd_out(this.cmd .. this.up_arg)
 end
 
 function this.down()
+    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     return this.parse_cmd_out(this.cmd .. this.down_arg)
 end
 
 function this.toggle()
+    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     return this.parse_cmd_out(this.cmd .. this.toggle_arg)
 end
 
@@ -82,19 +85,18 @@ function this.create_widget()
         end),
         awful.button({ }, 3, function ()
             this.toggle()
-            awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
         end),
         awful.button({ }, 4, function ()
             this.up()
-            awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
         end),
         awful.button({ }, 5, function ()
             this.down()
-            awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
         end),
     })
     
     return this.widget
 end
 
+VOLUME_CONTROL = this -- todo: do something similar to other widgets
+-- todo: actually, make a global registry with widgets or something
 return this
