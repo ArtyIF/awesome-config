@@ -44,16 +44,16 @@ local chosen_palette = possible_palettes[math.random(#possible_palettes)]
 -- local chosen_palette = possible_palettes[3]
 
 theme.bg_normal     = "#171717BF"
-theme.bg_focus      = chosen_palette.color_900
+theme.bg_focus      = chosen_palette.color_900 .. "BF"
 theme.bg_urgent     = chosen_palette.color_500
-theme.bg_minimize   = theme.bg_focus .. "3F"
-theme.bg_systray    = theme.bg_focus
+theme.bg_minimize   = string.sub(theme.bg_focus, 1, 7) .. "3F"
+theme.bg_systray    = string.sub(theme.bg_normal, 1, 7)
 
 theme.fg_normal     = "#E5E5E5"
 theme.fg_focus      = chosen_palette.color_50
 theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = theme.fg_normal
-theme.fg_systray    = theme.fg_focus
+theme.fg_systray    = theme.fg_normal
 
 -- There are other variable sets
 -- overriding the default one when
