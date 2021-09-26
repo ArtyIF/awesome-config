@@ -119,7 +119,7 @@ theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized.
 theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized.png"
 
 theme.wallpaper = function(s)
-    return "/usr/share/backgrounds/gnome/Lava.jpg"
+    return "/usr/share/backgrounds/gnome/Loveles.jpg"
     -- return theme_assets.wallpaper(string.sub(theme.bg_normal, 1, 7), theme.fg_normal, theme.bg_urgent, s)
     -- todo: replace with https://source.unsplash.com/1920x1080/?wallpaper
     -- todo: use https://www.shadertoy.com/view/fdy3Wy to filter it
