@@ -397,3 +397,7 @@ end
 awful.spawn.with_shell("copyq")
 
 local popup = require("components.wiboxes.volume_popup").create_popup()
+
+-- TODO: check for updates
+-- possible command to check for updates: yay -Qua, probably use checkupdates too
+-- command to execute to update: yay -Syu --noconfirm --sudo=pkexec; yay -S $(pacman -Qmq | grep "git" --color=never | tr "\n" " ") --noconfirm --sudo=pkexec
