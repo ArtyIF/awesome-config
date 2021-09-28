@@ -388,7 +388,9 @@ wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
 -- }}}
 
-awful.spawn.with_shell("xset s 900")
+awful.spawn.with_shell("easyeffects --gapplication-service")
+--awful.spawn.with_shell("xset s 900")
+awful.spawn.with_shell("xset s off")
 awful.spawn.with_shell("light-locker --lock-after-screensaver=900 --late-locking --lock-on-lid")
 awful.spawn.with_shell("picom --experimental-backends --config=$HOME/.config/awesome/picom/picom.conf") -- TODO: option to replace with picom-barebones.conf
 if not os.execute("pgrep thunderbird") then
