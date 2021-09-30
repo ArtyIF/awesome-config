@@ -361,6 +361,8 @@ awful.rules.rules = {
     -- not using gtk3-nocsd anymore, but removing it breaks witcher 3 window and offsets it 32 pixels up off-screen
     { rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false }},
 
+    { rule = { role = "PictureInPicture" }, properties = { placement = awful.placement.bottom_right }},
+
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
