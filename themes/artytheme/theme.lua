@@ -153,20 +153,25 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = "gnome"
 
-theme = theme_assets.recolor_titlebar(theme, theme.fg_normal, "normal", nil, nil)
-theme = theme_assets.recolor_titlebar(theme, theme.fg_normal, "normal", nil, "inactive")
-theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_50, "focus", nil, nil)
-theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_50, "focus", nil, "inactive")
-theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_300, "focus", "hover", nil)
-theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_300, "normal", "hover", nil)
-theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_500, "focus", "press", nil)
-theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_500, "normal", "press", nil)
+-- unfocused colors
+theme = theme_assets.recolor_titlebar(theme, theme.fg_normal         , "normal", nil, nil)
+theme = theme_assets.recolor_titlebar(theme, theme.fg_normal         , "normal", nil, "inactive")
 theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_300, "normal", nil, "active")
+theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_300, "normal", "hover", nil)
+theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_500, "normal", "press", nil)
+
+-- focused colors
+theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_50 , "focus", nil, nil)
+theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_50 , "focus", nil, "inactive")
 theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_300, "focus", nil, "active")
+theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_300, "focus", "hover", nil)
+theme = theme_assets.recolor_titlebar(theme, chosen_palette.color_500, "focus", "press", nil)
+
+-- close button
 theme.titlebar_close_button_normal_hover = gears.color.recolor_image(theme.titlebar_close_button_normal, possible_palettes[1].color_300)
 theme.titlebar_close_button_normal_press = gears.color.recolor_image(theme.titlebar_close_button_normal, possible_palettes[1].color_500)
-theme.titlebar_close_button_focus_hover = gears.color.recolor_image(theme.titlebar_close_button_focus, possible_palettes[1].color_300)
-theme.titlebar_close_button_focus_press = gears.color.recolor_image(theme.titlebar_close_button_focus, possible_palettes[1].color_500)
+theme.titlebar_close_button_focus_hover  = gears.color.recolor_image(theme.titlebar_close_button_focus , possible_palettes[1].color_300)
+theme.titlebar_close_button_focus_press  = gears.color.recolor_image(theme.titlebar_close_button_focus , possible_palettes[1].color_500)
 
 return theme
 
