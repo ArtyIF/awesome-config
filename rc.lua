@@ -53,6 +53,8 @@ local top_wibar = require("components.wibars.top")
 local bottom_wibar = require("components.wibars.bottom")
 
 local modkeys = require("components.keybinds.modkeys")
+local screenshot_spectacle_keybinds = require("components.keybinds.screenshot_spectacle")
+local sound_keybinds = require("components.keybinds.sound")
 
 local wibars_ontop_when_not_fullscreen = require("components.signals.wibars_ontop_when_not_fullscreen")
 local titlebar = require("components.signals.titlebar")
@@ -97,12 +99,6 @@ end)
 
 -- {{{ Key bindings, todo work on them
 local globalkeys = gears.table.join(
-    awful.key({                              }, "Print", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --current; copyq select 0") end, { description="screenshot current screen", group="screenshots (spectacle)" }),
-    awful.key({ modkeys.alt                  }, "Print", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --activewindow; copyq select 0") end, { description="screenshot focused window", group="screenshots (spectacle)" }),
-    awful.key({ modkeys.shift, modkeys.super }, "s", function() awful.spawn.with_shell("spectacle --background --pointer --copy-image --region; copyq select 0") end, { description="(screen snip button on Microsoft keyboards) screenshot rectangular region", group="screenshots (spectacle)" }),
-    awful.key({                              }, "XF86AudioRaiseVolume", function() VOLUME_CONTROL.up() end, { description="increase sound volume", group="sound" }),
-    awful.key({                              }, "XF86AudioLowerVolume", function() VOLUME_CONTROL.down() end, { description="decrease sound volume", group="sound" }),
-    awful.key({                              }, "XF86AudioMute", function() VOLUME_CONTROL.toggle() end, { description="toggle mute sound", group="sound" }),
     awful.key({ modkeys.super,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkeys.super,           }, "Left",   awful.tag.viewprev,
@@ -192,6 +188,9 @@ local globalkeys = gears.table.join(
     awful.key({ modkeys.super }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
+
+globalkeys = screenshot_spectacle_keybinds.connect_keybinds(globalkeys)
+globalkeys = sound_keybinds.connect_keybinds(globalkeys)
 
 local clientkeys = gears.table.join(
     awful.key({ modkeys.super,           }, "f",
@@ -397,8 +396,6 @@ if not os.execute("pgrep thunderbird") then
     awful.spawn.with_shell("kdocker thunderbird") -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
 end
 awful.spawn.with_shell("copyq")
-
-local popup = require("components.wiboxes.volume_popup").create_popup()
 
 -- TODO: check for updates
 -- possible command to check for updates: yay -Qua, probably use checkupdates too
