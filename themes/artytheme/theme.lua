@@ -120,10 +120,14 @@ theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized.
 theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized.png"
 
 theme.wallpaper = function(s)
-    return "/usr/share/backgrounds/gnome/Loveles.jpg"
-    -- return theme_assets.wallpaper(string.sub(theme.bg_normal, 1, 7), theme.fg_normal, theme.bg_urgent, s)
+    local result = "/usr/share/backgrounds/gnome/VNC.png"
+    while result == "/usr/share/backgrounds/gnome/VNC.png" do
+        result = "/usr/share/backgrounds/gnome/" .. gfs.get_random_file_from_dir("/usr/share/backgrounds/gnome/", { "jpg", "png" })
+    end
+    return result
+    -- return "/usr/share/backgrounds/gnome/Loveles.jpg"
     -- todo: replace with https://source.unsplash.com/1920x1080/?wallpaper
-    -- todo: use https://www.shadertoy.com/view/fdy3Wy to filter it
+    -- todo: use https://www.shadertoy.com/view/fdy3Wy to filter it maybe?
 end
 
 -- You can use your own layout icons like this:

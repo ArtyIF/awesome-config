@@ -63,7 +63,6 @@ local terminal = "konsole"
 
 -- for future
 local function run_in_terminal(command)
-    naughty.notify({text = command})
     awful.spawn(terminal .. " -e \"" .. command .. "\"")
 end
 
