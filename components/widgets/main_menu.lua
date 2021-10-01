@@ -13,6 +13,9 @@ local menu_utils = require("menubar.utils")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
+
+local naughty = require("naughty")
+
 local this = {
     menus = {
         favorites = {
@@ -28,9 +31,35 @@ local this = {
             { "Local Awesome Config", "code " .. gears.filesystem.get_configuration_dir() .. "/awesome-config.code-workspace" },
             { "Restart", awesome.restart },
         },
+        system = {
+            { "Upgrade", function()
+                awful.spawn.easy_async("yay -Syu --noconfirm --color=never --sudo=pkexec", function (stdout, stderr, _, exitcode)
+                    if stderr:match("depmod") then
+                        naughty.notification({ title = "Upgrade warning", text = "Something was updated that caused the Linux modules to be rebuilt. It's best to reboot your computer right now.", urgency = "critical" })
+                    end
+                    if exitcode == 0 then
+                        local match_upgraded_packages = stdout:match("Packages %((%d*)%)")
+                        if not match_upgraded_packages then
+                            naughty.notification({ title = "Upgrade done", text = "System upgraded successfully, no packages were upgraded" })
+                        else
+                            naughty.notification({ title = "Upgrade done", text = "System upgraded successfully, " .. match_upgraded_packages .. " packages were upgraded" })
+                        end
+                    else
+                        naughty.notification({ title = "Upgrade done", text = "Something went wrong, exit code " .. exitcode, urgency = "critical" })
+                    end
+                end)
+            end },
+            { "Upgrade with Git packages", function()
+                local launch_in_terminal_action = naughty.action({ name = "Launch in Konsole" })
+                launch_in_terminal_action:connect_signal("invoked", function ()
+                    awful.spawn.with_shell("konsole -e yay -Syu; konsole -e yay -S $(pacman -Qmq | grep \"git\" --color=never | tr \"\\n\" \" \")")
+                end)
+                naughty.notification({ title = "Not implemented yet", text = "In the meantime use: yay -Syu && yay -S $(pacman -Qmq | grep \"git\" --color=never | tr \"\\n\" \" \")", urgency = "critical", actions = { launch_in_terminal_action } })
+                -- don't forget --noconfirm --color=never --sudo=pkexec when adding
+            end },
+        },
         session = {
-            { "Lock", function () awful.spawn.spawn("light-locker-command -l", false) end
-            },
+            { "Lock", function () awful.spawn.spawn("light-locker-command -l", false) end },
             { "Log Out", function() awesome.quit() end },
         },
         power = {
@@ -73,6 +102,7 @@ function this.build_menu()
         for _, category in pairs(this.menus.apps) do
             table.insert(this.items, category)
         end
+        table.insert(this.items, { "System", this.menus.system })
         table.insert(this.items, { "Awesome", this.menus.awesome, beautiful.awesome_icon })
         table.insert(this.items, { "Session", this.menus.session })
         table.insert(this.items, { "Power", this.menus.power })
