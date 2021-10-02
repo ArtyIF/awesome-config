@@ -9,7 +9,7 @@ this.group_name = "Awesome"
 this.keybinds = gears.table.join(
     awful.key({ modkeys.super                }, "s", hotkeys_popup.show_help, { description="Show This Window", group=this.group_name }),
     awful.key({ modkeys.super, modkeys.ctrl  }, "r", awesome.restart        , { description="Restart Awesome", group=this.group_name }),
-    awful.key({ modkeys.super, modkeys.shift }, "q", awesome.quit           , { description="Log Out", group=this.group_name }) -- todo: move this to power?
+    awful.key({ modkeys.super, modkeys.shift }, "q", awesome.quit           , { description="Log Out", group=this.group_name }) -- todo: remove entirely?
 )
 
 function this.connect_keybinds(keybinds_dict)

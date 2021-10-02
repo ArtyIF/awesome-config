@@ -155,7 +155,8 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = "gnome"
+theme.icon_theme = "gnome" -- todo: chnage once there's support for other types of paths
+-- right now only "###x###/category/icon" is supported, but, say, breeze uses "category/###/icon" (### is size dimension)
 
 -- unfocused colors
 theme = theme_assets.recolor_titlebar(theme, theme.fg_normal         , "normal", nil, nil)
