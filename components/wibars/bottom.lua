@@ -8,7 +8,11 @@ this.task_list = require("components.widgets.task_list")
 this.toggle_minimize = require("components.widgets.toggle_minimize")
 
 function this.create_bar(s)
-    local bar = awful.wibar({ position = "bottom", screen = s, height = 32, ontop = true })
+    local bar_height = 32
+    if COMPACT_MODE then
+        bar_height = 24
+    end
+    local bar = awful.wibar({ position = "bottom", screen = s, height = bar_height, ontop = true })
     bar:setup {
         layout = wibox.layout.align.horizontal,
         this.tag_list.create_widget(s),

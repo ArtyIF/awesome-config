@@ -15,7 +15,7 @@ local theme_path = string.format("%s/.config/awesome/themes/%s/", os.getenv("HOM
 
 local theme = {}
 
-theme.font          = gtk_vars.font_family .. " " .. gtk_vars.font_size
+theme.font = gtk_vars.font_family .. " " .. gtk_vars.font_size
 
 -- possible palettes, taken from https://tailwindcolor.com/
 local possible_palettes =
@@ -86,6 +86,10 @@ theme.hotkeys_description_font = theme.font
 theme.menu_submenu = "▶ "
 theme.menu_height = 32
 theme.menu_width  = 256
+if COMPACT_MODE then
+    theme.menu_height = 24
+    theme.menu_width = 192
+end
 
 -- You can add as many variables as
 -- you wish and access them by using
@@ -177,6 +181,16 @@ theme.titlebar_close_button_normal_hover = gears.color.recolor_image(theme.title
 theme.titlebar_close_button_normal_press = gears.color.recolor_image(theme.titlebar_close_button_normal, possible_palettes[1].color_500)
 theme.titlebar_close_button_focus_hover  = gears.color.recolor_image(theme.titlebar_close_button_focus , possible_palettes[1].color_300)
 theme.titlebar_close_button_focus_press  = gears.color.recolor_image(theme.titlebar_close_button_focus , possible_palettes[1].color_500)
+
+theme.titlebar_margins = 8
+if COMPACT_MODE then
+    theme.titlebar_margins = 4
+end
+
+theme.wibar_icon_margins = 4
+if COMPACT_MODE then
+    theme.wibar_icon_margins = 2
+end
 
 return theme
 

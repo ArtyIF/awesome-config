@@ -8,7 +8,11 @@ this.clock = require("components.widgets.clock")
 this.top_wibar_right_part = require("components.widgets.top_wibar_right_part")
 
 function this.create_bar(s)
-    local bar = awful.wibar({ position = "top", screen = s, height = 32, ontop = true })
+    local bar_height = 32
+    if COMPACT_MODE then
+        bar_height = 24
+    end
+    local bar = awful.wibar({ position = "top", screen = s, height = bar_height, ontop = true })
     bar:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none",

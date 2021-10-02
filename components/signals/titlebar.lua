@@ -1,6 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
+local theme_vars = require("beautiful").get()
 
 local this = {}
 
@@ -17,10 +18,15 @@ function this.signal_callback(c)
         end)
     )
 
-    awful.titlebar(c, { size = 32 }) : setup {
+    local titlebar_size = 32
+    if COMPACT_MODE then
+        titlebar_size = 24
+    end
+
+    awful.titlebar(c, { size = titlebar_size }) : setup {
         {
-            wibox.container.margin(nil, 8, 0, 0, 0),
-            wibox.container.margin(awful.titlebar.widget.iconwidget(c), 0, 4, 8, 8, nil, false),
+            wibox.container.margin(nil, theme_vars.titlebar_margins, 0, 0, 0),
+            wibox.container.margin(awful.titlebar.widget.iconwidget(c), 0, theme_vars.titlebar_margins / 2, theme_vars.titlebar_margins, theme_vars.titlebar_margins, nil, false),
             awful.titlebar.widget.floatingbutton(c),
             --awful.titlebar.widget.ontopbutton(c),
             --awful.titlebar.widget.stickybutton(c),

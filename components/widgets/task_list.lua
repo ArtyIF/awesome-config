@@ -3,6 +3,7 @@ local gears = require("gears")
 local awful = require("awful")
 -- widget and layout library
 local wibox = require("wibox")
+local theme_vars = require("beautiful").get()
 
 local this = {}
 
@@ -45,7 +46,7 @@ this.template = {
                 id     = 'icon_role',
                 widget = wibox.widget.imagebox,
             },
-            margins = 8,
+            margins = theme_vars.titlebar_margins,
             widget  = wibox.container.margin,
         },
         {
@@ -53,7 +54,7 @@ this.template = {
                 id     = 'text_role',
                 widget = wibox.widget.textbox,
             },
-            right = 8,
+            right = theme_vars.titlebar_margins,
             widget = wibox.container.margin,
         },
         layout = wibox.layout.align.horizontal

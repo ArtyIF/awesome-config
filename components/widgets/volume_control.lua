@@ -3,6 +3,7 @@ local gears = require("gears")
 local awful = require("awful")
 -- widget and layout library
 local wibox = require("wibox")
+local theme_vars = require("beautiful").get()
 
 local this = {}
 
@@ -18,10 +19,10 @@ this.icon_medium = "audio-volume-medium-symbolic.svg"
 this.icon_low = "audio-volume-low-symbolic.svg"
 this.icon_muted = "audio-volume-muted-symbolic.svg"
 
-this.margin_top = 4
-this.margin_right = 2
-this.margin_bottom = 4
-this.margin_left = 2
+this.margin_top = theme_vars.wibar_icon_margins
+this.margin_right = theme_vars.wibar_icon_margins / 2
+this.margin_bottom = theme_vars.wibar_icon_margins
+this.margin_left = theme_vars.wibar_icon_margins / 2
 
 function this.callback(volume, muted)
     if muted or volume == 0 then

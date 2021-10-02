@@ -1,0 +1,2 @@
+COMPACT_MODE = false
+PICOM_BAREBONES = false
