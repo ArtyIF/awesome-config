@@ -77,7 +77,7 @@ local this = {
 function this.build_menu()
     menu_gen.generate(function (entries)
         for id, category in pairs(menu_gen.all_categories) do
-            table.insert(this.menus.apps, { id, {}, menu_utils.lookup_icon(category.icon_name) })
+            table.insert(this.menus.apps, { id, {}, "/usr/share/icons/Adwaita++/categories/32/" .. category.icon_name .. ".svg" })
         end
 
         for _, entry in pairs(entries) do
