@@ -384,11 +384,11 @@ wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
 -- }}}
 
-awful.spawn.spawn("easyeffects --gapplication-service")
-awful.spawn.spawn("light-locker --lock-after-screensaver=900 --late-locking --lock-on-lid")
+awful.spawn.spawn("easyeffects --gapplication-service", false)
+awful.spawn.spawn("light-locker --lock-after-screensaver=900 --late-locking --lock-on-lid", false)
 awful.spawn.with_shell("sleep 1; xset s off") -- added sleep 1 because i think light-locker overrides it on start
-awful.spawn.spawn("picom --experimental-backends --config=" .. gears.filesystem.get_xdg_config_home() .. "awesome/picom/picom.conf") -- TODO: option to replace with picom-barebones.conf
+awful.spawn.spawn("picom --experimental-backends --config=" .. gears.filesystem.get_xdg_config_home() .. "awesome/picom/picom.conf", false) -- TODO: option to replace with picom-barebones.conf
 if not os.execute("pgrep thunderbird") then
-    awful.spawn.spawn("kdocker thunderbird") -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
+    awful.spawn.spawn("kdocker thunderbird", false) -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
 end
-awful.spawn.spawn("copyq")
+awful.spawn.spawn("copyq", false)
