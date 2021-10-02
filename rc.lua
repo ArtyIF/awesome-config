@@ -61,6 +61,7 @@ local awesome_keybinds = require("components.keybinds.awesome")
 
 local wibars_ontop_when_not_fullscreen = require("components.signals.wibars_ontop_when_not_fullscreen")
 local titlebar = require("components.signals.titlebar")
+local fix_fullscreen_offset = require("components.signals.fix_fullscreen_offset")
 
 local terminal = "konsole"
 
@@ -351,13 +352,7 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
-
-    -- remove titlebars from windows that don't want them
-    -- not using gtk3-nocsd anymore, but removing it breaks witcher 3 window and offsets it 32 pixels up off-screen
-    { rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false }},
+    { rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = true } },
 
     { rule = { role = "PictureInPicture" }, properties = { placement = awful.placement.bottom_right }},
 
@@ -382,6 +377,7 @@ client.connect_signal("manage", function (c)
     end
 end)
 
+fix_fullscreen_offset.connect_signals()
 wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
 -- }}}
