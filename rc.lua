@@ -55,6 +55,7 @@ local bottom_wibar = require("components.wibars.bottom")
 local modkeys = require("components.keybinds.modkeys")
 local screenshot_spectacle_keybinds = require("components.keybinds.screenshot_spectacle")
 local sound_keybinds = require("components.keybinds.sound")
+local awesome_keybinds = require("components.keybinds.awesome")
 
 local wibars_ontop_when_not_fullscreen = require("components.signals.wibars_ontop_when_not_fullscreen")
 local titlebar = require("components.signals.titlebar")
@@ -98,8 +99,6 @@ end)
 
 -- {{{ Key bindings, todo work on them
 local globalkeys = gears.table.join(
-    awful.key({ modkeys.super,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
     awful.key({ modkeys.super,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkeys.super,           }, "Right",  awful.tag.viewnext,
@@ -145,10 +144,6 @@ local globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkeys.super,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkeys.super, modkeys.ctrl }, "r", awesome.restart,
-              {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkeys.super, modkeys.shift   }, "q", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkeys.super,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
@@ -190,6 +185,7 @@ local globalkeys = gears.table.join(
 
 globalkeys = screenshot_spectacle_keybinds.connect_keybinds(globalkeys)
 globalkeys = sound_keybinds.connect_keybinds(globalkeys)
+globalkeys = awesome_keybinds.connect_keybinds(globalkeys)
 
 local clientkeys = gears.table.join(
     awful.key({ modkeys.super,           }, "f",
@@ -396,7 +392,3 @@ if not os.execute("pgrep thunderbird") then
     awful.spawn.spawn("kdocker thunderbird") -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
 end
 awful.spawn.spawn("copyq")
-
--- TODO: check for updates
--- possible command to check for updates: yay -Qua, probably use checkupdates too
--- command to execute to update: yay -Syu --noconfirm --sudo=pkexec; yay -S $(pacman -Qmq | grep "git" --color=never | tr "\n" " ") --noconfirm --sudo=pkexec
