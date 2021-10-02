@@ -35,17 +35,21 @@ local this = {
             { "Upgrade", function()
                 awful.spawn.easy_async("yay -Syu --noconfirm --color=never --sudo=pkexec", function (stdout, stderr, _, exitcode)
                     if stderr:match("depmod") then
-                        naughty.notification({ title = "Upgrade warning", text = "Something was updated that caused the Linux modules to be rebuilt. It's best to reboot your computer right now.", urgency = "critical" })
+                        local depmod_reboot_action = naughty.action({ name = "Reboot" })
+                        depmod_reboot_action:connect_signal("invoked", function ()
+                            awful.spawn.spawn("systemctl reboot", false)
+                        end)
+                        naughty.notification({ title = "Kernel or its modules were updated", text = "Something was updated that caused Linux kernel modules to be rebuilt, either the modules or the kernel itself. It's best to reboot your computer right now.", urgency = "critical", actions = { depmod_reboot_action } })
                     end
                     if exitcode == 0 then
                         local match_upgraded_packages = stdout:match("Packages %((%d*)%)")
                         if not match_upgraded_packages then
-                            naughty.notification({ title = "Upgrade done", text = "System upgraded successfully, no packages were upgraded" })
+                            naughty.notification({ title = "System already up to date", text = "No packages were upgraded." })
                         else
-                            naughty.notification({ title = "Upgrade done", text = "System upgraded successfully, " .. match_upgraded_packages .. " packages were upgraded" })
+                            naughty.notification({ title = "Upgrade successful", text = match_upgraded_packages .. " packages were upgraded." })
                         end
                     else
-                        naughty.notification({ title = "Upgrade done", text = "Something went wrong, exit code " .. exitcode, urgency = "critical" })
+                        naughty.notification({ title = "Upgrade failed!", text = "Something went wrong, exit code " .. exitcode .. ".\n\n" .. stderr:sub(1, stderr:len() - 1), urgency = "critical" })
                     end
                 end)
             end },
