@@ -388,15 +388,14 @@ wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
 -- }}}
 
-awful.spawn.with_shell("easyeffects --gapplication-service")
---awful.spawn.with_shell("xset s 900")
-awful.spawn.with_shell("xset s off")
-awful.spawn.with_shell("light-locker --lock-after-screensaver=900 --late-locking --lock-on-lid")
-awful.spawn.with_shell("picom --experimental-backends --config=$HOME/.config/awesome/picom/picom.conf") -- TODO: option to replace with picom-barebones.conf
+awful.spawn.spawn("easyeffects --gapplication-service")
+awful.spawn.spawn("light-locker --lock-after-screensaver=900 --late-locking --lock-on-lid")
+awful.spawn.with_shell("sleep 1; xset s off") -- added sleep 1 because i think light-locker overrides it on start
+awful.spawn.spawn("picom --experimental-backends --config=" .. gears.filesystem.get_xdg_config_home() .. "awesome/picom/picom.conf") -- TODO: option to replace with picom-barebones.conf
 if not os.execute("pgrep thunderbird") then
-    awful.spawn.with_shell("kdocker thunderbird") -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
+    awful.spawn.spawn("kdocker thunderbird") -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
 end
-awful.spawn.with_shell("copyq")
+awful.spawn.spawn("copyq")
 
 -- TODO: check for updates
 -- possible command to check for updates: yay -Qua, probably use checkupdates too
