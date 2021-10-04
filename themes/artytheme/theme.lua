@@ -184,12 +184,12 @@ theme.titlebar_close_button_focus_press  = gears.color.recolor_image(theme.title
 
 theme.titlebar_margins = 8
 if COMPACT_MODE then
-    theme.titlebar_margins = 4
+    theme.titlebar_margins = 6
 end
 
 theme.wibar_icon_margins = 4
 if COMPACT_MODE then
-    theme.wibar_icon_margins = 2
+    theme.wibar_icon_margins = 3
 end
 
 return theme
