@@ -17,14 +17,9 @@ require("awful.hotkeys_popup.keys")
 local naughty = require("naughty")
 
 local this = {
+    favorite_items = { "Firefox", "File Manager PCManFM", "Konsole", "Discord", "Steam (Runtime)" },
     menus = {
-        favorites = {
-            { "Web Browser", "firefox" },
-            { "Files", "pcmanfm" },
-            { "Terminal", "konsole" },
-            { "Discord", "discord" },
-            { "Steam", "steam-runtime" },
-        },
+        favorites = {},
         apps = {},
         awesome = {
             { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end }, -- remove?
@@ -79,11 +74,17 @@ function this.build_menu()
         for id, category in pairs(menu_gen.all_categories) do
             table.insert(this.menus.apps, { id, {}, "/usr/share/icons/Adwaita++/categories/32/" .. category.icon_name .. ".svg" })
         end
-
+        
         for _, entry in pairs(entries) do
             for _, category in pairs(this.menus.apps) do
                 if category[1] == entry.category then
                     table.insert(category[2], { entry.name, entry.cmdline, entry.icon })
+                    for _, fav_entry in ipairs(this.favorite_items) do
+                        if string.sub(entry.name, 1, #fav_entry) == fav_entry then
+                            table.insert(this.menus.favorites, { entry.name, entry.cmdline, entry.icon })
+                            break
+                        end
+                    end
                     break
                 end
             end
@@ -94,15 +95,21 @@ function this.build_menu()
             if #category[2] == 0 then
                 table.remove(this.menus.apps, id)
             else
-                category[1] = menu_gen.all_categories[category[1]].name
-                table.sort(category[2], function (a, b) return string.byte(a[1]) < string.byte(b[1]) end)
+                if category[1] ~= "Favorites" then
+                    category[1] = menu_gen.all_categories[category[1]].name
+                end
             end
         end
 
         table.sort(this.menus.apps, function (a, b) return string.byte(a[1]) < string.byte(b[1]) end)
+        table.insert(this.menus.apps, 1, { "Favorites", this.menus.favorites })
+
+        for _, category in ipairs(this.menus.apps) do
+            table.sort(category[2], function (a, b) return string.byte(a[1]) < string.byte(b[1]) end) -- todo: sort favorites differently
+        end
+
 
         this.items = {}
-        table.insert(this.items, { "Favorites", this.menus.favorites })
         for _, category in pairs(this.menus.apps) do
             table.insert(this.items, category)
         end
