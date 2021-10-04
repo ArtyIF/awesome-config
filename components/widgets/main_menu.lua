@@ -29,12 +29,12 @@ local this = {
         system = {
             { "Upgrade", function()
                 awful.spawn.easy_async("yay -Syu --noconfirm --color=never --sudo=pkexec", function (stdout, stderr, _, exitcode)
-                    if stderr:match("depmod") then
-                        local depmod_reboot_action = naughty.action({ name = "Reboot" })
-                        depmod_reboot_action:connect_signal("invoked", function ()
+                    if stdout:match("==> depmod") then
+                        local kernel_update_reboot_action = naughty.action({ name = "Reboot" })
+                        kernel_update_reboot_action:connect_signal("invoked", function ()
                             awful.spawn.spawn("systemctl reboot", false)
                         end)
-                        naughty.notification({ title = "Kernel or its modules were updated", text = "Something was updated that caused Linux kernel modules to be rebuilt, either the modules or the kernel itself. It's best to reboot your computer right now.", urgency = "critical", actions = { depmod_reboot_action } })
+                        naughty.notification({ title = "Kernel or its modules were updated", text = "Something was updated that caused Linux kernel modules to be rebuilt, either the modules or the kernel itself. It's best to reboot your computer right now.", urgency = "critical", actions = { kernel_update_reboot_action } })
                     end
                     if exitcode == 0 then
                         local match_upgraded_packages = stdout:match("Packages %((%d*)%)")
