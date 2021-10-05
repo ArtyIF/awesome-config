@@ -5,7 +5,7 @@ local modkeys = require("components.keybinds.modkeys")
 
 local this = {}
 
-this.group_name = "Client"
+this.group_name = "Window"
 -- todo: add more keybinds?
 this.keybinds = gears.table.join(
     awful.key({ modkeys.super }, "f", function (c)

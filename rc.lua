@@ -54,7 +54,7 @@ local modkeys = require("components.keybinds.modkeys")
 local screenshot_spectacle_keybinds = require("components.keybinds.screenshot_spectacle")
 local sound_keybinds = require("components.keybinds.sound")
 local awesome_keybinds = require("components.keybinds.awesome")
-local client_keybinds = require("components.keybinds.client")
+local window_keybinds = require("components.keybinds.window")
 
 local wibars_ontop_when_not_fullscreen = require("components.signals.wibars_ontop_when_not_fullscreen")
 local titlebar = require("components.signals.titlebar")
@@ -187,7 +187,7 @@ globalkeys = screenshot_spectacle_keybinds.connect_keybinds(globalkeys)
 globalkeys = sound_keybinds.connect_keybinds(globalkeys)
 globalkeys = awesome_keybinds.connect_keybinds(globalkeys)
 
-local clientkeys = client_keybinds.connect_keybinds({})
+local clientkeys = window_keybinds.connect_keybinds({})
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
