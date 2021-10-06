@@ -55,6 +55,7 @@ local screenshot_spectacle_keybinds = require("components.keybinds.screenshot_sp
 local sound_keybinds = require("components.keybinds.sound")
 local awesome_keybinds = require("components.keybinds.awesome")
 local window_keybinds = require("components.keybinds.window")
+local keyboard_layout_keybinds = require("components.keybinds.keyboard_layout")
 
 local wibars_ontop_when_not_fullscreen = require("components.signals.wibars_ontop_when_not_fullscreen")
 local titlebar = require("components.signals.titlebar")
@@ -157,10 +158,6 @@ local globalkeys = gears.table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkeys.super, modkeys.ctrl }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkeys.super,           }, "space", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "layout"}),
-    awful.key({ modkeys.super, modkeys.shift   }, "space", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "layout"}),
 
     awful.key({ modkeys.super, modkeys.ctrl }, "n",
               function ()
@@ -186,6 +183,7 @@ local globalkeys = gears.table.join(
 globalkeys = screenshot_spectacle_keybinds.connect_keybinds(globalkeys)
 globalkeys = sound_keybinds.connect_keybinds(globalkeys)
 globalkeys = awesome_keybinds.connect_keybinds(globalkeys)
+globalkeys = keyboard_layout_keybinds.connect_keybinds(globalkeys)
 
 local clientkeys = window_keybinds.connect_keybinds({})
 

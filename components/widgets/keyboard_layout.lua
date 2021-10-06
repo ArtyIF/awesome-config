@@ -3,7 +3,8 @@ local awful = require("awful")
 local this = {}
 
 function this.create_widget()
-    return awful.widget.keyboardlayout()
+    KEYBOARD_LAYOUT = awful.widget.keyboardlayout()
+    return KEYBOARD_LAYOUT
 end
 
 return this
