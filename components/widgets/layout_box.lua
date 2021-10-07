@@ -9,7 +9,7 @@ local this = {}
 this.margin_top = theme_vars.wibar_icon_margins
 this.margin_right = theme_vars.wibar_icon_margins
 this.margin_bottom = theme_vars.wibar_icon_margins
-this.margin_left = theme_vars.wibar_icon_margins / 2
+this.margin_left = theme_vars.wibar_icon_margins
 
 awful.layout.layouts = {
     awful.layout.suit.max,
