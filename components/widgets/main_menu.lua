@@ -22,7 +22,7 @@ local this = {
         apps = {},
         awesome = {
             { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end }, -- remove?
-            { "Local Awesome Config", "code " .. gears.filesystem.get_configuration_dir() .. "/awesome-config.code-workspace" },
+            { "Awesome Config", "code " .. gears.filesystem.get_configuration_dir() .. "/awesome-config.code-workspace" },
             { "Restart", awesome.restart },
         },
         system = {
