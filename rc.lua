@@ -331,6 +331,6 @@ else
     awful.spawn.spawn("picom --experimental-backends --config=" .. gears.filesystem.get_xdg_config_home() .. "awesome/picom/picom.conf", false)
 end
 if not os.execute("pgrep thunderbird") then
-    awful.spawn.spawn("kdocker thunderbird", false) -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
+    awful.spawn.spawn("kdocker -d 60 thunderbird", false) -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
 end
 awful.spawn.spawn("copyq", false)
