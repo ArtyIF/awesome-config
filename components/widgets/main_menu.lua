@@ -27,7 +27,7 @@ local this = {
         },
         system = {
             { "Upgrade", function()
-                awful.spawn.easy_async("yay -Syu --noconfirm --color=never --sudo=pkexec", function (stdout, stderr, _, exitcode)
+                awful.spawn.easy_async("yay -Syu --devel --noconfirm --color=never --sudo=pkexec", function (stdout, stderr, _, exitcode)
                     if stdout:match("==> depmod") then
                         local kernel_update_reboot_action = naughty.action({ name = "Reboot" })
                         kernel_update_reboot_action:connect_signal("invoked", function ()
@@ -46,14 +46,6 @@ local this = {
                         naughty.notification({ title = "Upgrade failed!", text = "Something went wrong, exit code " .. exitcode .. ".\n\n" .. stderr:sub(1, stderr:len() - 1), urgency = "critical" })
                     end
                 end)
-            end },
-            { "Upgrade with Git packages", function()
-                local launch_in_terminal_action = naughty.action({ name = "Launch in Konsole" })
-                launch_in_terminal_action:connect_signal("invoked", function ()
-                    awful.spawn.with_shell("konsole -e yay -Syu; konsole -e yay -S $(pacman -Qmq | grep \"git\" --color=never | tr \"\\n\" \" \")")
-                end)
-                naughty.notification({ title = "Not implemented yet", text = "In the meantime use: yay -Syu && yay -S $(pacman -Qmq | grep \"git\" --color=never | tr \"\\n\" \" \")", urgency = "critical", actions = { launch_in_terminal_action } })
-                -- don't forget --noconfirm --color=never --sudo=pkexec when adding
             end },
         },
         session = {
