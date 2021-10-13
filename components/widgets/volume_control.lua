@@ -26,6 +26,9 @@ this.margin_bottom = theme_vars.wibar_icon_margins
 this.margin_left = theme_vars.wibar_icon_margins / 2
 
 function this.callback(volume, muted)
+    if not volume then
+        return
+    end
     if muted or volume == 0 then
         this.image_widget.image = this.icons_path .. this.icon_muted
     elseif volume <= 33 then
