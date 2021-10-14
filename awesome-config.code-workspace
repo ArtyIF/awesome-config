@@ -14,7 +14,7 @@
 			// classes
 			"button", "client", "drawable", "key", "screen", "signals", "wibox", "xproperties",
 			// config globals
-			"PICOM_BAREBONES", "COMPACT_MODE",
+			"PERFORMANCE_MODE", "COMPACT_MODE",
 		],
 		"Lua.runtime.version": "Lua 5.3", // the arch linux version at the date is compiled against lua 5.3.5
 	}
