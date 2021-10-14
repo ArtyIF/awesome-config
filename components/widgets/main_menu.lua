@@ -16,7 +16,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local naughty = require("naughty")
 
 local this = {
-    favorite_items = { "Firefox", "File Manager PCManFM", "Konsole", "Discord", "Steam (Runtime)" },
+    favorite_items = { "Firefox", "Nemo", "Konsole", "Discord", "Steam (Runtime)" },
     menus = {
         favorites = {},
         apps = {},
