@@ -39,13 +39,24 @@ local possible_palettes =
     { color_900 = "#881337", color_800 = "#9F1239", color_700 = "#BE123C", color_600 = "#E11D48", color_500 = "#F43F5E", color_400 = "#FB7185", color_300 = "#FDA4AF", color_200 = "#FECDD3", color_100 = "#FFE4E6", color_50 = "#FFF1F2" }, -- rose
 }
 
+local function process_transparency(color)
+    if PERFORMANCE_MODE and string.len(color) == 9 then
+        return string.sub(1, 7)
+    end
+end
+
 math.randomseed(os.time())
 local chosen_palette = possible_palettes[math.random(#possible_palettes)]
 -- if you want to have a specific color at all times, replace the above line with the line below:
 -- local chosen_palette = possible_palettes[3]
 
-theme.bg_normal     = "#171717BF"
-theme.bg_focus      = chosen_palette.color_900 .. "BF"
+if PERFORMANCE_MODE then
+    theme.bg_normal     = "#171717"
+    theme.bg_focus      = chosen_palette.color_900
+else
+    theme.bg_normal     = "#171717BF"
+    theme.bg_focus      = chosen_palette.color_900 .. "BF"
+end
 theme.bg_urgent     = chosen_palette.color_500
 theme.bg_minimize   = string.sub(theme.bg_focus, 1, 7) .. "3F"
 theme.bg_systray    = string.sub(theme.bg_normal, 1, 7)
