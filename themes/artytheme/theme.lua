@@ -83,6 +83,7 @@ theme.systray_icon_spacing = 4
 theme.hotkeys_modifiers_fg = chosen_palette.color_900
 theme.hotkeys_font = "Cascadia Code " .. gtk_vars.font_size
 theme.hotkeys_description_font = theme.font
+theme.border_width = 0
 
 -- Variables set for theming notifications:
 -- notification_font
