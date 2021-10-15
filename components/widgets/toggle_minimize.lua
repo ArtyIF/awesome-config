@@ -1,10 +1,11 @@
 -- standard awesome stuff
 local awful = require("awful")
+local gears = require("gears")
 
 local this = {minimized = false, minimize_history = {}}
 
 function this.create_widget(s)
-    local toggle_minimize = awful.widget.button({image = "/usr/share/icons/breeze-dark/places/24/desktop.svg"})
+    local toggle_minimize = awful.widget.button({image = gears.filesystem.get_configuration_dir() .. "themes/artytheme/icons/minimize.png"})
 
     toggle_minimize:buttons({
         awful.button({}, 1, function ()
