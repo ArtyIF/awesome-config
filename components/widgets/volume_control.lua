@@ -48,17 +48,13 @@ function this.execute_and_get_output(cmd)
     return out
 end
 
-function this.parse_cmd_out(volume_cmd, mute_cmd)
-    local volume_out = this.execute_and_get_output(volume_cmd)
-    local mute_out = this.execute_and_get_output(mute_cmd)
+function this.get()
+    local volume_out = this.execute_and_get_output(this.cmd .. this.get_volume_arg)
+    local mute_out = this.execute_and_get_output(this.cmd .. this.get_mute_arg)
     local volume = tonumber(volume_out:match("(%d?%d?%d)%%"))
     local muted = mute_out:match("Mute: yes")
     this.callback(volume, muted)
     return volume, muted
-end
-
-function this.get()
-    return this.parse_cmd_out(this.cmd .. this.get_volume_arg, this.cmd .. this.get_mute_arg)
 end
 
 function this.up()
