@@ -62,19 +62,19 @@ function this.get()
 end
 
 function this.up()
-    --awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change") -- todo: make toggleable. disabled because it freezes awesomewm on my laptop for quite a while
+    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     this.execute_and_get_output(this.cmd .. this.up_arg)
     return this.get()
 end
 
 function this.down()
-    --awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
+    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     this.execute_and_get_output(this.cmd .. this.down_arg)
     return this.get()
 end
 
 function this.toggle()
-    --awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
+    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     this.execute_and_get_output(this.cmd .. this.toggle_arg)
     return this.get()
 end
