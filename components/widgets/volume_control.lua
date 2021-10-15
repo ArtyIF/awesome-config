@@ -58,20 +58,20 @@ function this.get()
 end
 
 function this.up()
-    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     this.execute_and_get_output(this.cmd .. this.up_arg)
+    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     return this.get()
 end
 
 function this.down()
-    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     this.execute_and_get_output(this.cmd .. this.down_arg)
+    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     return this.get()
 end
 
 function this.toggle()
-    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     this.execute_and_get_output(this.cmd .. this.toggle_arg)
+    awful.spawn.with_shell("canberra-gtk-play --id=audio-volume-change")
     return this.get()
 end
 
