@@ -43,8 +43,8 @@ this.template = {
     {
         {
             {
-                id     = 'icon_role',
-                widget = wibox.widget.imagebox,
+                id = "clienticon",
+                widget = awful.widget.clienticon,
             },
             margins = theme_vars.titlebar_margins,
             widget  = wibox.container.margin,
