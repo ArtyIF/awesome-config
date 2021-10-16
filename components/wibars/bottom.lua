@@ -1,6 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
+local naughty = require("naughty")
 
 local this = {}
 
@@ -16,15 +17,22 @@ function this.create_bar(s)
     bar.y = s.geometry.height - 1
     bar:struts({ bottom = 0 })
 
-    local hide_timer = gears.timer({
-        timeout = 0.25,
-        autostart = false,
-        call_now = false,
-        callback = function ()
+    local hide_bar_callback = function ()
+        if client.focus ~= nil then
             bar.y = s.geometry.height - 1
-            bar:struts({ bottom = 0 })
+        else
+            bar.y = s.geometry.height - bar_height
         end
+        bar:struts({ bottom = 0 })
+    end
+    local hide_timer = gears.timer({
+        timeout = 0.2,
+        autostart = true,
+        call_now = false,
+        single_shot = true,
+        callback = hide_bar_callback
     })
+
     bar:connect_signal("mouse::enter", function ()
         hide_timer:stop()
         bar.y = s.geometry.height - bar_height
@@ -32,6 +40,10 @@ function this.create_bar(s)
     end)
     bar:connect_signal("mouse::leave", function ()
         hide_timer:start()
+    end)
+
+    client.connect_signal("request::border", function ()
+        hide_timer:start() -- todo: fix the bar going down after selecting a new thing
     end)
 
     bar:setup {

@@ -12,7 +12,7 @@
 			// libraries
 			"awesome", "dbus", "mouse", "mousegrabber", "root", "selection",
 			// classes
-			"button", "client", "drawable", "key", "screen", "signals", "wibox", "xproperties",
+			"button", "client", "drawable", "key", "screen", "signals", "wibox", "xproperties", "tag",
 			// config globals
 			"PERFORMANCE_MODE", "COMPACT_MODE",
 		],
