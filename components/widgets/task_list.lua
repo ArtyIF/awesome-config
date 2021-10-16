@@ -8,7 +8,7 @@ local theme_vars = require("beautiful").get()
 local this = {}
 
 this.layout = {
-    layout = wibox.layout.flex.horizontal,
+    layout = wibox.layout.fixed.horizontal,
 }
 
 -- todo: move to keybinds
