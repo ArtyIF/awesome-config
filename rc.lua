@@ -321,7 +321,7 @@ awful.rules.rules = {
 fix_fullscreen_offset.connect_signals()
 wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
-debug_notification.connect_signals()
+--debug_notification.connect_signals()
 -- }}}
 
 awful.spawn.spawn("easyeffects --gapplication-service", false)

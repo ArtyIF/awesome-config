@@ -27,7 +27,7 @@ function this.signal_callback(c)
 end
 
 function this.connect_signals()
-    client.connect_signal("manage", this.signal_callback)
+    client.connect_signal("request::manage", this.signal_callback)
 end
 
 return this
