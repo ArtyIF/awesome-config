@@ -8,7 +8,7 @@ this.task_list = require("components.widgets.task_list")
 this.toggle_minimize = require("components.widgets.toggle_minimize")
 
 function this.create_bar(s)
-    local bar_height = 32
+    local bar_height = 64
     if COMPACT_MODE then
         bar_height = 24
     end
@@ -36,6 +36,7 @@ function this.create_bar(s)
 
     bar:setup {
         layout = wibox.layout.align.horizontal,
+        expand = "none",
         nil,
         this.task_list.create_widget(s),
         this.toggle_minimize.create_widget(s),

@@ -42,22 +42,11 @@ this.buttons = gears.table.join(
 this.template = {
     {
         {
-            {
-                id = "clienticon",
-                widget = awful.widget.clienticon,
-            },
-            margins = theme_vars.titlebar_margins,
-            widget  = wibox.container.margin,
+            id = "clienticon",
+            widget = awful.widget.clienticon,
         },
-        {
-            {
-                id     = 'text_role',
-                widget = wibox.widget.textbox,
-            },
-            right = theme_vars.titlebar_margins,
-            widget = wibox.container.margin,
-        },
-        layout = wibox.layout.align.horizontal
+        margins = theme_vars.titlebar_margins,
+        widget  = wibox.container.margin,
     },
     id     = 'background_role',
     widget = wibox.container.background,
