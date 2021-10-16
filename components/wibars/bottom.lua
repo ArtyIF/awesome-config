@@ -13,7 +13,7 @@ function this.create_bar(s)
         bar_height = 24
     end
     local bar = awful.wibar({ position = "bottom", screen = s, height = bar_height, ontop = true })
-    bar.y = 1080 - 1
+    bar.y = s.geometry.height - 1
     bar:struts({ bottom = 0 })
 
     local hide_timer = gears.timer({
