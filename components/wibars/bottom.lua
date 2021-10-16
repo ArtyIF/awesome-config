@@ -18,7 +18,7 @@ function this.create_bar(s)
     bar:struts({ bottom = 0 })
 
     local hide_bar_callback = function ()
-        if client.focus ~= nil then
+        if client.focus ~= nil and tostring(mouse.object_under_pointer()):sub(1, 13) == "window/client" then
             bar.y = s.geometry.height - 1
         else
             bar.y = s.geometry.height - bar_height
@@ -43,7 +43,7 @@ function this.create_bar(s)
     end)
 
     client.connect_signal("request::border", function ()
-        hide_timer:start() -- todo: fix the bar going down after selecting a new thing
+        hide_timer:start()
     end)
 
     bar:setup {
