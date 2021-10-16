@@ -7,7 +7,7 @@ local this = {minimized = false, minimize_history = {}}
 
 function this.create_widget(s)
     local toggle_minimize = wibox.widget.imagebox(gears.filesystem.get_configuration_dir() .. "themes/artytheme/icons/minimize.png")
-    toggle_minimize.forced_width = 6
+    toggle_minimize.forced_width = 1
     toggle_minimize.vertical_fit_policy = "fit"
     toggle_minimize.horizontal_fit_policy = "fit"
 
