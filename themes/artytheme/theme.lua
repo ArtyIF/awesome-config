@@ -194,9 +194,9 @@ theme.titlebar_close_button_normal_press = gears.color.recolor_image(theme.title
 theme.titlebar_close_button_focus_hover  = gears.color.recolor_image(theme.titlebar_close_button_focus , possible_palettes[1].color_300)
 theme.titlebar_close_button_focus_press  = gears.color.recolor_image(theme.titlebar_close_button_focus , possible_palettes[1].color_500)
 
-theme.titlebar_margins = 8
+theme.titlebar_margins = 4
 if COMPACT_MODE then
-    theme.titlebar_margins = 6
+    theme.titlebar_margins = 3
 end
 
 theme.wibar_icon_margins = 4
