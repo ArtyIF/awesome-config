@@ -1,11 +1,15 @@
 -- standard awesome stuff
 local awful = require("awful")
 local gears = require("gears")
+local wibox = require("wibox")
 
 local this = {minimized = false, minimize_history = {}}
 
 function this.create_widget(s)
-    local toggle_minimize = awful.widget.button({image = gears.filesystem.get_configuration_dir() .. "themes/artytheme/icons/minimize.png"})
+    local toggle_minimize = wibox.widget.imagebox(gears.filesystem.get_configuration_dir() .. "themes/artytheme/icons/minimize.png")
+    toggle_minimize.forced_width = 6
+    toggle_minimize.vertical_fit_policy = "fit"
+    toggle_minimize.horizontal_fit_policy = "fit"
 
     toggle_minimize:buttons({
         awful.button({}, 1, function ()
