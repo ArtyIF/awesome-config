@@ -60,6 +60,7 @@ local keyboard_layout_keybinds = require("components.keybinds.keyboard_layout")
 local wibars_ontop_when_not_fullscreen = require("components.signals.wibars_ontop_when_not_fullscreen")
 local titlebar = require("components.signals.titlebar")
 local fix_fullscreen_offset = require("components.signals.fix_fullscreen_offset")
+local debug_notification = require("components.signals.debug_notification")
 
 local terminal = "konsole"
 
@@ -320,6 +321,7 @@ awful.rules.rules = {
 fix_fullscreen_offset.connect_signals()
 wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
+debug_notification.connect_signals()
 -- }}}
 
 awful.spawn.spawn("easyeffects --gapplication-service", false)
