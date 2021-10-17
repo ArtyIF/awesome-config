@@ -17,8 +17,9 @@ function this.create_bar(s)
     bar.y = s.geometry.height - 1
     bar:struts({ bottom = 0 })
 
+    local mouse_over = false
     local hide_bar_callback = function ()
-        if client.focus ~= nil and tostring(mouse.object_under_pointer()):sub(1, 13) == "window/client" then
+        if client.focus ~= nil and not mouse_over then
             bar.y = s.geometry.height - 1
         else
             bar.y = s.geometry.height - bar_height
@@ -26,7 +27,7 @@ function this.create_bar(s)
         bar:struts({ bottom = 0 })
     end
     local hide_timer = gears.timer({
-        timeout = 0.2,
+        timeout = 0.5,
         autostart = true,
         call_now = false,
         single_shot = true,
@@ -34,15 +35,20 @@ function this.create_bar(s)
     })
 
     bar:connect_signal("mouse::enter", function ()
+        mouse_over = true
         hide_timer:stop()
         bar.y = s.geometry.height - bar_height
         bar:struts({ bottom = 0 })
     end)
     bar:connect_signal("mouse::leave", function ()
+        mouse_over = false
         hide_timer:start()
     end)
 
-    client.connect_signal("request::border", function ()
+    client.connect_signal("focus", function ()
+        hide_timer:start()
+    end)
+    client.connect_signal("unfocus", function ()
         hide_timer:start()
     end)
 
