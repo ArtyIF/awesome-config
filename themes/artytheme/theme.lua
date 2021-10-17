@@ -58,7 +58,6 @@ else
     theme.bg_focus      = chosen_palette.color_900 .. "BF"
 end
 theme.bg_urgent     = chosen_palette.color_500
-theme.bg_minimize   = string.sub(theme.bg_focus, 1, 7) .. "3F"
 theme.bg_systray    = string.sub(theme.bg_normal, 1, 7)
 
 theme.fg_normal     = "#E5E5E5"
@@ -77,7 +76,9 @@ theme.fg_systray    = theme.fg_normal
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
-theme.tasklist_bg_normal = "#00000000"
+theme.tasklist_bg_normal = string.sub(theme.bg_focus, 1, 7) .. "3F"
+theme.tasklist_bg_focus = theme.bg_focus
+theme.tasklist_bg_minimize = string.sub(theme.bg_focus, 1, 7) .. "1F"
 theme.taglist_bg_occupied = theme.bg_minimize
 theme.systray_icon_spacing = 4
 theme.hotkeys_modifiers_fg = chosen_palette.color_900
