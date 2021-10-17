@@ -11,7 +11,7 @@ this.toggle_minimize = require("components.widgets.toggle_minimize")
 function this.create_bar(s)
     local bar_height = 64
     if COMPACT_MODE then
-        bar_height = 24
+        bar_height = 32
     end
     local bar = awful.wibar({ position = "bottom", screen = s, height = bar_height, ontop = true })
     bar.y = s.geometry.height - 1
