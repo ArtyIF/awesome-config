@@ -13,13 +13,16 @@ function this.signal_callback(c)
         notification_text = notification_text .. "\n" .. "Role: " .. c.role
     end
 
-    if c.size_hints.program_position then
-        notification_text = notification_text .. "\n" .. "Program Position Hint: (" .. c.size_hints.program_position.x .. ", " .. c.size_hints.program_position.y .. ")"
+    if c.size_hints then
+        local size_hints_text = "\nSize Hints:\n"
+        for key, value in pairs(c.size_hints) do
+            size_hints_text = size_hints_text .. key .. ": " .. tostring(value) .. "\n"
+        end
+        notification_text = notification_text .. "\n" .. size_hints_text
     end
 
-    if c.size_hints.program_size then
-        notification_text = notification_text .. "\n" .. "Program Size Hint: (" .. c.size_hints.program_position.width .. ", " .. c.size_hints.program_position.height .. ")"
-    end
+    notification_text = notification_text .. "\n" .. "Fullscreen: " .. tostring(c.fullscreen)
+
     naughty.notification({
         title = c.name .. " (" .. c.class .. ")",
         text = notification_text
@@ -28,6 +31,7 @@ end
 
 function this.connect_signals()
     client.connect_signal("request::manage", this.signal_callback)
+    client.connect_signal("request::geometry", this.signal_callback)
 end
 
 return this
