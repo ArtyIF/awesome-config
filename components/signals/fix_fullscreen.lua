@@ -7,6 +7,10 @@ function this.signal_callback(c)
         c.width = c.screen.geometry.width
         c.height = c.screen.geometry.height
     end
+
+    if c.width >= c.screen.geometry.width and c.height >= c.screen.geometry.height and not c.fullscreen then
+        c.fullscreen = true
+    end
 end
 
 function this.connect_signals()
