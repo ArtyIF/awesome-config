@@ -27,7 +27,7 @@ function this.create_bar(s)
         bar:struts({ bottom = 0 })
     end
     local hide_timer = gears.timer({
-        timeout = 0.5,
+        timeout = 0.3,
         autostart = true,
         call_now = false,
         single_shot = true,
