@@ -14,21 +14,34 @@ function this.create_bar(s)
         bar_height = 32
     end
     local bar = awful.wibar({ position = "bottom", screen = s, height = bar_height, ontop = true })
-    bar.y = s.geometry.height - 1
+    bar.y = s.geometry.height - bar_height
     bar:struts({ bottom = 0 })
 
     local mouse_over = false
+    
+    local show_bar_callback = function ()
+        if client.focus == nil or mouse_over then
+            bar.y = s.geometry.height - bar_height
+        end
+        bar:struts({ bottom = 0 })
+    end
+    local show_timer = gears.timer({
+        timeout = 0.1,
+        autostart = false,
+        call_now = false,
+        single_shot = true,
+        callback = show_bar_callback
+    })
+
     local hide_bar_callback = function ()
         if client.focus ~= nil and not mouse_over then
             bar.y = s.geometry.height - 1
-        else
-            bar.y = s.geometry.height - bar_height
         end
         bar:struts({ bottom = 0 })
     end
     local hide_timer = gears.timer({
         timeout = 0.3,
-        autostart = true,
+        autostart = false,
         call_now = false,
         single_shot = true,
         callback = hide_bar_callback
@@ -36,20 +49,22 @@ function this.create_bar(s)
 
     bar:connect_signal("mouse::enter", function ()
         mouse_over = true
+        show_timer:start()
         hide_timer:stop()
-        bar.y = s.geometry.height - bar_height
-        bar:struts({ bottom = 0 })
     end)
     bar:connect_signal("mouse::leave", function ()
         mouse_over = false
+        show_timer:stop()
         hide_timer:start()
     end)
 
     client.connect_signal("focus", function ()
+        show_timer:stop()
         hide_timer:start()
     end)
     client.connect_signal("unfocus", function ()
-        hide_timer:start()
+        show_timer:start()
+        hide_timer:stop()
     end)
 
     bar:setup {
