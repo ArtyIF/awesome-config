@@ -57,7 +57,7 @@ else
     theme.bg_normal     = "#171717BF"
     theme.bg_focus      = chosen_palette.color_900 .. "BF"
 end
-theme.bg_urgent     = chosen_palette.color_500
+theme.bg_urgent     = possible_palettes[1].color_300
 theme.bg_systray    = string.sub(theme.bg_normal, 1, 7)
 
 theme.fg_normal     = "#E5E5E5"
@@ -167,7 +167,7 @@ theme.layout_cornerse = theme_path.."layouts/cornersew.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-    32, theme.bg_urgent, theme.fg_urgent
+    32, chosen_palette.color_500, string.sub(theme.bg_normal, 1, 7)
 )
 
 -- Define the icon theme for application icons. If not set then the icons
