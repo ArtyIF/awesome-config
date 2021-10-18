@@ -40,22 +40,26 @@ this.buttons = gears.table.join(
 )
 
 this.template = {
-    nil,
-    {
-        awful.widget.clienticon,
-        left = theme_vars.titlebar_margins * 2,
-        right = theme_vars.titlebar_margins * 2,
-        top = theme_vars.titlebar_margins,
-        bottom = theme_vars.titlebar_margins - 2,
-        widget  = wibox.container.margin,
-    },
     {
         nil,
-        id     = 'background_role',
-        forced_height = 2,
-        widget = wibox.container.background,
+        {
+            awful.widget.clienticon,
+            left = theme_vars.titlebar_margins * 2,
+            right = theme_vars.titlebar_margins * 2,
+            top = theme_vars.titlebar_margins,
+            bottom = theme_vars.titlebar_margins - 2,
+            widget  = wibox.container.margin,
+        },
+        {
+            nil,
+            id     = 'background_role',
+            forced_height = 2,
+            widget = wibox.container.background,
+        },
+        layout = wibox.layout.align.vertical,
     },
-    layout = wibox.layout.align.vertical
+    bg = theme_vars.bg_minimize,
+    widget = wibox.container.background,
 }
 
 this.filter = awful.widget.tasklist.filter.currenttags
