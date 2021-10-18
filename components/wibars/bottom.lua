@@ -18,7 +18,7 @@ function this.create_bar(s)
     bar:struts({ bottom = 0 })
 
     local mouse_over = false
-    
+
     local show_bar_callback = function ()
         if client.focus == nil or mouse_over then
             bar.y = s.geometry.height - bar_height

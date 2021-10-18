@@ -31,6 +31,7 @@ function this.create_widget(s)
 
     client.connect_signal("focus", function ()
         this.minimized = false
+        toggle_minimize.bg = beautiful.get().tasklist_bg_minimize
     end)
 
     return toggle_minimize
