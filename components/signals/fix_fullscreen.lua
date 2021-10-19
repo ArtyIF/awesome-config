@@ -1,14 +1,8 @@
 local this = {}
 
 function this.signal_callback(c)
-    if c.fullscreen or c.type == "fullscreen" then
-        c.x = 0
-        c.y = 0
-        c.width = c.screen.geometry.width
-        c.height = c.screen.geometry.height
-    end
-
-    if c.width >= c.screen.geometry.width and c.height >= c.screen.geometry.height and not c.fullscreen then
+    -- todo: ignore steam, since, despite matching all those criteria (it uses CSD), it is not, in fact, fullscreen
+    if c.requests_no_titlebar and c.width >= c.screen.geometry.width and c.height >= c.screen.geometry.height and not c.fullscreen then
         c.fullscreen = true
     end
 end
