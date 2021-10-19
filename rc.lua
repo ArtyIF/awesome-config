@@ -62,6 +62,7 @@ local titlebar = require("components.signals.titlebar")
 local fix_fullscreen = require("components.signals.fix_fullscreen")
 local debug_notification = require("components.signals.debug_notification")
 local reverse_window_order = require("components.signals.reverse_window_order")
+local rounded_corners = require("components.signals.rounded_corners")
 
 local terminal = "konsole"
 
@@ -324,6 +325,7 @@ wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
 --debug_notification.connect_signals()
 reverse_window_order.connect_signals()
+rounded_corners.connect_signals()
 -- }}}
 
 awful.spawn.spawn("easyeffects --gapplication-service", false)
