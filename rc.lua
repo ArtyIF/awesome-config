@@ -325,7 +325,7 @@ wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
 --debug_notification.connect_signals()
 reverse_window_order.connect_signals()
---rounded_corners.connect_signals()
+rounded_corners.connect_signals()
 -- }}}
 
 awful.spawn.spawn("easyeffects --gapplication-service", false)
