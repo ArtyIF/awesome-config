@@ -93,11 +93,25 @@ function this.build_menu()
         end
 
         table.sort(this.menus.apps, function (a, b) return string.byte(a[1]) < string.byte(b[1]) end)
-        table.insert(this.menus.apps, 1, { "Favorites", this.menus.favorites })
-
         for _, category in ipairs(this.menus.apps) do
-            table.sort(category[2], function (a, b) return string.byte(a[1]) < string.byte(b[1]) end) -- todo: sort favorites differently
+            table.sort(category[2], function (a, b) return string.byte(a[1]) < string.byte(b[1]) end)
         end
+
+        table.sort(this.menus.favorites, function (a, b)
+            local a_index = 0
+            local b_index = 0
+            for index, value in ipairs(this.favorite_items) do
+                if a[1] == value then
+                    a_index = index
+                elseif b[1] == value then
+                    b_index = index
+                end
+            end
+
+            return a_index < b_index
+        end)
+
+        table.insert(this.menus.apps, 1, { "Favorites", this.menus.favorites })
 
 
         this.items = {}
