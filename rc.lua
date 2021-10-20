@@ -64,7 +64,7 @@ local debug_notification = require("components.signals.debug_notification")
 local reverse_window_order = require("components.signals.reverse_window_order")
 local rounded_corners = require("components.signals.rounded_corners")
 
-local terminal = "konsole"
+local terminal = "alacritty"
 
 -- for future
 local function run_in_terminal(command)
