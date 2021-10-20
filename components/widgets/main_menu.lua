@@ -27,7 +27,7 @@ local this = {
         },
         system = {
             { "Upgrade", function()
-                awful.spawn.spawn("alacritty yay -Syu --devel")
+                awful.spawn.spawn("alacritty -e yay -Syu --devel")
             end },
         },
         session = {
