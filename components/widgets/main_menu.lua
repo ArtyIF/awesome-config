@@ -27,25 +27,7 @@ local this = {
         },
         system = {
             { "Upgrade", function()
-                awful.spawn.easy_async("yay -Syu --devel --noconfirm --color=never --sudo=pkexec", function (stdout, stderr, _, exitcode)
-                    if stdout:match("==> depmod") then
-                        local kernel_update_reboot_action = naughty.action({ name = "Reboot" })
-                        kernel_update_reboot_action:connect_signal("invoked", function ()
-                            awful.spawn.spawn("systemctl reboot", false)
-                        end)
-                        naughty.notification({ title = "Kernel or its modules were updated", text = "Something was updated that caused Linux kernel modules to be rebuilt, either the modules or the kernel itself. It's best to reboot your computer right now.", urgency = "critical", actions = { kernel_update_reboot_action } })
-                    end
-                    if exitcode == 0 then
-                        local match_upgraded_packages = stdout:match("Packages %((%d*)%)")
-                        if not match_upgraded_packages then
-                            naughty.notification({ title = "System already up to date", text = "No packages were upgraded." })
-                        else
-                            naughty.notification({ title = "Upgrade successful", text = match_upgraded_packages .. " packages were upgraded." })
-                        end
-                    else
-                        naughty.notification({ title = "Upgrade failed!", text = "Something went wrong, exit code " .. exitcode .. ".\n\n" .. stderr:sub(1, stderr:len() - 1), urgency = "critical" })
-                    end
-                end)
+                awful.spawn.spawn("alacritty yay -Syu --devel")
             end },
         },
         session = {
