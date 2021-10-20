@@ -329,8 +329,8 @@ rounded_corners.connect_signals()
 -- }}}
 
 awful.spawn.spawn("easyeffects --gapplication-service", false)
-awful.spawn.spawn("light-locker --lock-after-screensaver=900 --late-locking --lock-on-lid", false)
-awful.spawn.with_shell("sleep 1; xset s off") -- added sleep 1 because i think light-locker overrides it on start
+awful.spawn.spawn("light-locker --lock-after-screensaver=900 --late-locking --lock-on-lid", false) -- todo replace with something lighter and easier for configuration
+awful.spawn.with_shell("sleep 1; xset s off") -- does this even work???
 if PERFORMANCE_MODE then
     awful.spawn.spawn("picom --experimental-backends --config=" .. gears.filesystem.get_xdg_config_home() .. "awesome/picom/picom-barebones.conf", false)
 else
