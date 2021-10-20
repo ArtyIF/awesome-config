@@ -47,7 +47,7 @@ function this.build_menu()
         for id, category in pairs(menu_gen.all_categories) do
             table.insert(this.menus.apps, { id, {}, "/usr/share/icons/Adwaita++/categories/32/" .. category.icon_name .. ".svg" })
         end
-        
+
         for _, entry in pairs(entries) do
             for _, category in pairs(this.menus.apps) do
                 if category[1] == entry.category then
