@@ -154,11 +154,11 @@ theme = theme_assets.recolor_titlebar(theme, theme.bg_focus, "focus", nil, "acti
 theme = theme_assets.recolor_titlebar(theme, theme.bg_focus, "focus", "hover", nil)
 theme = theme_assets.recolor_titlebar(theme, theme.bg_focus, "focus", "press", nil)
 
--- close button
+--[[ -- close button
 theme.titlebar_close_button_normal_hover = gears.color.recolor_image(theme.titlebar_close_button_normal, theme.bg_focus)
 theme.titlebar_close_button_normal_press = gears.color.recolor_image(theme.titlebar_close_button_normal, theme.bg_focus)
 theme.titlebar_close_button_focus_hover  = gears.color.recolor_image(theme.titlebar_close_button_focus , theme.bg_focus)
-theme.titlebar_close_button_focus_press  = gears.color.recolor_image(theme.titlebar_close_button_focus , theme.bg_focus)
+theme.titlebar_close_button_focus_press  = gears.color.recolor_image(theme.titlebar_close_button_focus , theme.bg_focus) ]]
 
 theme.titlebar_margins = 8
 if COMPACT_MODE then
