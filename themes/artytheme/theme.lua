@@ -49,7 +49,7 @@ theme.hotkeys_font = "Cascadia Code " .. gtk_vars.font_size
 theme.hotkeys_description_font = theme.font
 theme.border_width = 0
 theme.titlebar_bg_focus = "#171717"
-theme.titlebar_fg_focus = "#dfdfdf"
+theme.titlebar_fg_focus = "#5fff7f"
 
 -- Variables set for theming notifications:
 -- notification_font
