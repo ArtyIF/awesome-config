@@ -48,7 +48,18 @@ theme.hotkeys_modifiers_fg = theme.bg_focus
 theme.hotkeys_font = "Cascadia Code " .. gtk_vars.font_size
 theme.hotkeys_description_font = theme.font
 theme.border_width = 0
-theme.titlebar_bg_focus = "#171717"
+theme.titlebar_bg_normal = "#1f1f1f"
+theme.titlebar_fg_normal = "#7f7f7f"
+--theme.titlebar_bg_focus = "#1f1f1f"
+theme.titlebar_bg_focus = {
+    type = "linear",
+    from = { 0, 0 },
+    to = { 0, 32 },
+    stops = {
+        { 0, "#1f1f1f" },
+        { 1, "#171717" }
+    }
+}
 theme.titlebar_fg_focus = "#dfdfdf"
 
 -- Variables set for theming notifications:
@@ -141,8 +152,8 @@ theme.icon_theme = "Yaru" -- todo: chnage once there's support for other types o
 -- right now only "###x###/category/icon" is supported, but, say, breeze uses "category/###/icon" (### is size dimension)
 
 -- unfocused colors
-theme = theme_assets.recolor_titlebar(theme, theme.fg_normal, "normal", nil, nil)
-theme = theme_assets.recolor_titlebar(theme, theme.fg_normal, "normal", nil, "inactive")
+theme = theme_assets.recolor_titlebar(theme, theme.titlebar_fg_normal, "normal", nil, nil)
+theme = theme_assets.recolor_titlebar(theme, theme.titlebar_fg_normal, "normal", nil, "inactive")
 theme = theme_assets.recolor_titlebar(theme, theme.bg_focus, "normal", nil, "active")
 theme = theme_assets.recolor_titlebar(theme, theme.bg_focus, "normal", "hover", nil)
 theme = theme_assets.recolor_titlebar(theme, theme.bg_focus, "normal", "press", nil)
