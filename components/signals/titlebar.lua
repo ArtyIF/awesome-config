@@ -14,8 +14,8 @@ local function get_dominant_color(c)
 
     local colors = {}
 
-    for x = 2, c_geometry.width - 4, 4 do
-        local top_part_buffer = gdk.pixbuf_get_from_surface(c_content, x, 2, 1, 1):get_pixels()
+    for x = 0, c_geometry.width - 1, 4 do
+        local top_part_buffer = gdk.pixbuf_get_from_surface(c_content, x, 0, 1, 1):get_pixels()
         local current_color = "#" .. top_part_buffer:gsub(".", function(col) return ("%02x"):format(col:byte()) end):sub(1, 6)
         if colors[current_color] then
             colors[current_color] = colors[current_color] + 1
