@@ -6,6 +6,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 -- theme handling library
 local beautiful = require("beautiful")
+local theme_vars = beautiful.get()
 -- menugen from menubar
 local menu_gen = require("menubar.menu_gen")
 local menu_utils = require("menubar.utils")
@@ -126,7 +127,7 @@ end
 function this.create_widget()
     -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
     this.button = wibox.container.margin(wibox.widget.imagebox(gears.filesystem.get_configuration_dir() .. "themes/artytheme/icons/menu.png"))
-    this.button.margins = beautiful.get().wibar_icon_margins
+    this.button.margins = theme_vars.wibar_icon_margins
     this.build_menu()
     return this.button
 end

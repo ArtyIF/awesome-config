@@ -1,5 +1,4 @@
 local wibox = require("wibox")
-local beautiful = require("beautiful")
 local theme_vars = require("beautiful").get()
 
 local this = {}
@@ -12,8 +11,8 @@ this.paste = require("components.widgets.paste")
 
 function this.create_widget(s)
     local margin = wibox.container.margin(nil, theme_vars.wibar_icon_margins, 0, 0, 0)
-    local bg = wibox.container.background(margin, beautiful.get().bg_systray)
-    bg.fg = beautiful.get().fg_systray
+    local bg = wibox.container.background(margin, theme_vars.bg_systray)
+    bg.fg = theme_vars.fg_systray
     margin:setup {
         layout = wibox.layout.fixed.horizontal,
         this.keyboard_layout.create_widget(),
