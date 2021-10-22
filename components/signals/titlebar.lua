@@ -37,6 +37,22 @@ local function get_dominant_color(c)
     return dom_color
 end
 
+local function get_gradient_color(col)
+    local r = tonumber(col:sub(2, 3), 16)
+    local g = tonumber(col:sub(4, 5), 16)
+    local b = tonumber(col:sub(6, 7), 16)
+
+    r = r + 8
+    g = g + 8
+    b = b + 8
+
+    if r > 255 then r = 255 end
+    if g > 255 then g = 255 end
+    if b > 255 then b = 255 end
+
+    return "#" .. string.format("%02x", r) .. string.format("%02x", g) .. string.format("%02x", b)
+end
+
 function this.signal_callback(c)
     -- buttons for the titlebar
     local buttons = gears.table.join(
@@ -57,48 +73,53 @@ function this.signal_callback(c)
 
     local titlebar_widgets = {
         {
-            wibox.container.margin(nil, theme_vars.titlebar_margins, 0, 0, 0),
-            wibox.container.margin(awful.titlebar.widget.iconwidget(c), 0, theme_vars.titlebar_margins / 2, theme_vars.titlebar_margins, theme_vars.titlebar_margins, nil, false),
-            awful.titlebar.widget.floatingbutton(c),
-            --awful.titlebar.widget.ontopbutton(c),
-            --awful.titlebar.widget.stickybutton(c),
-            layout = wibox.layout.fixed.horizontal
-        },
-        {
             {
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
+                wibox.container.margin(nil, theme_vars.titlebar_margins, 0, 0, 0),
+                wibox.container.margin(awful.titlebar.widget.iconwidget(c), 0, theme_vars.titlebar_margins / 2, theme_vars.titlebar_margins, theme_vars.titlebar_margins, nil, false),
+                awful.titlebar.widget.floatingbutton(c),
+                --awful.titlebar.widget.ontopbutton(c),
+                --awful.titlebar.widget.stickybutton(c),
+                layout = wibox.layout.fixed.horizontal
             },
-            buttons = buttons,
-            layout = wibox.layout.flex.horizontal
+            {
+                {
+                    align  = "center",
+                    widget = awful.titlebar.widget.titlewidget(c)
+                },
+                buttons = buttons,
+                layout = wibox.layout.flex.horizontal
+            },
+            {
+                awful.titlebar.widget.minimizebutton(c),
+                awful.titlebar.widget.maximizedbutton(c),
+                awful.titlebar.widget.closebutton(c),
+                layout = wibox.layout.fixed.horizontal()
+            },
+            layout = wibox.layout.align.horizontal,
         },
-        {
-            awful.titlebar.widget.minimizebutton(c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.closebutton(c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
+        bg = "transparent",
+        widget = wibox.container.background
     }
-    -- local titlebar_bg = wibox.container.background(titlebar_widgets, "#000000")
 
     awful.titlebar(c, { size = titlebar_size }):setup(titlebar_widgets)
 
     --[[ gears.timer({
-        timeout = 1,
+        timeout = 0.25,
         autostart = true,
         call_now = false,
         single_shot = true,
         callback = function ()
-            titlebar_bg.bg = {
+            local dom_color = get_dominant_color(c)
+            titlebar_widgets.bg = {
                 type = "linear",
                 from = { 0, 0 },
                 to = { 0, 32 },
                 stops = {
-                    { 0, "#1f1f1f" },
-                    { 1, get_dominant_color(c) }
+                    { 0, get_gradient_color(dom_color) },
+                    { 1, dom_color }
                 }
             }
+            awful.titlebar(c, { size = titlebar_size }):setup(titlebar_widgets)
         end
     }) ]]
 end
