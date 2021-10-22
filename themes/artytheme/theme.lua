@@ -48,18 +48,21 @@ theme.hotkeys_modifiers_fg = theme.bg_focus
 theme.hotkeys_font = "Cascadia Code " .. gtk_vars.font_size
 theme.hotkeys_description_font = theme.font
 theme.border_width = 0
-theme.titlebar_bg_normal = "#1f1f1f"
+theme.titlebar_bg_normal = "#171717"
 theme.titlebar_fg_normal = "#7f7f7f"
---theme.titlebar_bg_focus = "#1f1f1f"
-theme.titlebar_bg_focus = {
-    type = "linear",
-    from = { 0, 0 },
-    to = { 0, 32 },
-    stops = {
-        { 0, "#1f1f1f" },
-        { 1, "#171717" }
+if PERFORMANCE_MODE then
+    theme.titlebar_bg_focus = "#1f1f1f"
+else
+    theme.titlebar_bg_focus = {
+        type = "linear",
+        from = { 0, 0 },
+        to = { 0, 32 },
+        stops = {
+            { 0, "#1f1f1f" },
+            { 1, "#171717" }
+        }
     }
-}
+end
 theme.titlebar_fg_focus = "#dfdfdf"
 
 -- Variables set for theming notifications:
