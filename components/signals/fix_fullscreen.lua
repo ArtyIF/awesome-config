@@ -1,10 +1,19 @@
+local gears = require("grars")
+
 local this = {}
 
 function this.signal_callback(c)
-    -- todo: ignore steam, since, despite matching all those criteria (it uses CSD), it is not, in fact, fullscreen
-    if c.requests_no_titlebar and c.width >= c.screen.geometry.width and c.height >= c.screen.geometry.height and not c.fullscreen then
-        c.fullscreen = true
-    end
+    gears.timer({
+        timeout = 0.1,
+        autostart = true,
+        call_now = false,
+        single_shot = true,
+        callback = function()
+            if c.requests_no_titlebar and c.width >= c.screen.geometry.width and c.height >= c.screen.geometry.height and not c.fullscreen then
+                c.fullscreen = true
+            end
+        end
+    })
 end
 
 function this.connect_signals()
