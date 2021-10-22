@@ -17,7 +17,7 @@ local theme = {}
 
 theme.font = gtk_vars.font_family .. " " .. gtk_vars.font_size
 
-theme.bg_normal     = "#1f1f1f"
+theme.bg_normal     = "#171717"
 theme.bg_focus      = "#47bf5f"
 theme.bg_urgent     = "#ff7700"
 theme.bg_systray    = theme.bg_normal
@@ -51,7 +51,7 @@ theme.border_width = 0
 theme.titlebar_bg_normal = "#171717"
 theme.titlebar_fg_normal = "#7f7f7f"
 if PERFORMANCE_MODE then
-    theme.titlebar_bg_focus = "#1f1f1f"
+    theme.titlebar_bg_focus = "#171717"
 else
     theme.titlebar_bg_focus = {
         type = "linear",
@@ -114,10 +114,6 @@ theme.titlebar_maximized_button_normal_inactive = theme_path.."titlebar/maximize
 theme.titlebar_maximized_button_focus_inactive  = theme_path.."titlebar/maximized.png"
 theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized.png"
 theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized.png"
-
-theme.wallpaper = function(s)
-    return "#171717"
-end
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = theme_path.."layouts/fairhw.png"
