@@ -126,7 +126,7 @@ end
 
 function this.create_widget()
     -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
-    this.button = wibox.container.margin(wibox.widget.imagebox(gears.filesystem.get_configuration_dir() .. "themes/artytheme/icons/menu.png"))
+    this.button = wibox.container.margin(wibox.widget.imagebox(gears.filesystem.get_configuration_dir() .. "theme/icons/menu.png"))
     this.button.margins = theme_vars.wibar_icon_margins
     this.build_menu()
     return this.button

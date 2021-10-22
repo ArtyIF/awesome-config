@@ -11,7 +11,7 @@ local gears = require("gears")
 local naughty = require("naughty") -- debugging stuff
 
 local gfs = require("gears.filesystem")
-local theme_path = string.format("%s/.config/awesome/themes/%s/", os.getenv("HOME"), "artytheme")
+local theme_path = gears.filesystem.get_configuration_dir() .. "theme/"
 
 local theme = {}
 
@@ -116,14 +116,7 @@ theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized.
 theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized.png"
 
 theme.wallpaper = function(s)
-    local result = "/usr/share/backgrounds/gnome/VNC.png"
-    while result == "/usr/share/backgrounds/gnome/VNC.png" do
-        result = "/usr/share/backgrounds/gnome/" .. gfs.get_random_file_from_dir("/usr/share/backgrounds/gnome/", { "jpg", "png" })
-    end
-    return result
-    -- return "/usr/share/backgrounds/gnome/Loveles.jpg"
-    -- todo: replace with https://source.unsplash.com/1920x1080/?wallpaper
-    -- todo: use https://www.shadertoy.com/view/fdy3Wy to filter it maybe?
+    return "#171717"
 end
 
 -- You can use your own layout icons like this:

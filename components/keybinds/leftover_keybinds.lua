@@ -78,7 +78,7 @@ this.keybinds = gears.table.join(
                   end
               end,
               {description = "restore minimized", group = "client"}),
-              
+
     -- Menubar
     awful.key({ modkeys.super }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})

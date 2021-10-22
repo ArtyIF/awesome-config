@@ -43,7 +43,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "artytheme") -- modification of default theme
+local theme_path = gears.filesystem.get_configuration_dir() .. "theme/theme.lua"
 beautiful.init(theme_path)
 
 -- components
@@ -84,7 +84,7 @@ local function set_wallpaper(s)
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
         end
-        gears.wallpaper.maximized(wallpaper, s, false)
+        gears.wallpaper.set(wallpaper)
     end
 end
 

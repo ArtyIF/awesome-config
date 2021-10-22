@@ -39,8 +39,5 @@ Files that use the dependencies are also shown.
 - `discord` (messenger I often use)
 - `steam` (game store and launcher I and many others use)
 
-### Wallpapers
-- `gnome-backgrounds` (`themes/artytheme/theme.lua` => `rc.lua`)
-
 ### Other
 - `alacritty` (default terminal emulator, `rc.lua`)
