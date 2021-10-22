@@ -20,7 +20,7 @@ theme.font = gtk_vars.font_family .. " " .. gtk_vars.font_size
 theme.bg_normal     = "#1f1f1f"
 theme.bg_focus      = "#5fff7f"
 theme.bg_urgent     = "#ff7900"
-theme.bg_systray    = "#171717"
+theme.bg_systray    = theme.bg_normal
 theme.bg_minimize   = "#5fff7f0f"
 
 theme.fg_normal     = "#dfdfdf"

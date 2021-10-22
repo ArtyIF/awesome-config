@@ -6,7 +6,11 @@ local this = {}
 this.main_menu = require("components.widgets.main_menu")
 this.tag_list = require("components.widgets.tag_list")
 this.clock = require("components.widgets.clock")
-this.top_wibar_right_part = require("components.widgets.top_wibar_right_part")
+this.layout_box = require("components.widgets.layout_box")
+this.volume_control = require("components.widgets.volume_control")
+this.system_tray = require("components.widgets.system_tray")
+this.keyboard_layout = require("components.widgets.keyboard_layout")
+this.paste = require("components.widgets.paste")
 
 function this.create_bar(s)
     local bar_height = 32
@@ -23,7 +27,14 @@ function this.create_bar(s)
             widget = wibox.layout.align.horizontal,
         },
         this.clock.create_widget(),
-        this.top_wibar_right_part.create_widget(s)
+        {
+            layout = wibox.layout.fixed.horizontal,
+            this.keyboard_layout.create_widget(),
+            this.paste.create_widget(),
+            this.system_tray.create_widget(),
+            this.volume_control.create_widget(),
+            this.layout_box.create_widget(s),
+        }
     }
     return bar
 end
