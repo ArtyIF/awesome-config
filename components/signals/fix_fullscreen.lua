@@ -1,4 +1,4 @@
-local gears = require("grars")
+local gears = require("gears")
 
 local this = {}
 
@@ -9,7 +9,7 @@ function this.signal_callback(c)
         call_now = false,
         single_shot = true,
         callback = function()
-            if c.requests_no_titlebar and c.width >= c.screen.geometry.width and c.height >= c.screen.geometry.height and not c.fullscreen then
+            if c.valid and c.requests_no_titlebar and c.width >= c.screen.geometry.width and c.height >= c.screen.geometry.height and not c.fullscreen then
                 c.fullscreen = true
             end
         end
