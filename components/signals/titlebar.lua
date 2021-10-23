@@ -167,7 +167,7 @@ end
 
 function this.focus_signal_callback(c)
     gears.timer({
-        timeout = 0.1,
+        timeout = 0.01,
         autostart = true,
         call_now = false,
         single_shot = true,
