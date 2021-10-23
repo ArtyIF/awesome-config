@@ -16,10 +16,13 @@ local function get_dominant_color(c)
 
     local colors = {}
 
-    for x = 0, c_geometry.width - 1, 4 do
-        local top_bar_buffer = gdk.pixbuf_get_from_surface(c_content, x, 0, 1, 1)
-        local top_bar_pixels = top_bar_buffer:get_pixels()
-        local current_color = "#" .. top_bar_pixels:gsub(".", function(col) return ("%02x"):format(col:byte()) end):sub(1, 6)
+    local top_part_buffer = gdk.pixbuf_get_from_surface(c_content, 0, 0, c_geometry.width, 1)
+    local top_part_pixels = top_part_buffer:get_pixels()
+    local top_part_stride = top_part_buffer:get_n_channels() * 2
+    local top_part_string = top_part_pixels:gsub(".", function(col) return ("%02x"):format(col:byte()) end)
+
+    for x = 0, (c_geometry.width * top_part_stride) - 1, top_part_stride do
+        local current_color = "#" .. top_part_string:sub(x + 1, x + top_part_stride)
         if colors[current_color] then
             colors[current_color] = colors[current_color] + 1
         else
@@ -29,6 +32,7 @@ local function get_dominant_color(c)
 
     local dom_color = "#000000"
     local dom_color_times = 0
+
     for color, times in pairs(colors) do
         if times > dom_color_times then
             dom_color = color
@@ -108,6 +112,8 @@ function this.signal_callback(c)
     this_titlebar:setup(titlebar_widgets)
     titlebars[c.window] = this_titlebar
 
+    get_dominant_color(c)
+
     titlebar_timers[c.window] = gears.timer({
         timeout = 0.25,
         autostart = true,
@@ -131,8 +137,8 @@ end
 function this.unmanage_signal_callback(c)
     if titlebar_timers[c.window] then
         titlebar_timers[c.window]:stop()
-        titlebar_timers:remove(c.window)
-        titlebars:remove(c.window)
+        titlebar_timers[c.window] = nil
+        titlebars[c.window] = nil
     end
 end
 
