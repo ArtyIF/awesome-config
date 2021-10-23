@@ -1,18 +1,21 @@
 local this = {}
 
 this.light_color = "#d7d7d7"
+this.middle_color = "#7f7f7f"
 this.dark_color = "#171717"
 
 if not LIGHT_MODE then
-    this.base.bg = this.dark_color
-    this.accent.bg = "#ff7f00"
-    this.urgent.bg = "#7f00ff"
+    this.base_bg = this.dark_color
+    this.accent_bg = "#ff7f00"
+    this.urgent_bg = "#7f00ff"
     this.icon_theme = "oomox-ArtyTheme-Dark"
+    this.wallpaper = "#101010"
 else
-    this.base.bg = this.light_color
-    this.accent.bg = "#bf772f"
-    this.urgent.bg = "#772fbf"
+    this.base_bg = this.light_color
+    this.accent_bg = "#bf772f"
+    this.urgent_bg = "#772fbf"
     this.icon_theme = "oomox-ArtyTheme"
+    this.wallpaper = "#e0e0e0"
 end
 
 function this.get_gradient_color(base_color)
@@ -63,8 +66,8 @@ function this.get_contrast_color(bg_color)
     end
 end
 
-this.base.fg = this.get_contrast_color(this.base.bg)
-this.accent.fg = this.get_contrast_color(this.accent.bg)
-this.urgent.fg = this.get_contrast_color(this.urgent.bg)
+this.base_fg = this.get_contrast_color(this.base_bg)
+this.accent_fg = this.get_contrast_color(this.accent_bg)
+this.urgent_fg = this.get_contrast_color(this.urgent_bg)
 
 return this
