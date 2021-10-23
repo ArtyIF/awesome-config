@@ -260,3 +260,14 @@ if not os.execute("pgrep thunderbird") then
     awful.spawn.spawn("kdocker -d 60 thunderbird", false) -- make sure to install Simple Startup Minimizer (https://addons.thunderbird.net/en-US/thunderbird/addon/simple-startup-minimizer/) and Minimize On Close (https://addons.thunderbird.net/en-US/thunderbird/addon/minimize-on-close/)
 end
 awful.spawn.spawn("nm-applet", false)
+
+-- garbage collection
+gears.timer({
+    timeout = 5,
+    autostart = true,
+    call_now = false,
+    single_shot = false,
+    callback = function ()
+        collectgarbage("collect")
+    end
+})

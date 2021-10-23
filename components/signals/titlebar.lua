@@ -3,10 +3,12 @@ local gears = require("gears")
 local wibox = require("wibox")
 local naughty = require("naughty")
 local theme_vars = require("beautiful").get()
+local gdk = require("lgi").Gdk
 
 local this = {}
 
-local gdk = require("lgi").Gdk
+local titlebar_timers = {}
+local titlebars = {}
 
 local function get_dominant_color(c)
     local c_content = gears.surface(c.content)
@@ -15,8 +17,9 @@ local function get_dominant_color(c)
     local colors = {}
 
     for x = 0, c_geometry.width - 1, 4 do
-        local top_part_buffer = gdk.pixbuf_get_from_surface(c_content, x, 0, 1, 1):get_pixels()
-        local current_color = "#" .. top_part_buffer:gsub(".", function(col) return ("%02x"):format(col:byte()) end):sub(1, 6)
+        local top_bar_buffer = gdk.pixbuf_get_from_surface(c_content, x, 0, 1, 1)
+        local top_bar_pixels = top_bar_buffer:get_pixels()
+        local current_color = "#" .. top_bar_pixels:gsub(".", function(col) return ("%02x"):format(col:byte()) end):sub(1, 6)
         if colors[current_color] then
             colors[current_color] = colors[current_color] + 1
         else
@@ -33,7 +36,6 @@ local function get_dominant_color(c)
         end
     end
 
-    --naughty.notification({ title = c.name, text = dom_color })
     return dom_color
 end
 
@@ -97,20 +99,23 @@ function this.signal_callback(c)
             },
             layout = wibox.layout.align.horizontal,
         },
+        id = "titlebar_background_domcolor",
         bg = "transparent",
         widget = wibox.container.background
     }
 
-    awful.titlebar(c, { size = titlebar_size }):setup(titlebar_widgets)
+    local this_titlebar = awful.titlebar(c, { size = titlebar_size })
+    this_titlebar:setup(titlebar_widgets)
+    titlebars[c.window] = this_titlebar
 
-    --[[ gears.timer({
+    titlebar_timers[c.window] = gears.timer({
         timeout = 0.25,
         autostart = true,
         call_now = false,
-        single_shot = true,
+        single_shot = false,
         callback = function ()
             local dom_color = get_dominant_color(c)
-            titlebar_widgets.bg = {
+            titlebars[c.window].titlebar_background_domcolor.bg = {
                 type = "linear",
                 from = { 0, 0 },
                 to = { 0, 32 },
@@ -119,13 +124,21 @@ function this.signal_callback(c)
                     { 1, dom_color }
                 }
             }
-            awful.titlebar(c, { size = titlebar_size }):setup(titlebar_widgets)
         end
-    }) ]]
+    })
+end
+
+function this.unmanage_signal_callback(c)
+    if titlebar_timers[c.window] then
+        titlebar_timers[c.window]:stop()
+        titlebar_timers:remove(c.window)
+        titlebars:remove(c.window)
+    end
 end
 
 function this.connect_signals()
     client.connect_signal("request::titlebars", this.signal_callback)
+    client.connect_signal("unmanage", this.unmanage_signal_callback)
 end
 
 return this
