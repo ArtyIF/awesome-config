@@ -54,6 +54,11 @@ local function get_dominant_color(c)
         end
     end
 
+    if dom_color == "#00000000" then
+        return "#171717"
+    end
+    dom_color = dom_color:sub(1, 7)
+
     return dom_color
 end
 
@@ -116,6 +121,7 @@ function this.signal_callback(c)
     end
 
     local this_titlebar = awful.titlebar(c, { size = titlebar_size })
+    -- todo: adjust text and buttons color for icons
     this_titlebar:setup({
         {
             {
