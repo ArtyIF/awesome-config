@@ -1,3 +1,5 @@
+local gears_fs = require("gears.filesystem")
+
 local this = {}
 
 this.light_color = "#d7d7d7"
@@ -16,6 +18,13 @@ else
     this.urgent_bg = "#772fbf"
     this.icon_theme = "oomox-ArtyTheme"
     this.wallpaper = "#e0e0e0"
+end
+
+this.full_icon_theme_path = ""
+if gears_fs.dir_readable(os.getenv("HOME") .. "/.icons/" .. this.icon_theme) then
+    this.full_icon_theme_path = os.getenv("HOME") .. "/.icons/" .. this.icon_theme .. "/"
+elseif gears_fs.dir_readable("/usr/share/icons/" .. this.icon_theme) then
+    this.full_icon_theme_path = "/usr/share/icons/" .. this.icon_theme .. "/"
 end
 
 function this.get_gradient_color(base_color)

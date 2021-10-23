@@ -4,6 +4,7 @@ local awful = require("awful")
 -- widget and layout library
 local wibox = require("wibox")
 local theme_vars = require("beautiful").get()
+local colors = require("theme.colors")
 
 local this = {}
 
@@ -12,9 +13,10 @@ this.get_volume_arg = "get-sink-volume 0"
 this.get_mute_arg = "get-sink-mute 0"
 this.up_arg = "set-sink-volume 0 +5%"
 this.down_arg = "set-sink-volume 0 -5%"
+this.max_vol_arg = "set-sink-volume 0 100%"
 this.toggle_arg = "set-sink-mute 0 toggle"
 
-this.icons_path = "/usr/share/icons/breeze-dark/status/symbolic/"
+this.icons_path = colors.full_icon_theme_path .. "symbolic/status/"
 this.icon_high = "audio-volume-high-symbolic.svg"
 this.icon_medium = "audio-volume-medium-symbolic.svg"
 this.icon_low = "audio-volume-low-symbolic.svg"
@@ -29,6 +31,10 @@ function this.callback(volume, muted)
     if not volume then
         return
     end
+    if volume > 100 then
+        this.execute_and_get_output(this.cmd .. this.max_vol_arg)
+        return this.get()
+    end
     if muted or volume == 0 then
         this.image_widget.image = this.icons_path .. this.icon_muted
     elseif volume <= 33 then
@@ -38,7 +44,7 @@ function this.callback(volume, muted)
     else
         this.image_widget.image = this.icons_path .. this.icon_high
     end
-    this.text_widget.text = volume .. "%"
+    this.text_widget.text = " " .. volume .. "%"
 end
 
 function this.execute_and_get_output(cmd)
