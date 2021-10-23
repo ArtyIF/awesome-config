@@ -1,4 +1,4 @@
-local gears_fs = require("gears.filesystem")
+local gears = require("gears")
 
 local this = {}
 
@@ -21,9 +21,9 @@ else
 end
 
 this.full_icon_theme_path = ""
-if gears_fs.dir_readable(os.getenv("HOME") .. "/.icons/" .. this.icon_theme) then
+if gears.filesystem.dir_readable(os.getenv("HOME") .. "/.icons/" .. this.icon_theme) then
     this.full_icon_theme_path = os.getenv("HOME") .. "/.icons/" .. this.icon_theme .. "/"
-elseif gears_fs.dir_readable("/usr/share/icons/" .. this.icon_theme) then
+elseif gears.filesystem.dir_readable("/usr/share/icons/" .. this.icon_theme) then
     this.full_icon_theme_path = "/usr/share/icons/" .. this.icon_theme .. "/"
 end
 
@@ -78,5 +78,9 @@ end
 this.base_fg = this.get_contrast_color(this.base_bg)
 this.accent_fg = this.get_contrast_color(this.accent_bg)
 this.urgent_fg = this.get_contrast_color(this.urgent_bg)
+
+function this.recolor_icon(icon)
+    return gears.color.recolor_image(icon, this.base_fg)
+end
 
 return this

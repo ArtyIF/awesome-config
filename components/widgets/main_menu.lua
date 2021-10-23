@@ -9,12 +9,10 @@ local beautiful = require("beautiful")
 local theme_vars = beautiful.get()
 -- menugen from menubar
 local menu_gen = require("menubar.menu_gen")
-local menu_utils = require("menubar.utils")
 -- hotkeys popup, we might not need it
 local hotkeys_popup = require("awful.hotkeys_popup")
 
-
-local naughty = require("naughty")
+local colors = require("theme.colors")
 
 local this = {
     favorite_items = { "Firefox", "Nemo", "Alacritty", "Discord", "Steam (Runtime)" },
@@ -126,7 +124,7 @@ end
 
 function this.create_widget()
     -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
-    this.button = wibox.container.margin(wibox.widget.imagebox(gears.filesystem.get_configuration_dir() .. "theme/icons/menu.png"))
+    this.button = wibox.container.margin(wibox.widget.imagebox(colors.recolor_icon(gears.filesystem.get_configuration_dir() .. "theme/icons/menu.png")))
     this.button.margins = theme_vars.wibar_icon_margins
     this.build_menu()
     return this.button
