@@ -7,6 +7,7 @@ local theme_vars = require("beautiful").get()
 local this = {}
 
 this.task_list = require("components.widgets.task_list")
+this.task_list_new = require("components.widgets.task_list_new")
 this.toggle_minimize = require("components.widgets.toggle_minimize")
 
 function this.create_bar(s)
@@ -69,7 +70,8 @@ function this.create_bar(s)
         layout = wibox.layout.align.horizontal,
         expand = "none",
         nil,
-        this.task_list.create_widget(s),
+        --this.task_list.create_widget(s),
+        this.task_list_new.create_widget(s),
         this.toggle_minimize.create_widget(s),
     }
     return bar
