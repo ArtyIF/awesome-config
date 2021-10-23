@@ -40,6 +40,8 @@ local function get_dominant_color(c)
         end
     end
 
+    collectgarbage("collect")
+
     return dom_color
 end
 
@@ -112,8 +114,8 @@ function this.signal_callback(c)
     this_titlebar:setup(titlebar_widgets)
     titlebars[c.window] = this_titlebar
 
-    --[[ titlebar_timers[c.window] = gears.timer({
-        timeout = 0.25,
+    titlebar_timers[c.window] = gears.timer({
+        timeout = 0.5,
         autostart = true,
         call_now = false,
         single_shot = false,
@@ -129,7 +131,7 @@ function this.signal_callback(c)
                 }
             }
         end
-    }) ]]
+    })
 end
 
 function this.unmanage_signal_callback(c)
