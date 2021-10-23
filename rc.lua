@@ -76,20 +76,12 @@ end
 menubar.utils.terminal = terminal
 -- }}}
 
-local function set_wallpaper(s)
-    awful.wallpaper {
-        screen = s,
-        bg     = "#101010",
-        widget = nil
-    }
-end
-
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
+screen.connect_signal("property::geometry", beautiful.wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    set_wallpaper(s)
+    beautiful.wallpaper(s)
 
     s.top_wibar = top_wibar.create_bar(s)
     s.bottom_wibar = bottom_wibar.create_bar(s)
