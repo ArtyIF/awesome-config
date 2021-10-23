@@ -20,7 +20,7 @@ local function get_dominant_color(c)
     local top_part_stride = 0
 
     do
-        local top_part_buffer = gdk.pixbuf_get_from_surface(c_content, 0, 0, c_geometry.width, 1)
+        local top_part_buffer = gdk.pixbuf_get_from_surface(c_content, 0, 3, c_geometry.width, 1)
         if top_part_buffer then
             local top_part_pixels = top_part_buffer:get_pixels()
             top_part_stride = top_part_buffer:get_n_channels() * 2
