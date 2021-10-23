@@ -43,7 +43,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-local theme_path = gears.filesystem.get_configuration_dir() .. "theme/theme_dark.lua"
+local theme_path = gears.filesystem.get_configuration_dir() .. "theme/theme.lua"
 beautiful.init(theme_path)
 
 -- components
