@@ -1,2 +1,3 @@
 COMPACT_MODE = false
 PERFORMANCE_MODE = false
+LIGHT_MODE = false
