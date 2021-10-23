@@ -82,7 +82,7 @@ local function get_gradient_color(col)
 end
 
 local function set_titlebar_color(c)
-    if not c.minimized and not c.hidden then
+    if titlebars[c.window] and not c.minimized and not c.hidden then
         local dom_color = get_dominant_color(c)
         titlebars[c.window].titlebar_background_domcolor.bg = {
             type = "linear",
