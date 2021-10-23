@@ -54,7 +54,7 @@ local function get_dominant_color(c)
     end
 
     if dom_color == "#00000000" then
-        return "#171717"
+        return theme_vars.bg_normal
     end
 
     return dom_color
@@ -148,7 +148,15 @@ function this.signal_callback(c)
             layout = wibox.layout.align.horizontal,
         },
         id = "titlebar_background_domcolor",
-        bg = "transparent",
+        bg = {
+            type = "linear",
+            from = { 0, 0 },
+            to = { 0, 32 },
+            stops = {
+                { 0, get_gradient_color(theme_vars.bg_normal) },
+                { 1, theme_vars.bg_normal }
+            }
+        },
         widget = wibox.container.background
     })
     titlebars[c.window] = this_titlebar
