@@ -10,7 +10,7 @@ local this = {}
 local titlebar_timers = {}
 local titlebars = {}
 
-local function get_dominant_color(c)
+--[[ local function get_dominant_color(c)
     local c_content = gears.surface(c.content)
     local c_geometry = c:geometry()
 
@@ -100,7 +100,7 @@ local function set_titlebar_color(c)
         end
         dom_color = nil
     end
-end
+end ]]
 
 function this.signal_callback(c)
     -- buttons for the titlebar
@@ -152,33 +152,33 @@ function this.signal_callback(c)
         bg = "transparent",
         widget = wibox.container.background
     })
-    titlebars[c.window] = this_titlebar
+    --titlebars[c.window] = this_titlebar
 
-    titlebar_timers[c.window] = gears.timer({
+    --[[ titlebar_timers[c.window] = gears.timer({
         timeout = 0.5,
         autostart = true,
         call_now = false,
         single_shot = false,
         callback = function () set_titlebar_color(c) end
-    })
+    }) ]]
 end
 
 function this.unmanage_signal_callback(c)
-    if titlebar_timers[c.window] then
+    --[[ if titlebar_timers[c.window] then
         titlebar_timers[c.window]:stop()
         titlebar_timers[c.window] = nil
         titlebars[c.window] = nil
-    end
+    end ]]
 end
 
 function this.focus_signal_callback(c)
-    gears.timer({
-        timeout = 0.01,
+    --[[ gears.timer({
+        timeout = 0.05,
         autostart = true,
         call_now = false,
         single_shot = true,
         callback = function () set_titlebar_color(c) end
-    })
+    }) ]]
 end
 
 function this.connect_signals()
