@@ -7,10 +7,9 @@ local gdk = require("lgi").Gdk
 
 local this = {}
 
-local titlebar_timers = {}
 local titlebars = {}
 
---[[ local function get_dominant_color(c)
+local function get_dominant_color(c)
     local c_content = gears.surface(c.content)
     local c_geometry = c:geometry()
 
@@ -85,22 +84,18 @@ end
 local function set_titlebar_color(c)
     if not c.minimized and not c.hidden then
         local dom_color = get_dominant_color(c)
-        if client.focus == c then
-            titlebars[c.window].titlebar_background_domcolor.bg = {
-                type = "linear",
-                from = { 0, 0 },
-                to = { 0, 32 },
-                stops = {
-                    { 0, get_gradient_color(dom_color) },
-                    { 1, dom_color }
-                }
+        titlebars[c.window].titlebar_background_domcolor.bg = {
+            type = "linear",
+            from = { 0, 0 },
+            to = { 0, 32 },
+            stops = {
+                { 0, get_gradient_color(dom_color) },
+                { 1, dom_color }
             }
-        else
-            titlebars[c.window].titlebar_background_domcolor.bg = dom_color
-        end
+        }
         dom_color = nil
     end
-end ]]
+end
 
 function this.signal_callback(c)
     -- buttons for the titlebar
@@ -152,39 +147,34 @@ function this.signal_callback(c)
         bg = "transparent",
         widget = wibox.container.background
     })
-    --titlebars[c.window] = this_titlebar
+    titlebars[c.window] = this_titlebar
 
-    --[[ titlebar_timers[c.window] = gears.timer({
-        timeout = 0.5,
-        autostart = true,
-        call_now = false,
-        single_shot = false,
-        callback = function () set_titlebar_color(c) end
-    }) ]]
-end
-
-function this.unmanage_signal_callback(c)
-    --[[ if titlebar_timers[c.window] then
-        titlebar_timers[c.window]:stop()
-        titlebar_timers[c.window] = nil
-        titlebars[c.window] = nil
-    end ]]
-end
-
-function this.focus_signal_callback(c)
-    --[[ gears.timer({
-        timeout = 0.05,
+    gears.timer({
+        timeout = 0.1,
         autostart = true,
         call_now = false,
         single_shot = true,
         callback = function () set_titlebar_color(c) end
-    }) ]]
+    })
+end
+
+function this.manage_signal_callback(c)
+    gears.timer({
+        timeout = 0.1,
+        autostart = true,
+        call_now = false,
+        single_shot = true,
+        callback = function () set_titlebar_color(c) end
+    })
+end
+
+function this.unmanage_signal_callback(c)
+    titlebars[c.window] = nil
 end
 
 function this.connect_signals()
     client.connect_signal("request::titlebars", this.signal_callback)
-    client.connect_signal("focus", this.focus_signal_callback)
-    client.connect_signal("unfocus", this.focus_signal_callback)
+    client.connect_signal("request::manage", this.manage_signal_callback)
     client.connect_signal("request::unmanage", this.unmanage_signal_callback)
 end
 
