@@ -4,13 +4,14 @@ local awful = require("awful")
 -- widget and layout library
 local wibox = require("wibox")
 local theme_vars = require("beautiful").get()
+local colors = require("theme.colors")
 
 local this = {}
 
 this.cmd = "copyq "
 this.ui_arg = "toggle"
 
-this.icon = gears.filesystem.get_configuration_dir() .. "theme/icons/clipboard.png"
+this.icon = colors.recolor_icon(gears.filesystem.get_configuration_dir() .. "theme/icons/clipboard.png")
 
 this.margin_top = theme_vars.wibar_icon_margins
 this.margin_right = theme_vars.wibar_icon_margins / 2
@@ -32,7 +33,7 @@ function this.create_widget()
             this.ui()
         end)
     })
-    
+
     return this.margin
 end
 
