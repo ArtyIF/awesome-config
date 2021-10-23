@@ -32,7 +32,7 @@ theme.fg_urgent     = colors.urgent_fg
 theme.fg_minimize   = colors.base_fg
 theme.fg_systray    = colors.accent_fg
 
-theme.tasklist_bg_normal = colors.accent_bg .. "3F"
+theme.tasklist_bg_normal = colors.accent_bg .. "7f"
 theme.tasklist_bg_focus = colors.accent_bg
 theme.tasklist_bg_minimize = "#00000000"
 
