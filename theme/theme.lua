@@ -173,6 +173,13 @@ if COMPACT_MODE then
     theme.wibar_icon_margins = 3
 end
 
+theme.top_wibar_height = 32
+theme.bottom_wibar_height = 64
+if COMPACT_MODE then
+    theme.top_wibar_height = 24
+    theme.bottom_wibar_height = 48
+end
+
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

@@ -2,6 +2,7 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local naughty = require("naughty")
+local theme_vars = require("beautiful").get()
 
 local this = {}
 
@@ -9,10 +10,7 @@ this.task_list = require("components.widgets.task_list")
 this.toggle_minimize = require("components.widgets.toggle_minimize")
 
 function this.create_bar(s)
-    local bar_height = 64
-    if COMPACT_MODE then
-        bar_height = 32
-    end
+    local bar_height = theme_vars.bottom_wibar_height
     local bar = awful.wibar({ position = "bottom", screen = s, height = bar_height, ontop = true })
     bar.y = s.geometry.height - bar_height
     bar:struts({ bottom = 0 })

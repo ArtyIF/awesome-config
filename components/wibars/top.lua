@@ -1,5 +1,6 @@
 local awful = require("awful")
 local wibox = require("wibox")
+local theme_vars = require("beautiful").get()
 
 local this = {}
 
@@ -13,11 +14,7 @@ this.keyboard_layout = require("components.widgets.keyboard_layout")
 this.paste = require("components.widgets.paste")
 
 function this.create_bar(s)
-    local bar_height = 32
-    if COMPACT_MODE then
-        bar_height = 24
-    end
-    local bar = awful.wibar({ position = "top", screen = s, height = bar_height, ontop = true })
+    local bar = awful.wibar({ position = "top", screen = s, height = theme_vars.top_wibar_height, ontop = true })
     bar:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none",

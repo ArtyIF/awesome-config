@@ -43,7 +43,10 @@ this.template = {
     {
         nil,
         {
-            awful.widget.clienticon,
+            {
+                widget = awful.widget.clienticon,
+                forced_width = theme_vars.bottom_wibar_height - theme_vars.titlebar_margins * 2
+            },
             left = theme_vars.titlebar_margins * 2,
             right = theme_vars.titlebar_margins * 2,
             top = theme_vars.titlebar_margins,
