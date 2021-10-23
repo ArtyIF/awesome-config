@@ -21,9 +21,12 @@ local function get_dominant_color(c)
 
     do
         local top_part_buffer = gdk.pixbuf_get_from_surface(c_content, 0, 0, c_geometry.width, 1)
-        local top_part_pixels = top_part_buffer:get_pixels()
-        top_part_stride = top_part_buffer:get_n_channels() * 2
-        top_part_string = top_part_pixels:gsub(".", function(ch) return ("%02x"):format(ch:byte()) end)
+        if top_part_buffer then
+            local top_part_pixels = top_part_buffer:get_pixels()
+            top_part_stride = top_part_buffer:get_n_channels() * 2
+            top_part_string = top_part_pixels:gsub(".", function(ch) return ("%02x"):format(ch:byte()) end)
+        end
+
     end
 
     local current_color = ""
@@ -41,7 +44,7 @@ local function get_dominant_color(c)
 
     collectgarbage()
 
-    local dom_color = "#000000"
+    local dom_color = ""
     local dom_color_times = 0
 
     for color, times in pairs(colors) do
@@ -55,19 +58,43 @@ local function get_dominant_color(c)
 end
 
 local function get_gradient_color(col)
-    local r = tonumber(col:sub(2, 3), 16)
-    local g = tonumber(col:sub(4, 5), 16)
-    local b = tonumber(col:sub(6, 7), 16)
+    if col ~= "" then
+        local r = tonumber(col:sub(2, 3), 16)
+        local g = tonumber(col:sub(4, 5), 16)
+        local b = tonumber(col:sub(6, 7), 16)
 
-    r = r + 8
-    g = g + 8
-    b = b + 8
+        r = r + 8
+        g = g + 8
+        b = b + 8
 
-    if r > 255 then r = 255 end
-    if g > 255 then g = 255 end
-    if b > 255 then b = 255 end
+        if r > 255 then r = 255 end
+        if g > 255 then g = 255 end
+        if b > 255 then b = 255 end
 
-    return "#" .. string.format("%02x", r) .. string.format("%02x", g) .. string.format("%02x", b)
+        return "#" .. string.format("%02x", r) .. string.format("%02x", g) .. string.format("%02x", b)
+    else
+        return ""
+    end
+end
+
+local function set_titlebar_color(c)
+    if not c.minimized and not c.hidden then
+        local dom_color = get_dominant_color(c)
+        if client.focus == c then
+            titlebars[c.window].titlebar_background_domcolor.bg = {
+                type = "linear",
+                from = { 0, 0 },
+                to = { 0, 32 },
+                stops = {
+                    { 0, get_gradient_color(dom_color) },
+                    { 1, dom_color }
+                }
+            }
+        else
+            titlebars[c.window].titlebar_background_domcolor.bg = dom_color
+        end
+        dom_color = nil
+    end
 end
 
 function this.signal_callback(c)
@@ -88,7 +115,8 @@ function this.signal_callback(c)
         titlebar_size = 24
     end
 
-    local titlebar_widgets = {
+    local this_titlebar = awful.titlebar(c, { size = titlebar_size })
+    this_titlebar:setup({
         {
             {
                 wibox.container.margin(nil, theme_vars.titlebar_margins, 0, 0, 0),
@@ -117,10 +145,7 @@ function this.signal_callback(c)
         id = "titlebar_background_domcolor",
         bg = "transparent",
         widget = wibox.container.background
-    }
-
-    local this_titlebar = awful.titlebar(c, { size = titlebar_size })
-    this_titlebar:setup(titlebar_widgets)
+    })
     titlebars[c.window] = this_titlebar
 
     titlebar_timers[c.window] = gears.timer({
@@ -128,20 +153,7 @@ function this.signal_callback(c)
         autostart = true,
         call_now = false,
         single_shot = false,
-        callback = function ()
-            if not c.minimized and not c.hidden then
-                local dom_color = get_dominant_color(c)
-                titlebars[c.window].titlebar_background_domcolor.bg = {
-                    type = "linear",
-                    from = { 0, 0 },
-                    to = { 0, 32 },
-                    stops = {
-                        { 0, get_gradient_color(dom_color) },
-                        { 1, dom_color }
-                    }
-                }
-            end
-        end
+        callback = function () set_titlebar_color(c) end
     })
 end
 
@@ -153,9 +165,21 @@ function this.unmanage_signal_callback(c)
     end
 end
 
+function this.focus_signal_callback(c)
+    gears.timer({
+        timeout = 0.1,
+        autostart = true,
+        call_now = false,
+        single_shot = true,
+        callback = function () set_titlebar_color(c) end
+    })
+end
+
 function this.connect_signals()
     client.connect_signal("request::titlebars", this.signal_callback)
-    client.connect_signal("unmanage", this.unmanage_signal_callback)
+    client.connect_signal("focus", this.focus_signal_callback)
+    client.connect_signal("unfocus", this.focus_signal_callback)
+    client.connect_signal("request::unmanage", this.unmanage_signal_callback)
 end
 
 return this
