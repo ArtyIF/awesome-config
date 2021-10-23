@@ -2,6 +2,7 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local naughty = require("naughty")
+local colors = require("theme.colors")
 local theme_vars = require("beautiful").get()
 local gdk = require("lgi").Gdk
 
@@ -97,6 +98,7 @@ local function set_titlebar_color(c)
                 { 1, dom_color }
             }
         }
+        titlebars[c.window].titlebar_background_domcolor.fg = colors.get_contrast_color(dom_color)
         dom_color = nil
     end
 end
