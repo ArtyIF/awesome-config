@@ -86,22 +86,22 @@ theme.titlebar_maximized_button_normal_active = theme_path.."titlebar/maximized.
 theme.titlebar_maximized_button_focus_active  = theme_path.."titlebar/maximized.png"
 
 -- You can use your own layout icons like this:
-theme.layout_fairh = theme_path.."layouts/fairh.png"
-theme.layout_fairv = theme_path.."layouts/fairv.png"
-theme.layout_floating  = theme_path.."layouts/floating.png"
-theme.layout_magnifier = theme_path.."layouts/magnifier.png"
-theme.layout_max = theme_path.."layouts/max.png"
-theme.layout_fullscreen = theme_path.."layouts/fullscreen.png"
-theme.layout_tilebottom = theme_path.."layouts/tilebottom.png"
-theme.layout_tileleft   = theme_path.."layouts/tileleft.png"
-theme.layout_tile = theme_path.."layouts/tile.png"
-theme.layout_tiletop = theme_path.."layouts/tiletop.png"
-theme.layout_spiral  = theme_path.."layouts/spiral.png"
-theme.layout_dwindle = theme_path.."layouts/dwindle.png"
-theme.layout_cornernw = theme_path.."layouts/cornernw.png"
-theme.layout_cornerne = theme_path.."layouts/cornerne.png"
-theme.layout_cornersw = theme_path.."layouts/cornersw.png"
-theme.layout_cornerse = theme_path.."layouts/cornerse.png"
+theme.layout_fairh = colors.recolor_icon(theme_path.."layouts/fairh.png")
+theme.layout_fairv = colors.recolor_icon(theme_path.."layouts/fairv.png")
+theme.layout_floating  = colors.recolor_icon(theme_path.."layouts/floating.png")
+theme.layout_magnifier = colors.recolor_icon(theme_path.."layouts/magnifier.png")
+theme.layout_max = colors.recolor_icon(theme_path.."layouts/max.png")
+theme.layout_fullscreen = colors.recolor_icon(theme_path.."layouts/fullscreen.png")
+theme.layout_tilebottom = colors.recolor_icon(theme_path.."layouts/tilebottom.png")
+theme.layout_tileleft   = colors.recolor_icon(theme_path.."layouts/tileleft.png")
+theme.layout_tile = colors.recolor_icon(theme_path.."layouts/tile.png")
+theme.layout_tiletop = colors.recolor_icon(theme_path.."layouts/tiletop.png")
+theme.layout_spiral  = colors.recolor_icon(theme_path.."layouts/spiral.png")
+theme.layout_dwindle = colors.recolor_icon(theme_path.."layouts/dwindle.png")
+theme.layout_cornernw = colors.recolor_icon(theme_path.."layouts/cornernw.png")
+theme.layout_cornerne = colors.recolor_icon(theme_path.."layouts/cornerne.png")
+theme.layout_cornersw = colors.recolor_icon(theme_path.."layouts/cornersw.png")
+theme.layout_cornerse = colors.recolor_icon(theme_path.."layouts/cornerse.png")
 
 theme.awesome_icon = theme_assets.awesome_icon(
     32, colors.accent_bg, colors.base_bg
