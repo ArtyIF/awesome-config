@@ -127,16 +127,18 @@ function this.signal_callback(c)
         call_now = false,
         single_shot = false,
         callback = function ()
-            local dom_color = get_dominant_color(c)
-            titlebars[c.window].titlebar_background_domcolor.bg = {
-                type = "linear",
-                from = { 0, 0 },
-                to = { 0, 32 },
-                stops = {
-                    { 0, get_gradient_color(dom_color) },
-                    { 1, dom_color }
+            if not c.minimized and not c.hidden then
+                local dom_color = get_dominant_color(c)
+                titlebars[c.window].titlebar_background_domcolor.bg = {
+                    type = "linear",
+                    from = { 0, 0 },
+                    to = { 0, 32 },
+                    stops = {
+                        { 0, get_gradient_color(dom_color) },
+                        { 1, dom_color }
+                    }
                 }
-            }
+            end
         end
     })
 end
