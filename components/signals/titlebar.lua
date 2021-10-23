@@ -160,7 +160,7 @@ end
 
 function this.manage_signal_callback(c)
     gears.timer({
-        timeout = 0.25,
+        timeout = 0.1,
         autostart = true,
         call_now = false,
         single_shot = true,

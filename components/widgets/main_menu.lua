@@ -46,7 +46,7 @@ local this = {
 function this.build_menu()
     menu_gen.generate(function (entries)
         for id, category in pairs(menu_gen.all_categories) do
-            table.insert(this.menus.apps, { id, {}, os.getenv("HOME") .. "/.icons/oomox-ArtyTheme/32x32/categories/" .. category.icon_name .. ".svg" })
+            table.insert(this.menus.apps, { id, {}, os.getenv("HOME") .. "/.icons/oomox-ArtyTheme-Dark/32x32/categories/" .. category.icon_name .. ".svg" })
         end
 
         for _, entry in pairs(entries) do
