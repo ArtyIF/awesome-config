@@ -56,7 +56,6 @@ local function get_dominant_color(c)
     if dom_color == "#00000000" then
         return "#171717"
     end
-    dom_color = dom_color:sub(1, 7)
 
     return dom_color
 end
@@ -75,7 +74,12 @@ local function get_gradient_color(col)
         if g > 255 then g = 255 end
         if b > 255 then b = 255 end
 
-        return "#" .. string.format("%02x", r) .. string.format("%02x", g) .. string.format("%02x", b)
+        local result = "#" .. string.format("%02x", r) .. string.format("%02x", g) .. string.format("%02x", b)
+        if col:len() == 9 then
+            result = result .. col:sub(8, 9)
+        end
+
+        return result
     else
         return ""
     end
