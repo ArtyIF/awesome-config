@@ -7,7 +7,7 @@ local this = {minimized = false, minimize_history = {}}
 
 function this.create_widget(s)
     local toggle_minimize = wibox.container.background(nil, theme_vars.tasklist_bg_normal)
-    toggle_minimize.forced_width = 2
+    toggle_minimize.forced_width = 4
 
     toggle_minimize:buttons({
         awful.button({}, 1, function ()
