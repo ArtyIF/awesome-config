@@ -114,7 +114,7 @@ function this.signal_callback(c)
 
     get_dominant_color(c)
 
-    titlebar_timers[c.window] = gears.timer({
+    --[[ titlebar_timers[c.window] = gears.timer({
         timeout = 0.25,
         autostart = true,
         call_now = false,
@@ -131,7 +131,7 @@ function this.signal_callback(c)
                 }
             }
         end
-    })
+    }) ]]
 end
 
 function this.unmanage_signal_callback(c)
