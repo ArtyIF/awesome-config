@@ -112,8 +112,6 @@ function this.signal_callback(c)
     this_titlebar:setup(titlebar_widgets)
     titlebars[c.window] = this_titlebar
 
-    get_dominant_color(c)
-
     --[[ titlebar_timers[c.window] = gears.timer({
         timeout = 0.25,
         autostart = true,
