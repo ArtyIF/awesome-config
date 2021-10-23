@@ -150,7 +150,7 @@ function this.signal_callback(c)
     titlebars[c.window] = this_titlebar
 
     gears.timer({
-        timeout = 0.1,
+        timeout = 0.25,
         autostart = true,
         call_now = false,
         single_shot = true,
@@ -160,7 +160,7 @@ end
 
 function this.manage_signal_callback(c)
     gears.timer({
-        timeout = 0.1,
+        timeout = 0.25,
         autostart = true,
         call_now = false,
         single_shot = true,
