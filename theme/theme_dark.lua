@@ -18,14 +18,14 @@ local theme = {}
 theme.font = gtk_vars.font_family .. " " .. gtk_vars.font_size
 
 theme.bg_normal     = "#171717"
-theme.bg_focus      = "#7fff7f"
-theme.bg_urgent     = "#ff7f00"
+theme.bg_focus      = "#ff7f00"
+theme.bg_urgent     = "#007fff"
 theme.bg_systray    = theme.bg_normal
 theme.bg_minimize   = theme.bg_focus .. "0f"
 
 theme.fg_normal     = "#dfdfdf"
 theme.fg_focus      = "#171717"
-theme.fg_urgent     = theme.bg_normal
+theme.fg_urgent     = "#171717"
 theme.fg_minimize   = theme.fg_normal
 theme.fg_systray    = theme.fg_normal
 
