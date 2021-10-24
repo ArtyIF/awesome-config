@@ -54,8 +54,7 @@ this.template = {
             widget  = wibox.container.margin,
         },
         {
-            nil,
-            id     = 'background_role',
+            id = 'background_role',
             forced_height = 4,
             widget = wibox.container.background,
         },

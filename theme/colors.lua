@@ -2,22 +2,22 @@ local gears = require("gears")
 
 local this = {}
 
-this.light_color = "#d7d7d7"
+this.light_color = "#e0e0e0"
 this.middle_color = "#7f7f7f"
-this.dark_color = "#171717"
+this.dark_color = "#101010"
 
 if not LIGHT_MODE then
     this.base_bg = this.dark_color
     this.accent_bg = "#ff7f00"
     this.urgent_bg = "#7f00ff"
     this.icon_theme = "oomox-ArtyTheme-Dark"
-    this.wallpaper = "#101010"
+    this.wallpaper = this.dark_color
 else
     this.base_bg = this.light_color
     this.accent_bg = "#bf772f"
     this.urgent_bg = "#772fbf"
     this.icon_theme = "oomox-ArtyTheme"
-    this.wallpaper = "#e0e0e0"
+    this.wallpaper = this.light_color
 end
 
 this.full_icon_theme_path = ""
