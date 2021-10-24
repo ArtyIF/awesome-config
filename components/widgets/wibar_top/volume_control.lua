@@ -6,8 +6,6 @@ local wibox = require("wibox")
 local theme_vars = require("beautiful").get()
 local colors = require("theme.colors")
 
-local button = require("components.widgets.common.button")
-
 local this = {}
 
 this.cmd = "pactl "
@@ -15,7 +13,6 @@ this.get_volume_arg = "get-sink-volume 0"
 this.get_mute_arg = "get-sink-mute 0"
 this.up_arg = "set-sink-volume 0 +5%"
 this.down_arg = "set-sink-volume 0 -5%"
-this.max_vol_arg = "set-sink-volume 0 100%"
 this.toggle_arg = "set-sink-mute 0 toggle"
 
 this.icons_path = colors.full_icon_theme_path .. "symbolic/status/"
@@ -24,13 +21,14 @@ this.icon_medium = "audio-volume-medium-symbolic.svg"
 this.icon_low = "audio-volume-low-symbolic.svg"
 this.icon_muted = "audio-volume-muted-symbolic.svg"
 
+this.margin_top = theme_vars.wibar_icon_margins
+this.margin_right = theme_vars.wibar_icon_margins
+this.margin_bottom = theme_vars.wibar_icon_margins
+this.margin_left = theme_vars.wibar_icon_margins / 2
+
 function this.callback(volume, muted)
     if not volume then
         return
-    end
-    if volume > 100 then
-        this.execute_and_get_output(this.cmd .. this.max_vol_arg)
-        return this.get()
     end
     if muted or volume == 0 then
         this.image_widget.image = this.icons_path .. this.icon_muted
@@ -90,24 +88,23 @@ this.callback_timer = gears.timer({
 })
 
 function this.create_widget()
-    this.widget = button.create_widget(
-        wibox.layout.fixed.horizontal(this.image_widget, this.text_widget),
-        function ()
-            awful.spawn.spawn("pavucontrol")
-        end,
-        {
-            on_right_click = function ()
-                this.toggle()
-            end,
-            on_scroll_up = function ()
-                this.up()
-            end,
-            on_scroll_down = function ()
-                this.down()
-            end,
-            imageboxes_to_recolor = { this.image_widget },
-        })
+    this.widget = wibox.container.margin(wibox.layout.fixed.horizontal(this.image_widget, this.text_widget), this.margin_left, this.margin_right, this.margin_top, this.margin_bottom)
 
+    this.widget:buttons({
+        awful.button({ }, 1, function ()
+            awful.spawn.spawn("pavucontrol")
+        end),
+        awful.button({ }, 3, function ()
+            this.toggle()
+        end),
+        awful.button({ }, 4, function ()
+            this.up()
+        end),
+        awful.button({ }, 5, function ()
+            this.down()
+        end),
+    })
+    
     return this.widget
 end
 
