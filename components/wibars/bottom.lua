@@ -6,9 +6,9 @@ local theme_vars = require("beautiful").get()
 
 local this = {}
 
-this.task_list = require("components.widgets.task_list")
-this.task_list_new = require("components.widgets.task_list_new")
-this.toggle_minimize = require("components.widgets.toggle_minimize")
+this.task_list = require("components.widgets.wibar_bottom.task_list")
+this.task_list_new = require("components.widgets.wibar_bottom.task_list_new")
+this.toggle_minimize = require("components.widgets.wibar_bottom.toggle_minimize")
 
 function this.create_bar(s)
     local bar_height = theme_vars.bottom_wibar_height
