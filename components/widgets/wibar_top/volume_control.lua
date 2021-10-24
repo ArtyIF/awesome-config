@@ -6,6 +6,8 @@ local wibox = require("wibox")
 local theme_vars = require("beautiful").get()
 local colors = require("theme.colors")
 
+local button = require("components.widgets.common.button")
+
 local this = {}
 
 this.cmd = "pactl "
@@ -93,23 +95,27 @@ this.callback_timer = gears.timer({
 })
 
 function this.create_widget()
-    this.widget = wibox.container.margin(wibox.layout.fixed.horizontal(this.image_widget, this.text_widget), this.margin_left, this.margin_right, this.margin_top, this.margin_bottom)
-
-    this.widget:buttons({
-        awful.button({ }, 1, function ()
+    this.widget = button.create_widget(
+        wibox.layout.fixed.horizontal(this.image_widget, this.text_widget),
+        function ()
             awful.spawn.spawn("pavucontrol")
-        end),
-        awful.button({ }, 3, function ()
-            this.toggle()
-        end),
-        awful.button({ }, 4, function ()
-            this.up()
-        end),
-        awful.button({ }, 5, function ()
-            this.down()
-        end),
-    })
-    
+        end,
+        {
+            margin_left = this.margin_left,
+            margin_right = this.margin_right,
+            margin_top = this.margin_top,
+            margin_bottom = this.margin_bottom,
+            on_right_click = function ()
+                this.toggle()
+            end,
+            on_scroll_up = function ()
+                this.up()
+            end,
+            on_scroll_down = function ()
+                this.down()
+            end,
+        })
+
     return this.widget
 end
 

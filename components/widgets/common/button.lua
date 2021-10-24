@@ -9,12 +9,13 @@ local colors = require("theme.colors")
 local this = {}
 
 function this.create_widget(content, on_left_click, args)
-    local margin_left = args.left or args.margins or 0
-    local margin_right = args.right or args.margins or 0
-    local margin_top = args.top or args.margins or 0
-    local margin_bottom = args.bottom or args.margins or 0
+    local margin_left = args.margin_left or args.margins or 0
+    local margin_right = args.margin_right or args.margins or 0
+    local margin_top = args.margin_top or args.margins or 0
+    local margin_bottom = args.margin_bottom or args.margins or 0
 
-    local widget = wibox.container.margin(content, margin_left, margin_right, margin_top, margin_bottom)
+    local button = wibox.container.margin(wibox.container.background(content), margin_left, margin_right, margin_top, margin_bottom)
+    button.widget.fg = colors.base_fg
 
     local buttons = {
         awful.button({ }, 1, on_left_click),
@@ -31,9 +32,16 @@ function this.create_widget(content, on_left_click, args)
     if args.on_scroll_down then
         table.insert(buttons, awful.button({ }, 5, args.on_scroll_down))
     end
-    widget:buttons(buttons)
+    button:buttons(buttons)
 
-    return widget
+    button:connect_signal("mouse::enter", function ()
+        button.widget.fg = colors.accent_bg
+    end)
+    button:connect_signal("mouse::leave", function ()
+        button.widget.fg = colors.base_fg
+    end)
+
+    return button
 end
 
 return this
