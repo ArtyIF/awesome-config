@@ -117,7 +117,7 @@ function this.signal_callback(c)
     )
 
     local titlebar_size = 32
-    if COMPACT_MODE then
+    if SMALL_ELEMENTS then
         titlebar_size = 24
     end
 
@@ -163,23 +163,27 @@ function this.signal_callback(c)
     })
     titlebars[c.window] = this_titlebar
 
-    gears.timer({
-        timeout = 0.5,
-        autostart = true,
-        call_now = false,
-        single_shot = true,
-        callback = function () set_titlebar_color(c) end
-    })
+    if SMART_TITLEBAR_COLOR then
+        gears.timer({
+            timeout = 0.5,
+            autostart = true,
+            call_now = false,
+            single_shot = true,
+            callback = function () set_titlebar_color(c) end
+        })
+    end
 end
 
 function this.manage_signal_callback(c)
-    gears.timer({
-        timeout = 0.1,
-        autostart = true,
-        call_now = false,
-        single_shot = true,
-        callback = function () set_titlebar_color(c) end
-    })
+    if SMART_TITLEBAR_COLOR then
+        gears.timer({
+            timeout = 0.1,
+            autostart = true,
+            call_now = false,
+            single_shot = true,
+            callback = function () set_titlebar_color(c) end
+        })
+    end
 end
 
 function this.unmanage_signal_callback(c)

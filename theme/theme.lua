@@ -54,7 +54,7 @@ theme.titlebar_fg_focus = colors.base_fg
 theme.menu_submenu = "▶ "
 theme.menu_height = 32
 theme.menu_width  = 256
-if COMPACT_MODE then
+if SMALL_ELEMENTS then
     theme.menu_height = 24
     theme.menu_width = 192
 end
@@ -125,18 +125,18 @@ theme = theme_assets.recolor_titlebar(theme, colors.accent_bg, "focus", "hover",
 theme = theme_assets.recolor_titlebar(theme, colors.accent_bg, "focus", "press", nil)
 
 theme.titlebar_margins = 8
-if COMPACT_MODE then
+if SMALL_ELEMENTS then
     theme.titlebar_margins = 6
 end
 
 theme.wibar_icon_margins = 4
-if COMPACT_MODE then
+if SMALL_ELEMENTS then
     theme.wibar_icon_margins = 3
 end
 
 theme.top_wibar_height = 32
 theme.bottom_wibar_height = 64
-if COMPACT_MODE then
+if SMALL_ELEMENTS then
     theme.top_wibar_height = 24
     theme.bottom_wibar_height = 48
 end

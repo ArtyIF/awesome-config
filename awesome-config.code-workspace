@@ -14,7 +14,7 @@
 			// classes
 			"button", "client", "drawable", "key", "screen", "signals", "wibox", "xproperties", "tag",
 			// config globals
-			"PERFORMANCE_MODE", "COMPACT_MODE", "LIGHT_MODE",
+			"PERFORMANCE_MODE", "SMALL_ELEMENTS", "LIGHT_COLORS", "SMART_TITLEBAR_COLOR",
 		],
 		"Lua.runtime.version": "Lua 5.3", // the arch linux version at the date is compiled against lua 5.3.5
 	}
