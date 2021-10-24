@@ -15,9 +15,7 @@ this.icons_path = colors.full_icon_theme_path .. "symbolic/status/"
 this.icon_muted = "audio-volume-muted-symbolic.svg"
 
 function this.create_widget()
-    this.widget = button.create_widget(this.icons_path .. this.icon_muted, function ()
-        naughty.notification({ text = "hello!" })
-    end)
+    this.widget = button.create_widget(this.icons_path .. this.icon_muted, function () naughty.notification({ text = "hello!" }) end, { text = "asdf" })
     
     return this.widget
 end

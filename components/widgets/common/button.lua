@@ -13,24 +13,25 @@ function this.create_widget(image, on_left_click, args)
     if not args then args = {} end
     local content = {
         {
-            {
-                id = "button_image",
-                image = image,
-                widget = wibox.widget.imagebox,
-            },
-            id = "button_layout",
-            layout = wibox.layout.fixed.horizontal,
-            widget = wibox.container.background
+            id = "button_image",
+            image = image,
+            widget = wibox.widget.imagebox,
         },
+        id = "button_layout",
+        layout = wibox.layout.fixed.horizontal,
         widget = wibox.container.background
     }
     if args.text then
         content[2] = {
             id = "button_text",
-            wibox.widget.textbox(image),
+            text = args.text,
+            widget = wibox.widget.textbox,
         }
     end
-    local button = wibox.widget(content)
+    local button = wibox.widget {
+        content,
+        widget = wibox.container.background
+    }
 
     return button
 end

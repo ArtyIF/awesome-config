@@ -31,7 +31,7 @@ function this.create_bar(s)
             this.paste.create_widget(),
             this.system_tray.create_widget(),
             this.volume_control.create_widget(),
-            this.volume_control_new.create_widget(),
+            --this.volume_control_new.create_widget(),
             this.layout_box.create_widget(s),
         }
     }
