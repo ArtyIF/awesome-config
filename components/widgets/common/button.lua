@@ -36,6 +36,7 @@ function this.create_widget(content, on_left_click, args)
 
     button:connect_signal("mouse::enter", function ()
         button.widget.fg = colors.accent_bg
+        -- todo: adjust icons
     end)
     button:connect_signal("mouse::leave", function ()
         button.widget.fg = colors.base_fg
