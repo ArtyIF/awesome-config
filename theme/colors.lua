@@ -6,7 +6,7 @@ this.light_color = "#e0e0e0"
 this.middle_color = "#7f7f7f"
 this.dark_color = "#101010"
 
-if not LIGHT_COLORS then
+if not LIGHT_THEME then
     this.base_bg = this.dark_color
     this.accent_bg = "#ff7f00"
     this.urgent_bg = "#7f00ff"
