@@ -70,8 +70,8 @@ function this.create_bar(s)
         layout = wibox.layout.align.horizontal,
         expand = "none",
         nil,
-        --this.task_list.create_widget(s),
-        this.task_list_new.create_widget(s),
+        this.task_list.create_widget(s),
+        --this.task_list_new.create_widget(s),
         this.toggle_minimize.create_widget(s),
     }
     return bar
