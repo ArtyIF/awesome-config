@@ -12,6 +12,7 @@ this.volume_control = require("components.widgets.wibar_top.volume_control")
 this.system_tray = require("components.widgets.wibar_top.system_tray")
 this.keyboard_layout = require("components.widgets.wibar_top.keyboard_layout")
 this.paste = require("components.widgets.wibar_top.paste")
+this.volume_control_new = require("components.widgets.wibar_top.volume_control_new")
 
 function this.create_bar(s)
     local bar = awful.wibar({ position = "top", screen = s, height = theme_vars.top_wibar_height, ontop = true })
@@ -30,6 +31,7 @@ function this.create_bar(s)
             this.paste.create_widget(),
             this.system_tray.create_widget(),
             this.volume_control.create_widget(),
+            this.volume_control_new.create_widget(),
             this.layout_box.create_widget(s),
         }
     }
