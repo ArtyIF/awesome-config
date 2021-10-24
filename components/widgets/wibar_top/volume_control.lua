@@ -24,11 +24,6 @@ this.icon_medium = "audio-volume-medium-symbolic.svg"
 this.icon_low = "audio-volume-low-symbolic.svg"
 this.icon_muted = "audio-volume-muted-symbolic.svg"
 
-this.margin_top = theme_vars.wibar_icon_margins
-this.margin_right = theme_vars.wibar_icon_margins
-this.margin_bottom = theme_vars.wibar_icon_margins
-this.margin_left = theme_vars.wibar_icon_margins / 2
-
 function this.callback(volume, muted)
     if not volume then
         return
@@ -101,10 +96,6 @@ function this.create_widget()
             awful.spawn.spawn("pavucontrol")
         end,
         {
-            margin_left = this.margin_left,
-            margin_right = this.margin_right,
-            margin_top = this.margin_top,
-            margin_bottom = this.margin_bottom,
             on_right_click = function ()
                 this.toggle()
             end,
@@ -114,6 +105,7 @@ function this.create_widget()
             on_scroll_down = function ()
                 this.down()
             end,
+            imageboxes_to_recolor = { this.image_widget },
         })
 
     return this.widget
