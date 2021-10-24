@@ -4,6 +4,7 @@ local awful = require("awful")
 -- widget and layout library
 local wibox = require("wibox")
 local theme_vars = require("beautiful").get()
+local naughty = require("naughty")
 
 local this = {}
 
@@ -70,14 +71,21 @@ this.filter = awful.widget.tasklist.filter.currenttags
 this.widgets = {}
 
 function this.create_widget(s)
-    this.widgets[s] = awful.widget.tasklist {
-        screen = s,
-        filter = this.filter,
-        buttons = this.buttons,
-        layout = this.layout,
-        widget_template = this.template
+    local wgt = wibox.widget {
+        {
+            text = "hello world",
+            widget = wibox.widget.textbox
+        },
+        layout = wibox.layout.fixed.horizontal
     }
-    return this.widgets[s]
+
+    client.connect_signal("manage", function (c)
+        wgt:add({
+            client = c,
+            widget = awful.widget.clienticon
+        })
+    end)
+    return wgt
 end
 
 return this -- todo: grouping
