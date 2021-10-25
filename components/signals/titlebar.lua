@@ -55,49 +55,16 @@ local function get_dominant_color(c)
     end
 
     if dom_color == "#00000000" then
-        return theme_vars.bg_normal
+        return colors.base_bg
     end
 
     return dom_color
 end
 
-local function get_gradient_color(col)
-    if col ~= "" then
-        local r = tonumber(col:sub(2, 3), 16)
-        local g = tonumber(col:sub(4, 5), 16)
-        local b = tonumber(col:sub(6, 7), 16)
-
-        r = r + 8
-        g = g + 8
-        b = b + 8
-
-        if r > 255 then r = 255 end
-        if g > 255 then g = 255 end
-        if b > 255 then b = 255 end
-
-        local result = "#" .. string.format("%02x", r) .. string.format("%02x", g) .. string.format("%02x", b)
-        if col:len() == 9 then
-            result = result .. col:sub(8, 9)
-        end
-
-        return result
-    else
-        return ""
-    end
-end
-
 local function set_titlebar_color(c)
     if titlebars[c.window] and not c.minimized and not c.hidden then
         local dom_color = get_dominant_color(c)
-        titlebars[c.window].titlebar_background_domcolor.bg = {
-            type = "linear",
-            from = { 0, 0 },
-            to = { 0, 32 },
-            stops = {
-                { 0, get_gradient_color(dom_color) },
-                { 1, dom_color }
-            }
-        }
+        titlebars[c.window].titlebar_background_domcolor.bg = colors.get_gradient(dom_color)
         titlebars[c.window].titlebar_background_domcolor.fg = colors.get_contrast_color(dom_color)
         dom_color = nil
     end
@@ -150,15 +117,7 @@ function this.signal_callback(c)
             layout = wibox.layout.align.horizontal,
         },
         id = "titlebar_background_domcolor",
-        bg = {
-            type = "linear",
-            from = { 0, 0 },
-            to = { 0, 32 },
-            stops = {
-                { 0, get_gradient_color(theme_vars.bg_normal) },
-                { 1, theme_vars.bg_normal }
-            }
-        },
+        bg = colors.get_gradient(colors.base_bg),
         widget = wibox.container.background
     })
     titlebars[c.window] = this_titlebar

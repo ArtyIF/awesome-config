@@ -66,6 +66,26 @@ function this.get_gradient_color(base_color)
     end
 end
 
+function this.get_gradient(base_color, height)
+    if not height then
+        if SMALL_ELEMENTS then
+            height = 24
+        else
+            height = 32
+        end
+    end
+
+    return {
+        type = "linear",
+        from = { 0, 0 },
+        to = { 0, height },
+        stops = {
+            { 0, this.get_gradient_color(base_color) },
+            { 1, base_color }
+        }
+    }
+end
+
 function this.get_luminance(color)
     local r = tonumber(color:sub(2, 3), 16) / 255
     local g = tonumber(color:sub(4, 5), 16) / 255
