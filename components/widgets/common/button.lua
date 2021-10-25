@@ -19,7 +19,13 @@ function this.create_widget(image, on_left_click, args)
         {
             {
                 id = "image_role",
-                image = (function() if args.do_not_recolor_icon then return image else return gears.color.recolor_image(image, colors.base_fg) end end)(),
+                image = (function()
+                    if args.do_not_recolor_icon then
+                        return image
+                    else
+                        return gears.color.recolor_image(image, colors.base_fg)
+                    end
+                end)(),
                 widget = wibox.widget.imagebox
             },
             id = "image_margin_role",
