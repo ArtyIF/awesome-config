@@ -6,18 +6,32 @@ this.light_color = "#e0e0e0"
 this.middle_color = "#7f7f7f"
 this.dark_color = "#101010"
 
+this.dark = {}
+this.dark.base_bg = this.dark_color
+this.dark.accent_bg = "#ff7f00"
+this.dark.urgent_bg = "#7f00ff"
+this.dark.icon_theme = "oomox-ArtyTheme-Dark"
+this.dark.wallpaper = this.dark_color
+
+this.light = {}
+this.light.base_bg = this.light_color
+this.light.accent_bg = "#bf772f"
+this.light.urgent_bg = "#772fbf"
+this.light.icon_theme = "oomox-ArtyTheme"
+this.light.wallpaper = this.light_color
+
 if not LIGHT_THEME then
-    this.base_bg = this.dark_color
-    this.accent_bg = "#ff7f00"
-    this.urgent_bg = "#7f00ff"
-    this.icon_theme = "oomox-ArtyTheme-Dark"
-    this.wallpaper = this.dark_color
+    this.base_bg = this.dark.base_bg
+    this.accent_bg = this.dark.accent_bg
+    this.urgent_bg = this.dark.urgent_bg
+    this.icon_theme = this.dark.icon_theme
+    this.wallpaper = this.dark.wallpaper
 else
-    this.base_bg = this.light_color
-    this.accent_bg = "#bf772f"
-    this.urgent_bg = "#772fbf"
-    this.icon_theme = "oomox-ArtyTheme"
-    this.wallpaper = this.light_color
+    this.base_bg = this.light.base_bg
+    this.accent_bg = this.light.accent_bg
+    this.urgent_bg = this.light.urgent_bg
+    this.icon_theme = this.light.icon_theme
+    this.wallpaper = this.light.wallpaper
 end
 
 this.full_icon_theme_path = ""
