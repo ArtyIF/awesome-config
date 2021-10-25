@@ -49,8 +49,8 @@ this.template = {
             },
             left = theme_vars.titlebar_margins * 2,
             right = theme_vars.titlebar_margins * 2,
-            top = theme_vars.titlebar_margins,
-            bottom = theme_vars.titlebar_margins - 4,
+            top = theme_vars.titlebar_margins - 2,
+            bottom = theme_vars.titlebar_margins - 2,
             widget  = wibox.container.margin,
         },
         {
