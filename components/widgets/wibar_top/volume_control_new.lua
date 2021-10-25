@@ -20,7 +20,8 @@ function this.create_widget()
         function () naughty.notification({ text = "hello!" }) end,
         {
             text = "asdf",
-        })
+        }
+    )
     
     return this.widget
 end

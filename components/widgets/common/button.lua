@@ -9,6 +9,7 @@ local naughty = require("naughty")
 
 local this = {}
 
+-- todo: rewrite this to be more oop
 function this.create_widget(image, on_left_click, args)
     if not args then args = {} end
 
@@ -46,12 +47,31 @@ function this.create_widget(image, on_left_click, args)
         widget = wibox.container.background
     }
 
+    function button:set_image(new_image)
+        image = new_image
+        if self.mouse_is_over then
+            self.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
+        else
+            self.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
+        end
+    end
+
+    function button:set_text(new_text)
+        self.margin_role.layout_role.text_role.text = new_text
+    end
+
+    function button:set_markup(new_text)
+        self.margin_role.layout_role.text_role.markup = new_text
+    end
+
     button:connect_signal("mouse::enter", function ()
+        button.mouse_is_over = true
         button.fg = colors.accent_bg
         button.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
     end)
 
     button:connect_signal("mouse::leave", function ()
+        button.mouse_is_over = false
         button.fg = colors.base_fg
         button.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
     end)
