@@ -12,37 +12,43 @@ local this = {}
 function this.create_widget(image, on_left_click, args)
     if not args then args = {} end
 
+    local margins = args.margins or theme_vars.wibar_icon_margins
+
     local content = {
         {
-            id = "button_image",
+            id = "image_role",
             image = gears.color.recolor_image(image, colors.base_fg),
             widget = wibox.widget.imagebox,
         },
-        id = "button_root",
-        layout = wibox.layout.fixed.horizontal,
-        widget = wibox.container.background
+        id = "layout_role",
+        layout = wibox.layout.fixed.horizontal
     }
     if args.text then
         content[2] = {
-            id = "button_text",
+            id = "text_role",
             text = args.text,
             widget = wibox.widget.textbox,
         }
     end
 
     local button = wibox.widget {
-        content,
+        {
+            content,
+            id = "margin_role",
+            margins = margins,
+            widget = wibox.container.margin
+        },
         widget = wibox.container.background
     }
 
     button:connect_signal("mouse::enter", function ()
         button.fg = colors.accent_bg
-        button.button_root.button_image.image = gears.color.recolor_image(image, colors.accent_bg)
+        button.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
     end)
 
     button:connect_signal("mouse::leave", function ()
         button.fg = colors.base_fg
-        button.button_root.button_image.image = gears.color.recolor_image(image, colors.base_fg)
+        button.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
     end)
 
     return button
