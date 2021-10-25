@@ -12,7 +12,7 @@ local button = require("components.widgets.common.button")
 local this = {}
 
 this.icons_path = colors.full_icon_theme_path .. "symbolic/status/"
-this.icon_muted = "audio-volume-muted-symbolic.svg"
+this.icon_muted = "audio-volume-low-symbolic.svg"
 
 function this.create_widget()
     this.widget = button.create_widget(

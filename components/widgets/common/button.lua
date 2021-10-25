@@ -16,9 +16,14 @@ function this.create_widget(image, on_left_click, args)
 
     local content = {
         {
-            id = "image_role",
-            image = gears.color.recolor_image(image, colors.base_fg),
-            widget = wibox.widget.imagebox,
+            {
+                id = "image_role",
+                image = gears.color.recolor_image(image, colors.base_fg),
+                widget = wibox.widget.imagebox
+            },
+            id = "image_margin_role",
+            margins = { right = margins },
+            widget = wibox.container.margin
         },
         id = "layout_role",
         layout = wibox.layout.fixed.horizontal
@@ -43,12 +48,12 @@ function this.create_widget(image, on_left_click, args)
 
     button:connect_signal("mouse::enter", function ()
         button.fg = colors.accent_bg
-        button.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
+        button.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
     end)
 
     button:connect_signal("mouse::leave", function ()
         button.fg = colors.base_fg
-        button.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
+        button.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
     end)
 
     return button
