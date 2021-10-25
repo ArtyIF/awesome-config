@@ -126,8 +126,8 @@ function this.signal_callback(c)
     this_titlebar:setup({
         {
             {
-                wibox.container.margin(nil, theme_vars.titlebar_margins, 0, 0, 0),
-                wibox.container.margin(awful.titlebar.widget.iconwidget(c), 0, theme_vars.titlebar_margins / 2, theme_vars.titlebar_margins, theme_vars.titlebar_margins, nil, false),
+                wibox.container.margin(nil, theme_vars.titlebar_margins / 2, 0, 0, 0),
+                wibox.container.margin(awful.titlebar.widget.iconwidget(c), theme_vars.titlebar_margins / 2, theme_vars.titlebar_margins / 2, theme_vars.titlebar_margins, theme_vars.titlebar_margins, nil, false),
                 awful.titlebar.widget.floatingbutton(c),
                 --awful.titlebar.widget.ontopbutton(c),
                 --awful.titlebar.widget.stickybutton(c),
