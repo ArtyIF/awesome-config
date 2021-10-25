@@ -76,6 +76,14 @@ function this.create_widget(image, on_left_click, args)
         button.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
     end)
 
+    button:buttons({
+        awful.button({ }, 1, on_left_click),
+        awful.button({ }, 2, args.on_middle_click),
+        awful.button({ }, 3, args.on_right_click),
+        awful.button({ }, 4, args.on_scroll_up),
+        awful.button({ }, 5, args.on_scroll_down),
+    })
+
     return button
 end
 
