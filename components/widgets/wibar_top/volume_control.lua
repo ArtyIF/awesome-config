@@ -110,6 +110,6 @@ function this.create_widget()
     return this.widget
 end
 
--- VOLUME_CONTROL = this -- todo: do something similar to other widgets
+VOLUME_CONTROL = this -- todo: do something similar to other widgets
 -- todo: actually, make a global registry with widgets or something
 return this
