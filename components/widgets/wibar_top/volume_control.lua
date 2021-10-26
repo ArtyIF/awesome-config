@@ -97,14 +97,14 @@ function this.create_widget()
             this.down()
         end
     }
-    
+
     this.callback_timer = gears.timer({
         timeout = 1,
         autostart = true,
         call_now = true,
         callback = this.get
     })
-    
+
     return this.widget
 end
 
