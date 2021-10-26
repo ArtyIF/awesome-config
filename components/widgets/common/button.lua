@@ -17,29 +17,29 @@ function this.create_widget(image, on_left_click, args)
 
     local content = {
         {
-            {
-                id = "image_role",
-                image = (function()
-                    if args.do_not_recolor_icon then
-                        return image
-                    else
-                        return gears.color.recolor_image(image, colors.base_fg)
-                    end
-                end)(),
-                widget = wibox.widget.imagebox
-            },
-            id = "image_margin_role",
-            margins = { right = margins },
-            widget = wibox.container.margin
+            id = "image_role",
+            image = (function()
+                if args.do_not_recolor_icon then
+                    return image
+                else
+                    return gears.color.recolor_image(image, colors.base_fg)
+                end
+            end)(),
+            widget = wibox.widget.imagebox
         },
         id = "layout_role",
         layout = wibox.layout.fixed.horizontal
     }
     if args.text then
         content[2] = {
-            id = "text_role",
-            text = args.text,
-            widget = wibox.widget.textbox,
+            {
+                id = "text_role",
+                text = args.text,
+                widget = wibox.widget.textbox
+            },
+            id = "text_margin_role",
+            margins = { left = margins },
+            widget = wibox.container.margin
         }
     end
 
@@ -57,26 +57,26 @@ function this.create_widget(image, on_left_click, args)
         image = new_image
         if not args.do_not_recolor_icon then
             if self.mouse_is_over then
-                self.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
+                self.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
             else
-                self.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
+                self.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
             end
         end
     end
 
     function button:set_text(new_text)
-        self.margin_role.layout_role.text_role.text = new_text
+        self.margin_role.layout_role.text_margin_role.text_role.text = new_text
     end
 
     function button:set_markup(new_text)
-        self.margin_role.layout_role.text_role.markup = new_text
+        self.margin_role.layout_role.text_margin_role.text_role.markup = new_text
     end
 
     button:connect_signal("mouse::enter", function ()
         button.mouse_is_over = true
         button.fg = colors.accent_bg
         if not args.do_not_recolor_icon then
-            button.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
+            button.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
         end
     end)
 
@@ -84,7 +84,7 @@ function this.create_widget(image, on_left_click, args)
         button.mouse_is_over = false
         button.fg = colors.base_fg
         if not args.do_not_recolor_icon then
-            button.margin_role.layout_role.image_margin_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
+            button.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
         end
     end)
 
