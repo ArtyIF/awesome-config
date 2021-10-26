@@ -10,7 +10,7 @@ local naughty = require("naughty")
 local this = {}
 
 -- todo: rewrite this to be more oop
-function this.create_widget(image, on_left_click, args)
+function this.create_widget(args)
     if not args then args = {} end
 
     local margins = args.margins or theme_vars.wibar_icon_margins
@@ -20,9 +20,9 @@ function this.create_widget(image, on_left_click, args)
             id = "image_role",
             image = (function()
                 if args.do_not_recolor_icon then
-                    return image
+                    return args.image
                 else
-                    return gears.color.recolor_image(image, colors.base_fg)
+                    return gears.color.recolor_image(args.image, colors.base_fg)
                 end
             end)(),
             widget = wibox.widget.imagebox
@@ -54,12 +54,12 @@ function this.create_widget(image, on_left_click, args)
     }
 
     function button:set_image(new_image)
-        image = new_image
+        args.image = new_image
         if not args.do_not_recolor_icon then
             if self.mouse_is_over then
-                self.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
+                self.margin_role.layout_role.image_role.image = gears.color.recolor_image(args.image, colors.accent_bg)
             else
-                self.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
+                self.margin_role.layout_role.image_role.image = gears.color.recolor_image(args.image, colors.base_fg)
             end
         end
     end
@@ -76,7 +76,7 @@ function this.create_widget(image, on_left_click, args)
         button.mouse_is_over = true
         button.fg = colors.accent_bg
         if not args.do_not_recolor_icon then
-            button.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.accent_bg)
+            button.margin_role.layout_role.image_role.image = gears.color.recolor_image(args.image, colors.accent_bg)
         end
     end)
 
@@ -84,12 +84,12 @@ function this.create_widget(image, on_left_click, args)
         button.mouse_is_over = false
         button.fg = colors.base_fg
         if not args.do_not_recolor_icon then
-            button.margin_role.layout_role.image_role.image = gears.color.recolor_image(image, colors.base_fg)
+            button.margin_role.layout_role.image_role.image = gears.color.recolor_image(args.image, colors.base_fg)
         end
     end)
 
     button:buttons({
-        awful.button({ }, 1, on_left_click),
+        awful.button({ }, 1, args.on_left_click),
         awful.button({ }, 2, args.on_middle_click),
         awful.button({ }, 3, args.on_right_click),
         awful.button({ }, 4, args.on_scroll_up),

@@ -80,25 +80,23 @@ function this.toggle()
 end
 
 function this.create_widget()
-    this.widget = button.create_widget(
-        this.icons_path .. this.icon_muted,
-        function ()
+    this.widget = button.create_widget {
+        image = this.icons_path .. this.icon_muted,
+        margins = this.margins,
+        text = "...%",
+        on_left_click = function ()
             awful.spawn.spawn("pavucontrol")
         end,
-        {
-            margins = this.margins,
-            text = "...%",
-            on_right_click = function ()
-                this.toggle()
-            end,
-            on_scroll_up = function ()
-                this.up()
-            end,
-            on_scroll_down = function ()
-                this.down()
-            end
-        }
-    )
+        on_right_click = function ()
+            this.toggle()
+        end,
+        on_scroll_up = function ()
+            this.up()
+        end,
+        on_scroll_down = function ()
+            this.down()
+        end
+    }
     
     this.callback_timer = gears.timer({
         timeout = 1,
