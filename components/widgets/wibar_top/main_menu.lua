@@ -15,7 +15,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local colors = require("theme.colors")
 
 local this = {
-    favorite_items = { "Firefox", "Nemo", "Alacritty", "Discord", "Steam (Runtime)" },
+    favorite_items = { "Firefox", "Nemo", "Alacritty", "Visual Studio Code", "Discord", "Steam (Runtime)" },
     menus = {
         favorites = {},
         apps = {},

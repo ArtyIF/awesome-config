@@ -36,6 +36,7 @@ Files that use the dependencies are also shown.
 - `firefox` (web browser)
 - `nemo` (file manager)
 - `alacritty` (terminal emulator)
+- `visual-studio-code-bin`<sup>AUR</sup> (text/code editor)
 - `discord` (messenger I often use)
 - `steam` (game store and launcher I and many others use)
 
