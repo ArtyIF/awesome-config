@@ -3,7 +3,7 @@ local gears = require("gears")
 local this = {}
 
 function this.signal_callback(c)
-    if c.floating and not c.fullscreen then
+    if c.floating and not c.fullscreen and not c.maximized then
         gears.surface.apply_shape_bounding(c, gears.shape.rounded_rect, 8)
     else
         gears.surface.apply_shape_bounding(c, gears.shape.rectangle)
