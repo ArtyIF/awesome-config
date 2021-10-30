@@ -16,7 +16,12 @@ function this.create_widget(args)
     local margins = args.margins or theme_vars.wibar_icon_margins
 
     local content = {
-        {
+        id = "layout_role",
+        layout = wibox.layout.fixed.horizontal
+    }
+
+    if args.image then
+        content[1] = {
             id = "image_role",
             image = (function()
                 if args.do_not_recolor_icon then
@@ -26,21 +31,21 @@ function this.create_widget(args)
                 end
             end)(),
             widget = wibox.widget.imagebox
-        },
-        id = "layout_role",
-        layout = wibox.layout.fixed.horizontal
-    }
+        }
+    end
     if args.text then
         content[2] = {
-            {
-                id = "text_role",
-                text = args.text,
-                widget = wibox.widget.textbox
-            },
-            id = "text_margin_role",
+            id = "text_role",
+            text = args.text,
+            widget = wibox.widget.textbox
+        }
+    end
+    if args.image and args.text then
+        table.insert(content, 2, {
+            id = "padding_role",
             margins = { left = margins },
             widget = wibox.container.margin
-        }
+        })
     end
 
     local button = wibox.widget {
@@ -65,11 +70,11 @@ function this.create_widget(args)
     end
 
     function button:set_text(new_text)
-        self.margin_role.layout_role.text_margin_role.text_role.text = new_text
+        self.margin_role.layout_role.text_role.text = new_text
     end
 
     function button:set_markup(new_text)
-        self.margin_role.layout_role.text_margin_role.text_role.markup = new_text
+        self.margin_role.layout_role.text_role.markup = new_text
     end
 
     button:connect_signal("mouse::enter", function ()
