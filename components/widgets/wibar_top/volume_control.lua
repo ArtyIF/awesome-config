@@ -34,15 +34,18 @@ function this.callback(volume, muted)
 	    volume = 100
     end
     if muted or volume == 0 then
-        this.widget:set_image(this.icons_path .. this.icon_muted)
+        this.widget.icon = this.icons_path .. this.icon_muted
     elseif volume <= 33 then
-        this.widget:set_image(this.icons_path .. this.icon_low)
+        this.widget.icon = this.icons_path .. this.icon_low
     elseif volume <= 67 then
-        this.widget:set_image(this.icons_path .. this.icon_medium)
+        this.widget.icon = this.icons_path .. this.icon_medium
     else
-        this.widget:set_image(this.icons_path .. this.icon_high)
+        this.widget.icon = this.icons_path .. this.icon_high
     end
-    this.widget:set_text(volume .. "%")
+    this.widget:update_icon()
+
+    this.widget.text = volume .. "%"
+    this.widget:update_text()
 end
 
 function this.execute_and_get_output(cmd)
@@ -80,8 +83,8 @@ function this.toggle()
 end
 
 function this.create_widget()
-    this.widget = button.create_widget {
-        image = this.icons_path .. this.icon_muted,
+    this.widget = button:new {
+        icon = this.icons_path .. this.icon_muted,
         margins = this.margins,
         text = "...%",
         on_left_click = function ()

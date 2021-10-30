@@ -7,29 +7,49 @@ local theme_vars = require("beautiful").get()
 local colors = require("theme.colors")
 local naughty = require("naughty")
 
-local button = {}
+local button = {
+    margins = theme_vars.wibar_icon_margins,
+    icon = "",
+    do_not_recolor_icon = false,
+    mouse_is_over = false,
+    text = "",
+    widget = wibox.container.background()
+}
 
--- todo: rewrite this to be more oop
-function button.create_widget(args)
+function button:update_icon()
+    if not self.do_not_recolor_icon then
+        if self.mouse_is_over then
+            self.widget.margin_role.layout_role.icon_role.image = gears.color.recolor_image(self.icon, colors.accent_bg)
+        else
+            self.widget.margin_role.layout_role.icon_role.image = gears.color.recolor_image(self.icon, colors.base_fg)
+        end
+    else
+        self.widget.margin_role.layout_role.icon_role.image = self.icon
+    end
+end
+
+function button:update_text()
+    self.widget.margin_role.layout_role.text_role.text = self.text
+end
+
+function button:new(args)
     if not args then args = {} end
 
-    local margins = args.margins or theme_vars.wibar_icon_margins
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+
+    self.margins = args.margins or theme_vars.wibar_icon_margins
 
     local content = {
         id = "layout_role",
         layout = wibox.layout.fixed.horizontal
     }
 
-    if args.image then
+    if args.icon then
         content[1] = {
-            id = "image_role",
-            image = (function()
-                if args.do_not_recolor_icon then
-                    return args.image
-                else
-                    return gears.color.recolor_image(args.image, colors.base_fg)
-                end
-            end)(),
+            id = "icon_role",
+            image = nil,
             widget = wibox.widget.imagebox
         }
     end
@@ -40,60 +60,34 @@ function button.create_widget(args)
             widget = wibox.widget.textbox
         }
     end
-    if args.image and args.text then
+    if args.icon and args.text then
         table.insert(content, 2, {
             id = "padding_role",
-            margins = { left = margins },
+            margins = { left = self.margins },
             widget = wibox.container.margin
         })
     end
 
-    local btn = wibox.widget {
-        {
-            content,
-            id = "margin_role",
-            margins = margins,
-            widget = wibox.container.margin
-        },
-        widget = wibox.container.background
+    self.widget:setup {
+        content,
+        id = "margin_role",
+        margins = self.margins,
+        widget = wibox.container.margin
     }
 
-    function btn:set_image(new_image)
-        args.image = new_image
-        if not args.do_not_recolor_icon then
-            if self.mouse_is_over then
-                self.margin_role.layout_role.image_role.image = gears.color.recolor_image(args.image, colors.accent_bg)
-            else
-                self.margin_role.layout_role.image_role.image = gears.color.recolor_image(args.image, colors.base_fg)
-            end
-        end
-    end
-
-    function btn:set_text(new_text)
-        self.margin_role.layout_role.text_role.text = new_text
-    end
-
-    function btn:set_markup(new_text)
-        self.margin_role.layout_role.text_role.markup = new_text
-    end
-
-    btn:connect_signal("mouse::enter", function ()
-        btn.mouse_is_over = true
-        btn.fg = colors.accent_bg
-        if not args.do_not_recolor_icon then
-            btn.margin_role.layout_role.image_role.image = gears.color.recolor_image(args.image, colors.accent_bg)
-        end
+    self.widget:connect_signal("mouse::enter", function ()
+        o.mouse_is_over = true
+        o.widget.fg = colors.accent_bg
+        o:update_icon()
     end)
 
-    btn:connect_signal("mouse::leave", function ()
-        btn.mouse_is_over = false
-        btn.fg = colors.base_fg
-        if not args.do_not_recolor_icon then
-            btn.margin_role.layout_role.image_role.image = gears.color.recolor_image(args.image, colors.base_fg)
-        end
+    self.widget:connect_signal("mouse::leave", function ()
+        o.mouse_is_over = false
+        o.widget.fg = colors.base_fg
+        o:update_icon()
     end)
 
-    btn:buttons({
+    self.widget:buttons({
         awful.button({ }, 1, args.on_left_click),
         awful.button({ }, 2, args.on_middle_click),
         awful.button({ }, 3, args.on_right_click),
@@ -101,7 +95,15 @@ function button.create_widget(args)
         awful.button({ }, 5, args.on_scroll_down),
     })
 
-    return btn
+    self.icon = args.icon
+    self:update_icon()
+
+    self.text = args.text
+    self:update_text()
+
+    self.widget.button_wrapper = self
+
+    return o
 end
 
 return button
