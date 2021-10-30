@@ -9,12 +9,17 @@ local gdk = require("lgi").Gdk
 local this = {}
 
 local titlebars = {}
+local titlebar_timers = {}
+
+local call_times = 0
 
 local function get_dominant_color(c)
+    call_times = call_times + 1
+
     local c_content = gears.surface(c.content)
     local c_geometry = c:geometry()
 
-    local colors = {}
+    local top_part_colors = {}
 
     local top_part_string = ""
     local top_part_stride = 0
@@ -32,10 +37,10 @@ local function get_dominant_color(c)
     local current_color = ""
     for x = 0, (c_geometry.width * top_part_stride) - 1, top_part_stride do
         current_color = "#" .. top_part_string:sub(x + 1, x + top_part_stride)
-        if colors[current_color] then
-            colors[current_color] = colors[current_color] + 1
+        if top_part_colors[current_color] then
+            top_part_colors[current_color] = top_part_colors[current_color] + 1
         else
-            colors[current_color] = 1
+            top_part_colors[current_color] = 1
         end
     end
     current_color = nil
@@ -47,7 +52,7 @@ local function get_dominant_color(c)
     local dom_color = ""
     local dom_color_times = 0
 
-    for color, times in pairs(colors) do
+    for color, times in pairs(top_part_colors) do
         if times > dom_color_times then
             dom_color = color
             dom_color_times = times
@@ -121,8 +126,10 @@ function this.signal_callback(c)
         widget = wibox.container.background
     })
     titlebars[c.window] = this_titlebar
+end
 
-    if SMART_TITLEBAR_COLOR then
+function this.manage_signal_callback(c)
+    if SMART_TITLEBAR_COLOR == "static" then
         gears.timer({
             timeout = 0.5,
             autostart = true,
@@ -130,22 +137,22 @@ function this.signal_callback(c)
             single_shot = true,
             callback = function () set_titlebar_color(c) end
         })
-    end
-end
-
-function this.manage_signal_callback(c)
-    if SMART_TITLEBAR_COLOR then
-        gears.timer({
-            timeout = 0.1,
+    elseif SMART_TITLEBAR_COLOR == "dynamic" then
+        titlebar_timers[c.window] = gears.timer({
+            timeout = 0.5,
             autostart = true,
             call_now = false,
-            single_shot = true,
+            single_shot = false,
             callback = function () set_titlebar_color(c) end
         })
     end
 end
 
 function this.unmanage_signal_callback(c)
+    if SMART_TITLEBAR_COLOR == "once" then
+        titlebar_timers[c.window]:stop()
+        titlebar_timers[c.window] = nil
+    end
     titlebars[c.window] = nil
 end
 
