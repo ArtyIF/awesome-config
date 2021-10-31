@@ -115,8 +115,7 @@ function this.build_menu()
             end)
         })
 
-        --this.button.widget:buttons({
-        this.button:buttons({
+        this.button.widget:buttons({
             awful.button({}, 1, function ()
                 this.menu:toggle()
             end)
@@ -126,12 +125,10 @@ end
 
 function this.create_widget()
     -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
-    --[[ this.button = button:new {
+    this.button = button:new {
         icon = gears.filesystem.get_configuration_dir() .. "theme/icons/menu.png",
-        text = "Menu"
-    } ]]
-    this.button = wibox.container.margin(wibox.widget.imagebox(colors.recolor_icon(gears.filesystem.get_configuration_dir() .. "theme/icons/menu.png")))
-    this.button.margins = theme_vars.wibar_icon_margins
+        -- text = "Menu"
+    }
     this.build_menu()
     return this.button
 end

@@ -7,39 +7,34 @@ local theme_vars = require("beautiful").get()
 local colors = require("theme.colors")
 local naughty = require("naughty")
 
-local button = {
-    margins = theme_vars.wibar_icon_margins,
-    icon = "",
-    do_not_recolor_icon = false,
-    mouse_is_over = false,
-    text = "",
-    widget = {}
-}
-
-function button:update_icon()
-    if not self.do_not_recolor_icon then
-        if self.mouse_is_over then
-            self.widget.margin_role.layout_role.icon_role.image = colors.recolor_icon(self.icon, colors.accent)
-        else
-            self.widget.margin_role.layout_role.icon_role.image = colors.recolor_icon(self.icon)
-        end
-    else
-        self.widget.margin_role.layout_role.icon_role.image = self.icon
-    end
-end
-
-function button:update_text()
-    self.widget.margin_role.layout_role.text_role.text = self.text
-end
+local button = {}
 
 function button:new(args)
     if not args then args = {} end
 
-    local o = {}
-    setmetatable(o, self)
-    self.__index = self
+    local btn = {}
 
-    self.margins = args.margins or theme_vars.wibar_icon_margins
+    function btn:update_icon()
+        if self.widget.margin_role.layout_role.icon_role then
+            if not self.do_not_recolor_icon then
+                if self.mouse_is_over then
+                    self.widget.margin_role.layout_role.icon_role.image = colors.recolor_icon(self.icon, colors.accent)
+                else
+                    self.widget.margin_role.layout_role.icon_role.image = colors.recolor_icon(self.icon)
+                end
+            else
+                self.widget.margin_role.layout_role.icon_role.image = self.icon
+            end
+        end
+    end
+    
+    function btn:update_text()
+        if self.widget.margin_role.layout_role.text_role then
+            self.widget.margin_role.layout_role.text_role.text = self.text
+        end
+    end
+
+    btn.margins = args.margins or theme_vars.wibar_icon_margins
 
     local content = {
         id = "layout_role",
@@ -63,32 +58,32 @@ function button:new(args)
     if args.icon and args.text then
         table.insert(content, 2, {
             id = "padding_role",
-            margins = { left = self.margins },
+            margins = { left = btn.margins },
             widget = wibox.container.margin
         })
     end
 
-    self.widget = wibox.container.background()
-    self.widget:setup {
+    btn.widget = wibox.container.background()
+    btn.widget:setup {
         content,
         id = "margin_role",
-        margins = self.margins,
+        margins = btn.margins,
         widget = wibox.container.margin
     }
 
-    self.widget:connect_signal("mouse::enter", function ()
-        o.mouse_is_over = true
-        o.widget.fg = colors.accent
-        o:update_icon()
+    btn.widget:connect_signal("mouse::enter", function ()
+        btn.mouse_is_over = true
+        btn.widget.fg = colors.accent
+        btn:update_icon()
     end)
 
-    self.widget:connect_signal("mouse::leave", function ()
-        o.mouse_is_over = false
-        o.widget.fg = colors.base_text
-        o:update_icon()
+    btn.widget:connect_signal("mouse::leave", function ()
+        btn.mouse_is_over = false
+        btn.widget.fg = colors.base_text
+        btn:update_icon()
     end)
 
-    self.widget:buttons({
+    btn.widget:buttons({
         awful.button({ }, 1, args.on_left_click),
         awful.button({ }, 2, args.on_middle_click),
         awful.button({ }, 3, args.on_right_click),
@@ -96,13 +91,16 @@ function button:new(args)
         awful.button({ }, 5, args.on_scroll_down),
     })
 
-    self.icon = args.icon
-    self:update_icon()
+    btn.icon = args.icon
+    btn:update_icon()
 
-    self.text = args.text
-    self:update_text()
+    btn.text = args.text
+    btn:update_text()
 
-    return o
+    setmetatable(btn, self)
+    self.__index = self
+
+    return btn
 end
 
 return button
