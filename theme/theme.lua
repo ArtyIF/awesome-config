@@ -20,27 +20,27 @@ local theme = {}
 
 theme.font = gtk_vars.font_family .. " " .. gtk_vars.font_size
 
-theme.bg_normal     = colors.base_bg
-theme.bg_focus      = colors.accent_bg
-theme.bg_urgent     = colors.urgent_bg
-theme.bg_systray    = colors.base_bg
-theme.bg_minimize   = colors.accent_bg .. "0f"
+theme.bg_normal     = colors.base
+theme.bg_focus      = colors.accent
+theme.bg_urgent     = colors.urgent
+theme.bg_systray    = colors.base
+theme.bg_minimize   = colors.accent .. "0f"
 
-theme.fg_normal     = colors.base_fg
-theme.fg_focus      = colors.accent_fg
-theme.fg_urgent     = colors.urgent_fg
-theme.fg_minimize   = colors.base_fg
-theme.fg_systray    = colors.accent_fg
+theme.fg_normal     = colors.base_text
+theme.fg_focus      = colors.accent_text
+theme.fg_urgent     = colors.urgent_text
+theme.fg_minimize   = colors.base_text
+theme.fg_systray    = colors.accent_text
 
-theme.tasklist_bg_normal = colors.accent_bg .. "5f"
-theme.tasklist_bg_focus = colors.accent_bg
+theme.tasklist_bg_normal = colors.accent .. "5f"
+theme.tasklist_bg_focus = colors.accent
 theme.tasklist_bg_minimize = "#00000000"
 
 theme.taglist_bg_occupied = theme.bg_minimize
 
 theme.systray_icon_spacing = 4
 
-theme.hotkeys_modifiers_fg = colors.accent_bg
+theme.hotkeys_modifiers_fg = colors.accent
 theme.hotkeys_font = "Cascadia Code " .. gtk_vars.font_size
 theme.hotkeys_description_font = theme.font
 
@@ -49,7 +49,7 @@ theme.border_width = 0
 theme.titlebar_bg_normal = "transparent"
 theme.titlebar_fg_normal = colors.middle_color
 theme.titlebar_bg_focus = "transparent"
-theme.titlebar_fg_focus = colors.base_fg
+theme.titlebar_fg_focus = colors.base_text
 
 theme.menu_submenu = "▶ "
 theme.menu_height = 32
@@ -104,7 +104,7 @@ theme.layout_cornersw = colors.recolor_icon(theme_path.."layouts/cornersw.png")
 theme.layout_cornerse = colors.recolor_icon(theme_path.."layouts/cornerse.png")
 
 theme.awesome_icon = theme_assets.awesome_icon(
-    32, colors.accent_bg, colors.base_bg
+    32, colors.accent, colors.base
 )
 
 theme.icon_theme = colors.icon_theme
@@ -113,16 +113,16 @@ theme.icon_theme = colors.icon_theme
 -- unfocused colors
 theme = theme_assets.recolor_titlebar(theme, colors.middle_color, "normal", nil, nil)
 theme = theme_assets.recolor_titlebar(theme, colors.middle_color, "normal", nil, "inactive")
-theme = theme_assets.recolor_titlebar(theme, colors.accent_bg, "normal", nil, "active")
-theme = theme_assets.recolor_titlebar(theme, colors.accent_bg, "normal", "hover", nil)
-theme = theme_assets.recolor_titlebar(theme, colors.accent_bg, "normal", "press", nil)
+theme = theme_assets.recolor_titlebar(theme, colors.accent, "normal", nil, "active")
+theme = theme_assets.recolor_titlebar(theme, colors.accent, "normal", "hover", nil)
+theme = theme_assets.recolor_titlebar(theme, colors.accent, "normal", "press", nil)
 
 -- focused colors
-theme = theme_assets.recolor_titlebar(theme, colors.base_fg, "focus", nil, nil)
-theme = theme_assets.recolor_titlebar(theme, colors.base_fg, "focus", nil, "inactive")
-theme = theme_assets.recolor_titlebar(theme, colors.accent_bg, "focus", nil, "active")
-theme = theme_assets.recolor_titlebar(theme, colors.accent_bg, "focus", "hover", nil)
-theme = theme_assets.recolor_titlebar(theme, colors.accent_bg, "focus", "press", nil)
+theme = theme_assets.recolor_titlebar(theme, colors.base_text, "focus", nil, nil)
+theme = theme_assets.recolor_titlebar(theme, colors.base_text, "focus", nil, "inactive")
+theme = theme_assets.recolor_titlebar(theme, colors.accent, "focus", nil, "active")
+theme = theme_assets.recolor_titlebar(theme, colors.accent, "focus", "hover", nil)
+theme = theme_assets.recolor_titlebar(theme, colors.accent, "focus", "press", nil)
 
 theme.titlebar_margins = 8
 if SMALL_ELEMENTS then

@@ -19,9 +19,9 @@ local button = {
 function button:update_icon()
     if not self.do_not_recolor_icon then
         if self.mouse_is_over then
-            self.widget.margin_role.layout_role.icon_role.image = gears.color.recolor_image(self.icon, colors.hover_bg)
+            self.widget.margin_role.layout_role.icon_role.image = gears.color.recolor_image(self.icon, colors.accent)
         else
-            self.widget.margin_role.layout_role.icon_role.image = gears.color.recolor_image(self.icon, colors.base_fg)
+            self.widget.margin_role.layout_role.icon_role.image = gears.color.recolor_image(self.icon, colors.base_text)
         end
     else
         self.widget.margin_role.layout_role.icon_role.image = self.icon
@@ -77,13 +77,13 @@ function button:new(args)
 
     self.widget:connect_signal("mouse::enter", function ()
         o.mouse_is_over = true
-        o.widget.fg = colors.hover_bg
+        o.widget.fg = colors.accent
         o:update_icon()
     end)
 
     self.widget:connect_signal("mouse::leave", function ()
         o.mouse_is_over = false
-        o.widget.fg = colors.base_fg
+        o.widget.fg = colors.base_text
         o:update_icon()
     end)
 
