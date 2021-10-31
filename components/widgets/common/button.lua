@@ -27,7 +27,7 @@ function button:new(args)
             end
         end
     end
-    
+
     function btn:update_text()
         if self.widget.margin_role.layout_role.text_role then
             self.widget.margin_role.layout_role.text_role.text = self.text
