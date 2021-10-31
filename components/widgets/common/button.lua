@@ -97,9 +97,6 @@ function button:new(args)
     btn.text = args.text
     btn:update_text()
 
-    setmetatable(btn, self)
-    self.__index = self
-
     return btn
 end
 
