@@ -13,7 +13,7 @@ local button = {
     do_not_recolor_icon = false,
     mouse_is_over = false,
     text = "",
-    widget = wibox.container.background()
+    widget = {}
 }
 
 function button:update_icon()
@@ -68,6 +68,7 @@ function button:new(args)
         })
     end
 
+    self.widget = wibox.container.background()
     self.widget:setup {
         content,
         id = "margin_role",
@@ -100,8 +101,6 @@ function button:new(args)
 
     self.text = args.text
     self:update_text()
-
-    self.widget.button_wrapper = self
 
     return o
 end
