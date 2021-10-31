@@ -6,8 +6,8 @@ local wibox = require("wibox")
 local this = {minimized = false, minimize_history = {}}
 
 function this.create_widget(s)
-    local toggle_minimize = wibox.container.background(nil, theme_vars.tasklist_bg_normal)
-    toggle_minimize.forced_width = 4
+    local toggle_minimize = wibox.container.background(nil, "#00000000")
+    toggle_minimize.forced_width = 1
 
     toggle_minimize:buttons({
         awful.button({}, 1, function ()
@@ -24,14 +24,14 @@ function this.create_widget(s)
             if this.minimized then
                 toggle_minimize.bg = theme_vars.tasklist_bg_focus
             else
-                toggle_minimize.bg = theme_vars.tasklist_bg_normal
+                toggle_minimize.bg = "#00000000"
             end
         end)
     })
 
     client.connect_signal("focus", function ()
         this.minimized = false
-        toggle_minimize.bg = theme_vars.tasklist_bg_normal
+        toggle_minimize.bg = "#00000000"
     end)
 
     return toggle_minimize
