@@ -221,6 +221,10 @@ awful.rules.rules = {
     -- Add titlebars to normal clients and dialogs
     { rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = true } },
 
+    { rule = { requests_no_titlebar = true }, properties = { titlebars_enabled = false } },
+
+    { rule_any = { class = { "easyeffects" } }, properties = { titlebars_enabled = true } },
+
     { rule = { role = "PictureInPicture" }, properties = { placement = awful.placement.bottom_right }},
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -234,7 +238,7 @@ awful.rules.rules = {
 fix_fullscreen.connect_signals()
 wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
---debug_notification.connect_signals()
+debug_notification.connect_signals()
 reverse_window_order.connect_signals()
 rounded_corners.connect_signals()
 -- }}}
