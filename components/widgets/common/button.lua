@@ -19,9 +19,9 @@ local button = {
 function button:update_icon()
     if not self.do_not_recolor_icon then
         if self.mouse_is_over then
-            self.widget.margin_role.layout_role.icon_role.image = gears.color.recolor_image(self.icon, colors.accent)
+            self.widget.margin_role.layout_role.icon_role.image = colors.recolor_icon(self.icon, colors.accent)
         else
-            self.widget.margin_role.layout_role.icon_role.image = gears.color.recolor_image(self.icon, colors.base_text)
+            self.widget.margin_role.layout_role.icon_role.image = colors.recolor_icon(self.icon)
         end
     else
         self.widget.margin_role.layout_role.icon_role.image = self.icon
