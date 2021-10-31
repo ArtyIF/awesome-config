@@ -13,6 +13,7 @@ local menu_gen = require("menubar.menu_gen")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 local colors = require("theme.colors")
+local button = require("components.widgets.common.button")
 
 local this = {
     favorite_items = { "Firefox", "Nemo", "Alacritty", "Visual Studio Code", "Discord", "Steam (Runtime)" },
@@ -114,6 +115,7 @@ function this.build_menu()
             end)
         })
 
+        --this.button.widget:buttons({
         this.button:buttons({
             awful.button({}, 1, function ()
                 this.menu:toggle()
@@ -124,6 +126,10 @@ end
 
 function this.create_widget()
     -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
+    --[[ this.button = button:new {
+        icon = gears.filesystem.get_configuration_dir() .. "theme/icons/menu.png",
+        text = "Menu"
+    } ]]
     this.button = wibox.container.margin(wibox.widget.imagebox(colors.recolor_icon(gears.filesystem.get_configuration_dir() .. "theme/icons/menu.png")))
     this.button.margins = theme_vars.wibar_icon_margins
     this.build_menu()
