@@ -9,7 +9,7 @@ local naughty = require("naughty")
 
 local button = {}
 
-function button:new(args)
+function button.new(args)
     if not args then args = {} end
 
     local btn = {}

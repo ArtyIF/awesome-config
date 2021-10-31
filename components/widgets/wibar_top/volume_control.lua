@@ -83,7 +83,7 @@ function this.toggle()
 end
 
 function this.create_widget()
-    this.widget = button:new {
+    this.widget = button.new {
         icon = this.icons_path .. this.icon_muted,
         margins = this.margins,
         text = "...%",
