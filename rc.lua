@@ -238,7 +238,7 @@ awful.rules.rules = {
 fix_fullscreen.connect_signals()
 wibars_ontop_when_not_fullscreen.connect_signals()
 titlebar.connect_signals()
-debug_notification.connect_signals()
+--debug_notification.connect_signals()
 reverse_window_order.connect_signals()
 rounded_corners.connect_signals()
 -- }}}
