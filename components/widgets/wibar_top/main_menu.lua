@@ -8,12 +8,14 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local theme_vars = beautiful.get()
 -- menugen from menubar
-local menu_gen = require("menubar.menu_gen")
+local menubar = require("menubar")
 -- hotkeys popup, we might not need it
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 local colors = require("theme.colors")
 local button = require("components.widgets.common.button")
+
+menubar.utils.wm_name = ""
 
 local this = {
     favorite_items = { "Firefox", "Nemo", "Alacritty", "Visual Studio Code", "Discord", "Steam (Runtime)" },
@@ -43,8 +45,8 @@ local this = {
 }
 
 function this.build_menu()
-    menu_gen.generate(function (entries)
-        for id, category in pairs(menu_gen.all_categories) do
+    menubar.menu_gen.generate(function (entries)
+        for id, category in pairs(menubar.menu_gen.all_categories) do
             table.insert(this.menus.apps, { id, {}, colors.full_icon_theme_path .. "32x32/categories/" .. category.icon_name .. ".svg" })
         end
 
@@ -69,7 +71,7 @@ function this.build_menu()
                 table.remove(this.menus.apps, id)
             else
                 if category[1] ~= "Favorites" then
-                    category[1] = menu_gen.all_categories[category[1]].name
+                    category[1] = menubar.menu_gen.all_categories[category[1]].name
                 end
             end
         end
