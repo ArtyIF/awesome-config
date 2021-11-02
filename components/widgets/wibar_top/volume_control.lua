@@ -17,11 +17,11 @@ this.down_arg = "set-sink-volume 0 -5%"
 this.toggle_arg = "set-sink-mute 0 toggle"
 this.clamp_volume_arg = "set-sink-volume 0 100%"
 
-this.icons_path = colors.full_icon_theme_path .. "symbolic/status/"
-this.icon_high = "audio-volume-high-symbolic.svg"
-this.icon_medium = "audio-volume-medium-symbolic.svg"
-this.icon_low = "audio-volume-low-symbolic.svg"
-this.icon_muted = "audio-volume-muted-symbolic.svg"
+this.icons_path = colors.full_icon_theme_path .. "24x24/panel/"
+this.icon_high = "audio-volume-high.svg"
+this.icon_medium = "audio-volume-medium.svg"
+this.icon_low = "audio-volume-low.svg"
+this.icon_muted = "audio-volume-muted.svg"
 
 this.margins = theme_vars.wibar_icon_margins
 
