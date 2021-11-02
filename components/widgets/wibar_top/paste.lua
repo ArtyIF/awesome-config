@@ -12,7 +12,7 @@ local this = {}
 this.cmd = "copyq "
 this.ui_arg = "toggle"
 
-this.icon = colors.recolor_icon(gears.filesystem.get_configuration_dir() .. "theme/icons/clipboard.png")
+this.icon = colors.full_icon_theme_path .. "24x24/panel/clipboard.svg"
 
 this.margins = theme_vars.wibar_icon_margins
 

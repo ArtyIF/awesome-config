@@ -128,7 +128,7 @@ end
 function this.create_widget()
     -- todo: make it more elaborate than a simple dropdown. i'm leaning windows 10 style
     this.button = button.new {
-        icon = gears.filesystem.get_configuration_dir() .. "theme/icons/menu.png",
+        icon = colors.full_icon_theme_path .. "24x24/actions/application-menu.svg",
         -- text = "Menu"
     }
     this.build_menu()
