@@ -86,6 +86,7 @@ function this.create_widget()
     this.widget = button.new {
         icon = this.icons_path .. this.icon_muted,
         margins = this.margins,
+        do_not_add_padding = true,
         text = "...%",
         on_left_click = function ()
             awful.spawn.spawn("pavucontrol")

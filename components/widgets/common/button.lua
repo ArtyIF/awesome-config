@@ -55,7 +55,7 @@ function button.new(args)
             widget = wibox.widget.textbox
         }
     end
-    if args.icon and args.text then
+    if args.icon and args.text and not args.do_not_add_padding then
         table.insert(content, 2, {
             id = "padding_role",
             margins = { left = btn.margins },
