@@ -47,7 +47,10 @@ local function get_dominant_color(c)
     top_part_string = nil
     top_part_stride = nil
 
-    collectgarbage()
+    if call_times / 10 >= 1 then
+        collectgarbage()
+        call_times = 0
+    end
 
     local dom_color = ""
     local dom_color_times = 0
