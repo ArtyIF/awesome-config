@@ -4,6 +4,7 @@ local awful = require("awful")
 -- widget and layout library
 local wibox = require("wibox")
 local theme_vars = require("beautiful").get()
+local modkeys = require("components.keybinds.modkeys")
 
 local this = {}
 
@@ -22,6 +23,9 @@ this.buttons = gears.table.join(
             end
         end
     ),
+    awful.button({ modkeys.super }, 1, function (c)
+        c:swap(client.focus)
+    end),
     awful.button({ }, 3,
         function()
             awful.menu.client_list() -- todo: replace with a better menu
