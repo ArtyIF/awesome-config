@@ -18,7 +18,6 @@ local button = require("components.widgets.common.button")
 menubar.utils.wm_name = ""
 
 local this = {
-    favorite_items = { "Firefox", "Nemo", "Alacritty", "Visual Studio Code", "Discord", "Steam (Runtime)", "Spotify" },
     menus = {
         favorites = {},
         apps = {},
@@ -54,7 +53,7 @@ function this.build_menu()
             for _, category in pairs(this.menus.apps) do
                 if category[1] == entry.category then
                     table.insert(category[2], { entry.name, entry.cmdline, entry.icon })
-                    for _, fav_entry in ipairs(this.favorite_items) do
+                    for _, fav_entry in ipairs(MENU_FAVORITE_ITEMS) do
                         if string.sub(entry.name, 1, #fav_entry) == fav_entry then
                             table.insert(this.menus.favorites, { entry.name, entry.cmdline, entry.icon })
                             break
@@ -84,7 +83,7 @@ function this.build_menu()
         table.sort(this.menus.favorites, function (a, b)
             local a_index = 0
             local b_index = 0
-            for index, value in ipairs(this.favorite_items) do
+            for index, value in ipairs(MENU_FAVORITE_ITEMS) do
                 if a[1] == value then
                     a_index = index
                 elseif b[1] == value then
