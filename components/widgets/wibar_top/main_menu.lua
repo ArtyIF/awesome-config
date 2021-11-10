@@ -18,7 +18,7 @@ local button = require("components.widgets.common.button")
 menubar.utils.wm_name = ""
 
 local this = {
-    favorite_items = { "Firefox", "Nemo", "Alacritty", "Visual Studio Code", "Discord", "Steam (Runtime)" },
+    favorite_items = { "Firefox", "Nemo", "Alacritty", "Visual Studio Code", "Discord", "Steam (Runtime)", "Spotify" },
     menus = {
         favorites = {},
         apps = {},
