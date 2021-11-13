@@ -13,8 +13,6 @@ Files that use the dependencies are also shown.
 - `xorg-xset` (enabling or disabling turning off the screen, `rc.lua`)
 - `picom-jonaburg-git`<sup>AUR</sup> (compositing manager, `rc.lua` and `picom` directory)
 - `copyq` (clipboard manager, `rc.lua`)
-- `kdocker`<sup>AUR</sup> (to run Thunderbird in the system tray, `rc.lua`)
-- `thunderbird` (email client, `rc.lua`)
 - `network-manager-applet` (I use it to connect to my university's VPN mostly, `rc.lua`)
 - `networkmanager` (what it says on the tin, required for `network-manager-applet` to work properly)
 - `nm-connection-editor` (for an easy way to manage connections and VPNs, recommended for `network-manager-applet` to work properly)
@@ -33,7 +31,7 @@ Files that use the dependencies are also shown.
 - `pavucontrol` (advanced sound management, `components/widgets/volume_control.lua` => `components/widgets/top_wibar_right_part.lua` => `components/wibars/top.lua` => `rc.lua`)
 
 ### Favorites, all under `components/widgets/main_menu.lua` => `components/wibars/top.lua` => `rc.lua`
-- `firefox` (web browser)
+- `vivaldi` (web browser and email client)
 - `nemo` (file manager)
 - `alacritty` (terminal emulator)
 - `visual-studio-code-bin`<sup>AUR</sup> (text/code editor)
