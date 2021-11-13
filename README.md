@@ -41,4 +41,3 @@ Files that use the dependencies are also shown.
 ### Other
 - `alacritty` (default terminal emulator, `rc.lua`)
 - `gtk3-classic`<sup>AUR</sup> (recommended fork of GTK3 to disable CSD, `rc.lua`)
-asdf
