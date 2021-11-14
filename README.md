@@ -16,6 +16,7 @@ Files that use the dependencies are also shown.
 - `network-manager-applet` (I use it to connect to my university's VPN mostly, `rc.lua`)
 - `networkmanager` (what it says on the tin, required for `network-manager-applet` to work properly)
 - `nm-connection-editor` (for an easy way to manage connections and VPNs, recommended for `network-manager-applet` to work properly)
+- `kdeconnect` (interconnectability between phone and desktop)
 
 ### Keybinds
 - `spectacle` (for screenshots (just works the best for me, suggest alternatives though), `components/keybinds/screenshot_spectacle.lua` => `rc.lua`)
