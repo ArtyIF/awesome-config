@@ -34,10 +34,17 @@ function this.signal_callback(c)
 
     notification_text = notification_text .. "\n" .. "Fullscreen: " .. tostring(c.fullscreen)
 
-    naughty.notification({
-        title = c.name .. " (" .. c.class .. ")",
-        text = notification_text
-    })
+    if c.class then
+        naughty.notification({
+            title = c.name .. " (" .. c.class .. ")",
+            text = notification_text
+        })
+    else
+        naughty.notification({
+            title = c.name .. " (no class)",
+            text = notification_text
+        })
+    end
 end
 
 function this.connect_signals()
