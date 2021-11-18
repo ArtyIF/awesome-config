@@ -1,3 +1,9 @@
+# Deprecated
+
+I decided to switch to GNOME, so I won't be updating this anymore.
+
+---
+
 # ArtyIF's awesomewm config
 
 Yes, it's mine. Uh... yeah.
